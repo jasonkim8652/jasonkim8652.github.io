@@ -6,4 +6,4 @@ categories: Synthesizable Library
 ---
 Motivation
 =======================
-    Despite Molecular generative model has promising results, their common design strategy does not explain synthesizability, which is important in learning things. 
+  Despite Molecular generative model has promising results, their common design strategy does not explain synthesizability, which is important in developing chemotherpy. Human 
