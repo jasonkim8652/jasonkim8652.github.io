@@ -2,6 +2,8 @@
 layout: post
 title:  "Molecular Generative Model via Retrosyntheyically prepared Chemical Building BLock Assembly"
 date:   2023-01-13 18:01:24 +0900
-categories: Paper Review
+categories: Synthesizable Library
 ---
-Hello!
+Motivation
+=======================
+    Despite Molecular generative model has promising results, their common design strategy does not explain synthesizability, which is important in learning things. 
