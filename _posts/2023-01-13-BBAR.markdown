@@ -6,4 +6,7 @@ categories: Synthesizable Library
 ---
 Motivation
 =======================
-  Despite Molecular generative model has promising results, their common design strategy does not explain synthesizability, which is important in developing chemotherpy. Human 
+  Despite Molecular generative model has promising results, their common design strategy does not explain synthesizability, which is important in developing chemotherpies. Human experts mostly perceive a molecule as a conneceted set of chemical building blocks rather than a simple assembly of atoms. Therefore, the direct consideration of synthesizability can be done by preparing synthetically accessible building blocks using known reaction templates and letting the model learn the implied synthetic validity from the resulting data. 
+  > Important point is 1. How to prepare Building blocks 2. How to teach model chemical Reaction. 
+
+  
