@@ -2,10 +2,10 @@
 layout: post
 title:  "Molecular Generative Model via Retrosyntheyically prepared Chemical Building BLock Assembly"
 date:   2023-01-13 18:01:24 +0900
-categories: Synthesizable Library
+categories: Synthesizable_Library
 ---
-Motivation
-=======================
+# Motivation
+
 Despite Molecular generative model has promising results, their common design strategy does not explain synthesizability, which is important in developing chemotherpies. Human experts mostly perceive a molecule as a conneceted set of chemical building blocks rather than a simple assembly of atoms. Therefore, the direct consideration of synthesizability can be done by preparing synthetically accessible building blocks using known reaction templates and letting the model learn the implied synthetic validity from the resulting data. 
 > Important point is 1. How to prepare Building blocks 2. How to teach model chemical Reaction. 
 
@@ -13,8 +13,12 @@ In this paper, they propose a novel deep generative model for molecular generati
 
 They used **Synthon-based molecule generation** based on **fragment-based molecule design**.
 
-There are a few fragmeny-based molecular generative models, thought the definition of fragments in those works is different from the building block in this work. Podda et al.[[1]](https://proceedings.mlr.press/v108/podda20a.html) proposed a language model which sequentially generates fragements and combining them into a single molecule. They could achieve the high validity and uniqueness of generted molecules. Yang et al. [[2]](https://proceedings.neurips.cc/paper/2021/hash/41da609c519d77b29be442f8c1105647-Abstract.html) developed a reinfrocement learning model that sequentially adds fragments to a givne core molecule to improve the binding affinity of the resulting molecule to a target protein. 
+There are a few fragmeny-based molecular generative models, thought the definition of fragments in those works is different from the building block in this work. Podda et al.[[1]](https://proceedings.mlr.press/v108/podda20a.html) proposed a language model which sequentially generates fragements and combining them into a single molecule. They could achieve the high validity and uniqueness of generted molecules. Yang et al. [[2]](https://proceedings.neurips.cc/paper/2021/hash/41da609c519d77b29be442f8c1105647-Abstract.html) developed a reinfrocement learning model that sequentially adds fragments to a given core molecule to improve the binding affinity of the resulting molecule to a target protein. Desptie the conceptual advance of these models, they have fundamental limitations in dealing with diverse fragments. Yang et al. sampled fragments from a predefinced library which contains only 66 fragments. Podda et al. explicitly considered only a small number of frequent molecular fragments in a dataset. Furthermore, these modesl cannot accept novel fragments that are not in the training set, because they used fixed libraries.
+This paper resolve these problems by splitting the building block selection process into two steps. We first sample a building block randomly from a predefined library. Then, we determine whether the sampled building block will be added to a given core molecule,which can be done using a deep neural network that predicts the probability of connecting between the given molecule and the building block. The neural network can take any building blocks as an embedding vector obtained by encoding the molecules using another deep neural network, so one can add new building blocks in the library without retraining the model. This strategy allows us to handle an unlimited number of building blocks in theory while maintaining high computational efficiency.  
 
+# Method
+
+![Tux, the figure 1](BBAR_1.jpg)
 ### Reference
 1. Podda, Marco, Davide Bacciu, and Alessio Micheli. "A deep generative model for fragment-based molecule generation." International Conference on Artificial Intelligence and Statistics. PMLR, 2020.
 2. Yang, Soojung, et al. "Hit and lead discovery with explorative rl and fragment-based molecule generation." Advances in Neural Information Processing Systems 34 (2021): 7924-7936.
