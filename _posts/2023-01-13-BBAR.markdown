@@ -18,7 +18,7 @@ This paper resolve these problems by splitting the building block selection proc
 
 # Method
 
-![Tux, the figure 1](BBAR_1.jpg)
+![Tux, the figure 1](./BBAR_1.jpg)
 ### Reference
 1. Podda, Marco, Davide Bacciu, and Alessio Micheli. "A deep generative model for fragment-based molecule generation." International Conference on Artificial Intelligence and Statistics. PMLR, 2020.
 2. Yang, Soojung, et al. "Hit and lead discovery with explorative rl and fragment-based molecule generation." Advances in Neural Information Processing Systems 34 (2021): 7924-7936.
