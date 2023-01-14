@@ -10,3 +10,11 @@ Despite Molecular generative model has promising results, their common design st
 > Important point is 1. How to prepare Building blocks 2. How to teach model chemical Reaction. 
 
 In this paper, they propose a novel deep generative model for molecular generation, namely building block-based autoregressive generative model (BBAR) which aims to design new molecules with target properties by sequentially adding building blocks to any given starting molecule. 
+
+They used **Synthon-based molecule generation** based on **fragment-based molecule design**.
+
+There are a few fragmeny-based molecular generative models, thought the definition of fragments in those works is different from the building block in this work. Podda et al.[1](https://proceedings.mlr.press/v108/podda20a.html) proposed
+
+### Reference
+1. Podda, Marco, Davide Bacciu, and Alessio Micheli. "A deep generative model for fragment-based molecule generation." International Conference on Artificial Intelligence and Statistics. PMLR, 2020.
+2. 
