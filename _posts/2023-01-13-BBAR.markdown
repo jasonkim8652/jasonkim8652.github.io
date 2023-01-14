@@ -1,8 +1,14 @@
 ---
 layout: post
 title:  "Molecular Generative Model via Retrosyntheyically prepared Chemical Building BLock Assembly"
+classes: wide
 date:   2023-01-13 18:01:24 +0900
-categories: Synthesizable_Library
+categories: Paperstudy
+tage:
+  - Small molecule therapy
+  - Generative model
+  - Graph based model
+  - Synthesizability
 ---
 # Motivation
 
