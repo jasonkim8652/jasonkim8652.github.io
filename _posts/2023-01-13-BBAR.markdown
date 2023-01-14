@@ -1,6 +1,7 @@
 ---
 layout: post
 title:  "Molecular Generative Model via Retrosyntheyically prepared Chemical Building BLock Assembly"
+excerpt: "Paper review about making synthesizable molecule generative model"
 classes: wide
 date:   2023-01-13 18:01:24 +0900
 categories: Paperstudy
