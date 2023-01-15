@@ -8,17 +8,17 @@ toc: true
 
 ![My_picture](https://jasonkim8652.github.io/assets/images/My_picture.jpg){: width="200" height="350"}
 
-# Personal Information
+## Personal Information
 
-## Kim Jeonghyeon
+### Kim Jeonghyeon
 
-## Birth: 10th September 1998, in Republic of Korea
+### Birth: 10th September 1998, in Republic of Korea
 
-## Nationality: Korean
+### Nationality: Korean
 
-## Language: First language Korean, Fluent in English
+### Language: First language Korean, Fluent in English
 
-# Education
+## Education
 
 | Mar. 2017 ~ Feb. 2023(expected) | Seoul National University - Department of **Chemical and Biological Engineering**, Double major in **Computer Science and Engineering**| Seoul, Korea |
 | Mar. 2014 ~ Feb. 2017 | Daegu Science High School | Daegu, Korea |
