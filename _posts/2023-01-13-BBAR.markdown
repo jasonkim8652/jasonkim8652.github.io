@@ -9,7 +9,7 @@ tags:
   - Generative model
   - Graph based model
   - Synthesizability
-
+mathjax: true
 ---
 ## Motivation
 
