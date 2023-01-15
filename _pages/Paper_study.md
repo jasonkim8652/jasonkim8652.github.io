@@ -7,6 +7,7 @@ toc: true
 author_profile: true
 taxonomy: Paper Study
 layout: category
+sidebar_main: true
 ---
 
 ### Paper Study about AI and structural biology
