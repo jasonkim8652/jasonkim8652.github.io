@@ -9,4 +9,4 @@ taxonomy: Paper Study
 layout: category
 ---
 
-1. [Molecular Generative Model via Retrosyntheyically prepared Chemical Building BLock Assembly](https://jasonkim8652.github.io/paperstudy/BBAR/)
+## [Molecular Generative Model via Retrosyntheyically prepared Chemical Building BLock Assembly](https://jasonkim8652.github.io/paperstudy/BBAR/)
