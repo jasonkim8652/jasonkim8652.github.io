@@ -37,7 +37,10 @@ By applying the graph convolution layers, the two respecive graph vectors were o
 
 The training dataset made by the BRICS decomposition intrinsically included only positive samples, wher "positive" means that building blocks of the same molecule prepared by the decomposition method. To make the model select such building blocks over others, it was also needed to train the model with namely the negative samples which were unlikely to be added. To prepare the negative samples for each positive sample, ten buildingblocks proportional to their occurence to the power of 3/4 as proposed in ref.[[3]](https://arxiv.org/abs/1301.3781) was randomly choosen. The model was trained to predict the building block probability as 1.0 for the positive samples and 0.0 for the negative samples. The binary cross-entropy loss was used for this task.
 
-> Specific point of this paper is that they prepare negative fragment sample. 
+> Specific point of this paper is that they prepare negative fragment sample.
+
+### Atom Selection Model
+The atom selection module predicted the bonding probability between core graph node and block graph node. We only need to choose the block graph node. 
 
 ## Reference
 1. Podda, Marco, Davide Bacciu, and Alessio Micheli. "A deep generative model for fragment-based molecule generation." International Conference on Artificial Intelligence and Statistics. PMLR, 2020.
