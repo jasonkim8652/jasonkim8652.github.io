@@ -4,10 +4,6 @@ main:
     url: "/about/"
   - title: "Paper Study"
     url: "/Paper_study/"
-  - title: "Categories"
-    url: /categories/
-  - title: "Tags"
-    url: /tags/
   # - title: "Sample Posts"
   #   url: /year-archive/
   # - title: "Sample Collections"
