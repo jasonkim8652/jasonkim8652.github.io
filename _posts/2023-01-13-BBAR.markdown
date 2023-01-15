@@ -4,9 +4,8 @@ classes: wide
 excerpt: "Paper review about making synthesizable molecule generative model"
 date:   2023-01-13 18:01:24 +0900
 categories: 
-  - Paperstudy
+  - SmallMolecule
 tags:
-  - Small molecule therapy
   - Generative model
   - Graph based model
   - Synthesizability
