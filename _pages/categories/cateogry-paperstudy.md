@@ -1,7 +1,7 @@
 ---
 title: "Small Molecule"
 layout: archive
-permalink: categories/Small_Molecule
+permalink: /smallmolecule/
 author_profile: true
 sidebar_main: true
 ---
