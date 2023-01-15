@@ -1,5 +1,5 @@
 ---
-permalink: /Paperstudy/
+permalink: /categories/Paperstudy/
 title: "Paper Study"
 excerpt: "Paper Study about AI, Structural Biology"
 last_modified_at: 2023-01-15
