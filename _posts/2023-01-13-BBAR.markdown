@@ -40,7 +40,21 @@ The training dataset made by the BRICS decomposition intrinsically included only
 > Specific point of this paper is that they prepare negative fragment sample.
 
 ### Atom Selection Model
-The atom selection module predicted the bonding probability between core graph node and block graph node. We only need to choose the block graph node. 
+The atom selection module predicted the bonding probability between core graph node and block graph node. We only need to choose the block graph node. The atom selection module accepted output node embedding vectors from the building block selection module and applied the graph convolution layers to them. After applying the graph convolutional layers, the connection probability of core graph node was calculated using fully connected layers with a softmax layer at the end. The model was trained to predict connection probability as 1 for a positive atom and 0 for negative atoms. The cross-entropy loss for this task was used. 
+
+### Termination Prediction Model
+The termination prediction module predicted the probability of terminating the generation process. The module produced core graph vector by applying the graph convolution layers. Then, the termination prbability can be evaluated by applyting fully connected layers with the sigmoid activation function to the core graph vector. In the training process, the module was trained to predict the termination probability as 1.0 when the original molecules were recovered and other wise as 0.0.
+
+### Moleculare Generation after Training the Model
+The model accepted a starting molecule as input to generate a larger molecule by adding building blocks to it. If the starting molecule was not given, a building block was randomly selected from the building block library as a starting molecule. The conditional molecule generation additionally needed target properties as input. The generation process began to predict the termination probability of the starting molecule. Then, the termination sign was sampled in proportion to the termination probability. 
+
+If not terminating, the model executed the building block selection and the atom selection modules subsequently. ** In the building block selection step, the model randomly samples a set of building blocks proportional to their populations in the training. This stochastic sampling enhanced the efficiency of the generation process. ** 
+
+> How about clustering when selecting building blocks?
+
+The number of building blocks in each sampling was a hyper-parameter. 
+
+
 
 ## Reference
 1. Podda, Marco, Davide Bacciu, and Alessio Micheli. "A deep generative model for fragment-based molecule generation." International Conference on Artificial Intelligence and Statistics. PMLR, 2020.
