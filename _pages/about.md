@@ -5,19 +5,20 @@ excerpt: "Infomation About me "
 last_modified_at: 2023-01-15
 layout: single
 toc: true
+sidebar_main: true
 ---
 
 ![My_picture](https://jasonkim8652.github.io/assets/images/My_picture.jpg){: width="200" height="350"}
 
 ## Personal Information
 
-### Kim Jeonghyeon
+Kim Jeonghyeon
 
-### Birth: 10th September 1998, in Republic of Korea
+Birth: 10th September 1998, in Republic of Korea
 
-### Nationality: Korean
+Nationality: Korean
 
-### Language: First language Korean, Fluent in English
+Language: First language Korean, Fluent in English
 
 ## Education
 
