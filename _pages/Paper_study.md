@@ -1,11 +1,11 @@
 ---
-permalink: /categories/Paperstudy
+permalink: /Paperstudy/
 title: "Paper Study"
 excerpt: "Paper Study about AI, Structural Biology"
 last_modified_at: 2023-01-15
 sidebar_main: true
 author_profile: true
-layout: archive
+layout: category
 ---
 
 {% assign posts = site.categories.Paperstudy %}
