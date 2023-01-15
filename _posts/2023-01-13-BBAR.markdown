@@ -54,7 +54,11 @@ If not terminating, the model executed the building block selection and the atom
 
 The number of building blocks in each sampling was a hyper-parameter. 
 
-
+### What I've learned
+* We could use synthon based method, not using reaction template. This method could solve the harsh subgraph isomorphism problem. 
+* There are various building block generation method. Let's study about BRICS.
+* Building block selection model, Atom selection model, termination prediction model. These are elaborate architecture as I think. We can use this architecture later. 
+* Preparing negative building block was really impressive. This kind of detail is what we should learn.  
 
 ## Reference
 1. Podda, Marco, Davide Bacciu, and Alessio Micheli. "A deep generative model for fragment-based molecule generation." International Conference on Artificial Intelligence and Statistics. PMLR, 2020.
