@@ -27,8 +27,9 @@ This paper resolve these problems by splitting the building block selection proc
 
 ![Tux, the figure 1](https://user-images.githubusercontent.com/59328209/212456986-9b37a2dd-1b89-4dc6-ab61-6f6ecfb53a81.jpg){: .center}
 
+### Dataset
+The library should contain all building blocks of the molecuels in the training set, preferably many molecules, so that the model could learn chemical diversity. There would be various definitions of building blocks such as BRICS, RECAP, Bemis-Murcko, and so on. 
 
-
-### Reference
+## Reference
 1. Podda, Marco, Davide Bacciu, and Alessio Micheli. "A deep generative model for fragment-based molecule generation." International Conference on Artificial Intelligence and Statistics. PMLR, 2020.
 2. Yang, Soojung, et al. "Hit and lead discovery with explorative rl and fragment-based molecule generation." Advances in Neural Information Processing Systems 34 (2021): 7924-7936.
