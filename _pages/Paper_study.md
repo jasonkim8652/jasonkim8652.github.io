@@ -9,6 +9,6 @@ taxonomy: Paper Study
 layout: category
 ---
 
-#Paper Study about AI and structural biology
+# Paper Study about AI and structural biology
 
-1. [Molecular Generative Model via Retrosyntheyically prepared Chemical Building BLock Assembly](https://jasonkim8652.github.io/paperstudy/BBAR/)
+1. [Molecular Generative Model via Retrosyntheyically prepared Chemical Building Block Assembly](https://jasonkim8652.github.io/paperstudy/BBAR/)

@@ -1,5 +1,5 @@
 ---
-title:  "Molecular Generative Model via Retrosyntheyically prepared Chemical Building BLock Assembly"
+title:  "Molecular Generative Model via Retrosyntheyically prepared Chemical Building Block Assembly"
 classes: wide
 excerpt: "Paper review about making synthesizable molecule generative model"
 date:   2023-01-13 18:01:24 +0900
@@ -27,6 +27,7 @@ This paper resolve these problems by splitting the building block selection proc
 ## Method
 
 ![Tux, the figure 1](https://user-images.githubusercontent.com/59328209/212456986-9b37a2dd-1b89-4dc6-ab61-6f6ecfb53a81.jpg){: .center}
+
 
 
 ### Reference
