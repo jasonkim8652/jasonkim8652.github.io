@@ -52,6 +52,7 @@ Before we move on, I emphasized that most of the explanation about prior model w
 Teacher forcing is used to train the prior model capable of creating chemically valid compounds containing a given scaffold. The generation process can be seen as sequential conditional likelihood maximization problem. The output of the model represents a probability distribution over the token space containing all of the possible SMILES tokens present in the training dataset enriched by the “START” and “END” tokens.
 
 ![priormodel](https://jasonkim8652.github.io/assets/images/Libinvent_4.jpg)
+
 ![priormodel2](https://jasonkim8652.github.io/assets/images/Libinvent_5.jpg)
 
 Each RNN cells are consisted of three LSTM layer and they used bidirectional RNN for econder. They put both feature vector in right side and reverse side to decoder. Then, the model also featured a global attention mechanism that combined the summed outputs for both directions of encoder in each step with the output of the current step of the decoder. 
