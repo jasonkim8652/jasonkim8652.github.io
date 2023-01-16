@@ -54,7 +54,7 @@ If not terminating, the model executed the building block selection and the atom
 
 The number of building blocks in each sampling was a hyper-parameter. 
 
-### What I've learned
+## What I've learned
 * We could use synthon based method, not using reaction template. This method could solve the harsh subgraph isomorphism problem. 
 * There are various building block generation method. Let's study about BRICS.
 * Building block selection model, Atom selection model, termination prediction model. These are elaborate architecture as I think. We can use this architecture later. 
