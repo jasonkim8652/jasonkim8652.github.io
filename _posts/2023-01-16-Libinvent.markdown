@@ -26,4 +26,4 @@ First method is too exhaustive: we do not need to make a compounds that is not s
 
 ### Model Overview
 
-[model architecture](https://jasonkim8652.github.io/assets/images/Libinvent_1.jpg){: .center}
+![model architecture](https://jasonkim8652.github.io/assets/images/.jpg){: .center}
