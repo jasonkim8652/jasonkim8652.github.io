@@ -2,7 +2,7 @@
 title:  "On the Art of Compliling and Using 'Drug-Like' Chemical Fragment Spaces(2008)"
 classes: wide
 excerpt: "Paper review about synthon based dataset"
-date:   2023-01-16 18:01:24 +0900
+date:   2023-01-15 18:01:24 +0900
 categories: 
   - SmallMolecule
 tags:
