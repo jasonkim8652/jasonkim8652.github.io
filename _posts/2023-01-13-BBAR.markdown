@@ -1,5 +1,5 @@
 ---
-title:  "Molecular Generative Model via Retrosyntheyically prepared Chemical Building Block Assembly"
+title:  "Molecular Generative Model via Retrosyntheyically prepared Chemical Building Block Assembly(2023)"
 classes: wide
 excerpt: "Paper review about making synthesizable molecule generative model"
 date:   2023-01-13 18:01:24 +0900
