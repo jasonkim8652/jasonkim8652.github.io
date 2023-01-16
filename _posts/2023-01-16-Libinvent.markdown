@@ -26,4 +26,10 @@ First method is too exhaustive: we do not need to make a compounds that is not s
 
 ### Model Overview
 
-![model architecture](https://jasonkim8652.github.io/assets/images/.jpg){: .center}
+![model architecture](https://jasonkim8652.github.io/assets/images/Libinvent_1.jpg){: .center}
+
+[[1]](https://jcheminf.biomedcentral.com/articles/10.1186/s13321-020-00441-8)
+
+
+## Reference
+1. Arús-Pous, Josep, et al. "SMILES-based deep generative scaffold decorator for de-novo drug design." Journal of cheminformatics 12.1 (2020): 1-18.
