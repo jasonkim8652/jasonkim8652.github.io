@@ -1,0 +1,45 @@
+---
+title:  "Exposing the Limitation of Molecular Machine Learning with Activity Cliffs(2022)"
+classes: wide
+excerpt: "Paper review about machine learning that tried to catch up activity cliff"
+date:   2023-01-18 10:31:24 +0900
+categories: 
+  - SmallMolecule
+tags:
+  - lead optimization
+  - limitation
+mathjax: true
+---
+
+## Introduction
+
+Molecular property prediction has the principle of similarity as its heart-postulating that similar compounds are likely to have similar properties. Notably, one particular exception to this principle holds gret insights into the underlying structure-activity relationships. Activity cliffs may cause machine learning models to remarkably mispredict the activity of certain molecules, even with an overall high model predictivity. 
+This works has a three fold goal
+
+1. benchmark the performance of several machine and deep learning methods on activity cliffs
+2. quantify the effect of activity cliffs on the overall performance of machine learning
+3. identify promising approaches and future directions in the field of molecular machine learning
+
+Our results highlight a generally poor performance of machine learning approaches on acitivity cliff compounds, there by further underscoring the relevance of assessing structure-activity "discontinuities" during model training and selectin. 
+
+## Results and Discussion
+
+### Study Setup
+Data on 30 macormolecular targets from ChEMBL v29 is used. For each macromolecular target, activity cliffs were identified by considering pariwise structural similarities and differences in potency. We quantified molecular similarity between any pairs of molecules belonging to the same data set with three distinct approaches. 
+
+1. Substructure similarity: computed EXFPs to capture the presence of shared radial, atom-centered substructures among pairs of molecules. 
+2. Scaffold similarity: determined by computing ECFPs on atomic scaffolds and calculating the respective Tanimoto similarity coefficient. 
+3. Similarity of SMILES strings: captured by the Levenshtein distance. This metric detects character insertions, deletions, and translocations. 
+
+Although there is no widely accepted definition of activity cliffs and each similarity metir captures only part of the underlying "chemical reality," these three definitions were chosen to cover different types of structural differences relevant to medicinal chemistry. 
+
+In agreement with previous studies, a one fold or larger difference in bioactivity was used to identify activity cliff pairs. 
+
+In this work, we set out to ensure (a) a proportioanl representation of the number of activity cliff compounds in the train and test set and (b) preserving structural similarity between training and test molecules, as previously suggested. To this end, for each data set, molecules were clustered based on substructure similarity using spectral clustering on extended connectivity fingerprints. 
+
+### Model Performance with Activity Cliffs
+Overall, large differences in predictive performance on activity cliff compounds can be observed among data sets, with RMSE values ranging from0.62 to 1.60 log units. To provide a global assessment of methods across the analyzed data sets, we performed a principal component analysis (PCA) on the obtained RMSE values. The closer a method is to the "best" point, the better its overall performance. The higher the orthogonal deviation from the best-worst line, the higher the variability of a method's performance based on the dataset. SVM coupled with ECFPs resulted in the best method on activity cliffs on average, in agreement with a previous study. 
+
+![fig1](https://jasonkim8652.github.io/assets/images/ACE_1.png)
+
+The systematic training and assessment of 720 machine learning models allowed us to investigate the potential "failure modes" of machine learning approaches on activity cliffs. 

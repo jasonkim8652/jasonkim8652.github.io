@@ -78,6 +78,8 @@ Also they performed albation studies of algorithm to investigate the effect of e
 
 FREED with both PE and BU outperformed curiosity-driven models with PE and BU, showing the effectiveness of our methods in our task compared to curiosity-driven explorations. Moreover, our predictive error-PER method outperformed the TD error-PER method. We conjecture that such a result is due to 1) novelty-based experience prioritization ecourages better exploration 2) leveraging an auxiliary priority predictor network makes PER training more robust than internal value estimate functions. 
 
+## What I've learned
+* various RL techniques using multiple actions. 
 
 ## Reference
 1. Ståhl, Niclas, et al. "Deep reinforcement learning for multiparameter optimization in de novo drug design." Journal of chemical information and modeling 59.7 (2019): 3166-3176.
