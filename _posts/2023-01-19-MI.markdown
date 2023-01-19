@@ -10,3 +10,19 @@ tags:
 mathjax: true
 ---
 
+## Introduction
+
+Multiplicative interactions have reappeared in a range of modern architectural designs. We start this work by considering multiplicative interactions as an object of study in their own right. We hypothesize that multiplicative interactions are suitable for representing certain meaningufl classes of functions needed to build algorithmic operations such as conditional statements or simlarity metrics, and more generally as an effective way of intergrating contextual infromation in a network in a way that generalized effectively. We show this empirically in controlled synthetic scenarios, and also demonstrate significant performance improvement on a variety of challengning, large-scale reinforcement learning(RL) and sequence modelling tasks when a conceptually simple muiltiplicative interaction module is incorporated. 
+
+Such improvements are consistent with our hypothesis that  the use of appropriately applied multiplicative interactions can provide a more suitable inductive bias over function classes leading to more data-efficient learning, better generalization, and stronger performance. 
+
+Our contributions are thus: (i) to re-explore multiplicative interactions and their design principles; (ii) to aid the community's understanding of other models(hypernetworks, gating, multiplicative RNNs) through them; (iii) to show their efficiacy at representing certain solutions; and (iv) to empirically apply them to large scale sequence modeling and reinforcement learning problems. 
+
+## Multiplicative Interactions
+The underlying question we are trying to answer is how to combine two different streams of information. Our goal is to model an unknown function that entails some interaction between the two variables. The standard approach is to approximate this function by a neural network. If we only use concatenation of x and z, the interaction between x and z is only additive. 
+
+In contrast, a single layer with multiplicative interactions would impose the functional form 
+
+![fig1](https://jasonkim8652.github.io/assets/images/MI_1.png)
+
+where, W is a 3D weight tensor, U, V are regular weight matrtices and b is a vector. 
