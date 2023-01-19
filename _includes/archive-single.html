@@ -13,6 +13,7 @@
 <div class="{{ include.type | default: "list" }}__item">
     <article class="archive-item">
         <div>
+            <p>
             <span>
               <a href="{{ post.url }}">{{post.title}}</a>
             </span> 
@@ -21,7 +22,7 @@
               {% if site.category_archive.type and post.categories[0] and site.tag_archive.type and post.tags[0] %}
                 {%- include post__taxonomy.html -%}
               {% endif %}
-              <br>
+            </p>
             </small>
         </div>
       </article>
