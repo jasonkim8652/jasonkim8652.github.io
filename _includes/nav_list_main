@@ -22,7 +22,7 @@
             </ul>
             <ul>
                 {% for category in site.categories %}
-                    {% if category[0] == "ProteinStructure" %}
+                    {% if category[0] == "AI" %}
                         <li><a href="/categories/AI" class="">AI ({{category[1].size}})</a></li>
                     {% endif %}
                 {% endfor %}
