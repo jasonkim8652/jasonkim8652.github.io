@@ -17,7 +17,7 @@
               <a href="{{ post.url }}">{{post.title}}</a>
             </span>
             <small> 
-              <p class="archive__item-excerpt"><i class="far fa-calendar-alt"></i> {★{ post.date | date: "%m/%d/%Y" }} </p>
+              <p class="archive__item-excerpt"><i class="far fa-calendar-alt"></i> {{ post.date | date: "%m/%d/%Y" }} </p>
               {% if site.category_archive.type and post.categories[0] %}
                 {%- include post__taxonomy.html -%}
               {% endif %}
