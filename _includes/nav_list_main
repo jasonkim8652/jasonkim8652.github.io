@@ -23,14 +23,14 @@
             <ul>
                 {% for category in site.categories %}
                     {% if category[0] == "ProteinStructure" %}
-                        <li><a href="/categories/stl" class="">ProteinStructure ({{category[1].size}})</a></li>
+                        <li><a href="/categories/AI" class="">AI ({{category[1].size}})</a></li>
                     {% endif %}
                 {% endfor %}
             </ul>
             <ul>
                 {% for category in site.categories %}
                     {% if category[0] == "Immunogenecity" %}
-                        <li><a href="/categories/stl" class="">Immunogenecity ({{category[1].size}})</a></li>
+                        <li><a href="/categories/Immunogen" class="">Immunogenecity ({{category[1].size}})</a></li>
                     {% endif %}
                 {% endfor %}
             </ul>
