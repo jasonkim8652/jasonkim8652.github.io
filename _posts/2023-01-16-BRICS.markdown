@@ -10,3 +10,38 @@ tags:
   - Synthesizability
 mathjax: true
 ---
+
+## Introduction
+RECAP is widely used and often referred to, yet even though authors frequently state to have used modified improved versions of the original, actual publications that communicate the extensions that were carried out are rare. The question remains what a 'drug-like' fragment space actually is, and whether or not 'drug-likeness' depends on the origin of the fragments: that is, if they neessarily have to be derived from drugs. In this context, it is highly interesting and important to measure the extent and accuracy with which current models and methods are able to represent the available chemical space. 
+
+BRICS incorporated more elaborate medicinal chemistry concepts and, for exmpale, modeled explicit isosteric replacements for cyclic and acyclcic cases and further distinguished activated from inactivated heterocyclic ring systems and their corresponding substituents. 
+
+## Method
+The shredding procedure we used for BRICS applies all possible retrosynthetic cuts simultaneously, which avoids the generation of overlapping(redundant) fragments. This is in accordance with RECAP and simplifies the calcualtion later on. 
+
+![fig1](https://jasonkim8652.github.io/assets/images/BRICS_1.png)
+
+In addition to splitting retrosynthetically relevant bonds, we directly included substructure filters into the shredding procedure to avoid the generation of unwanted chemical motifs as well as small terminal fragments such as single hydrgen and halogen atoms, hydroxy, nitro, carboxylate, methoxy, methyl, ethyl, and isopropyl groups. These motifs are therefore discarded or left uncleaved, respectively. 
+
+The BRICS model consists of 16 chemical environments indicated by link atoms of different types. The corresponding fragment prototypes are depicted in following figure. and show only the direct chemical environment of the cleavage sites for reasons of simplicity. 
+
+![fig2](https://jasonkim8652.github.io/assets/images/BRICS_2.png)
+
+Note that the carbonyl and alkyl fragments are shown twice (L1/L6, L4/L8). This is because we wanted to keep track of tehri origin for medicinal chemistry and modeling reasons, that is, whether they appeared as cyclic or acyclic substituents or linkers. The corresponding fragment space results from the definition of the compatibility of the respective chemical environments. 
+
+We implemented the new set of rules in SMARTS notation and used the shredding functionality of the Recore program for retrosynthetic fragmentation, which works on 3D molecular structures and thereby retains the input coordinates in the fragments. This setupt, in particular, easily enables potential users to adapt and modify teh set of rules for splitting and recombination. 
+
+This rule was applied to the World Drug Index(WDI) and the 'drug-like' subset of the ZINC database. We preprocessed and prefiltered the two catalogues using a custom PipelinePilot protocol to remove ions, metals, and unwanted chemical motifs and to obtain consistent protonation states. 
+
+## Results
+
+The results of the shredding are shown in Tables 1 and 2. 
+
+![fig3](https://jasonkim8652.github.io/assets/images/BRICS_3.png)
+
+In general, BRICS is able to cleave about 10% more molecules than RECAP. At the same time, the numver of fragments with more than one connection point is higher, which leads to more branching possiblities in the end, that is, a greater number of possible topologies during the construction of molecules that can be directly observed in the results of the performance evaluation. 
+
+![fig4](https://jasonkim8652.github.io/assets/images/BRICS_4.png)
+
+From the reuslts of the calcualtions, we generated histograms of the similarity vlaues for the best solution that was generated for each query molecule. The normalized distributions contained in above figure clearly show that we could significantly improve the RECAP performance for all test cases by using the new BRICS model, that is, the corresponding fragments and the respecitve set of rules for recombination. This led us to the conclusion that the fragments produced by BRICS seem to be more general in nature and lead to a greater number of reconstructed queries as well as solutions with higher overall similarity values in case the orginal queries could not be exactly rebuilt. 
+
