@@ -58,6 +58,9 @@ We can think of multiplicative interactions equivalently in terms of either:
 
 ## Expressivity of the model 
 
+![fig3](https://jasonkim8652.github.io/assets/images/MI_3.png)
+
+We first show that multiplicative interactions strictly enlarge the hypotheses space of vanilla MLPs - that is, we add new function which multi-layer multiplicative models can now represent perfectly, while also presertving our ability to represent those in the existing set modeled perfectly by vanilla MLPs. 
 
 ## Reference
 [1] Ha, David, Andrew Dai, and Quoc V. Le. "Hypernetworks." arXiv preprint arXiv:1609.09106 (2016).
