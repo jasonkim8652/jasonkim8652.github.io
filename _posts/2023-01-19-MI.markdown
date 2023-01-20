@@ -52,7 +52,7 @@ Further, we can make another low-rank approximation to the diagnoal form and gen
 
 ### Multiplicative Interactiona and Metric Learning
 
-Another highly related field of active research is that of metric learning, where one tries to find the most suitable metric to measure similarity between objects in some parametrised space of metrics. One of the most commonly used classes is that of Mahalanobis distances $d_C(x,z) = |x-z|_C = (x-z)^TC^{-1}(x-z)$. In metric learning, however, one usually epxlicitly defines losses over tuples(or higher order n-tuples) with direct supervision, while here we consider building blocks that can learn a metric internally, without direct supervision. 
+Another highly related field of active research is that of metric learning, where one tries to find the most suitable metric to measure similarity between objects in some parametrised space of metrics. One of the most commonly used classes is that of Mahalanobis distances $d_C(x,z) = \|x-z\|_C = (x-z)^TC^{-1}(x-z)$. In metric learning, however, one usually epxlicitly defines losses over tuples(or higher order n-tuples) with direct supervision, while here we consider building blocks that can learn a metric internally, without direct supervision. 
 
 ### The Taxonomy of Multiplicative Interactions
 
@@ -71,7 +71,7 @@ We first show that multiplicative interactions strictly enlarge the hypotheses s
 
 > Theorem 1. Let $H_{mlp}$ denote the hypotheses space of standard MLPs with ReLU activation function, and let $H_{mu}$ denote the hypotheses space of analogous networks, but with each linear layer replaced with a multiplicative layer, then we have $H_{mlp} \subset H_{mu}$.
 
-While valuable, such a result can also be trivially obtained by adding somewhat exotic activtion functions to the pool of typically used ones. While increasing the hypothesis space on its own is not of great significance, the crucial point here is that the set $H_{mu}\H_{mlp}$ helps extend our coverage to the set of basic functions that one would expect to need in composing solutions that mimic systems of interest - such as logical, physical, or biological ones. 
+While valuable, such a result can also be trivially obtained by adding somewhat exotic activtion functions to the pool of typically used ones. While increasing the hypothesis space on its own is not of great significance, the crucial point here is that the set $H_{mu} - H_{mlp}$ helps extend our coverage to the set of basic functions that one would expect to need in composing solutions that mimic systems of interest - such as logical, physical, or biological ones. 
 
 Let's see the figure. For the gating and dot-product function classes, the complexity of MLPs required to learn them seems to grow exponenetially, while the growth for multiplicative models is quadratic. On the other hands summation is trivially easier for an MLP. Thus we do not argue that multiplicative interactions are a silver bullet -but that such interactions add an important class of functions to the hypothesis set that are often the right inductive bias, or algorithmic building block, for many kinds of problems. 
 
