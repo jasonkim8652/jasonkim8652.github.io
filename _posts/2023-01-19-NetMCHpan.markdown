@@ -5,7 +5,8 @@ date:   2023-01-19 16:31:24 +0900
 categories: 
   - Immunogenecity
 tags:
-  - T cell-MHC
+  - Bioinformatics
+  - MHC class I
 mathjax: true
 ---
 
@@ -27,10 +28,68 @@ However, the number of MHC molecules characterized by such MS studies will remia
 The IEDB contains a comprehensive set of MHC-binding and eluted ligand(EL) data available in the public domain. Although this dataset contains BA data characterizing more than 150 MHC class I molecules, at the onset of this study only 55 MHC class I molecules were characterized by MS peptidome data. This imbalance caused us to suggest a novel machine-learning approach integrating in formation from both types of data into a combined framework benefitting from information from the two worlds. The proposed framwork is "pan specific", because it can leverage information across MHC molecules, data types, and peptide lengths into a single model. Hence, we expect this approach to achieve superior predictive performance compared with models trained on the two data types individually, as well as achieve an improved performance when it comes to predicting length profile preferences of different MHC molecules. 
 
 ## Materials and Methods
+
 ### Data sets
+
+Data on all class I MHC ligand elution assays available in the [IEDB]((http://www.iedb.org) database were collected, including the ligand sequence, details of the source protein, position of the ligand in the source protein, and the restricting allele of the ligand. There were 160,527 distinct assays in total, and the length of the ligands ranged from 4 to 37 aa. All lengths that were associated with >0.5% of total ligandas were selected for further analysis; this included lengths 8-15 aa and included 99% of the assay entries. 
+
+The restricting MHC molecules of the ligands was analyzed, and entries with alleles listed unambiguosuly were selected. Thus, there were 127 class I molecules from human and mouse in teh selected data set. Redundant entries with teh same ligand sequence and MHC molecule were removed, and MHC molecules with >50 ligand entries were selected. This included 55 class I molecules, and the number of available ligands per molecule varied widely from 50 to 9500. 
+
+A protocol was designed to identify such false positive Ags and exclude them from the final data selected. The protocol identified proteins that had a significantly smaller number of predicted binders among ligands than expected for random peptides using binomial probability distribution. Five sets of random peptides were generated from the ligand sequences by shuffling the amino acid residues within the ligands. BA was then predicted for the original ligands and random peptide sets for their corresponding allels. The median of the predicted percentile ranks of the five random sets was estimated and assigned as the BA of the random peptides. Based on a predicted BA cut-off of percentile rank 1.0, the number of predicted binders among the original ligands and the random peptide sets was estimated. Thus, five proteins were identified as false positives, and ligand entries from these proteins were excluded from teh dataset. 
+
+Random artificial negatives were generated for each MHC molecule covered by EL data by randomly sampling 10*N peptides of each length(8-15 aa) from the Ag source protein sequences, where N is the number of 9-mer ligands for the given MHC molecule. 
+
+## Neural network training
+
+The NNAlign training approach with insertions and deletions was extended by adding a second output nueron, as shown below.
+
+![fig1](https://jasonkim8652.github.io/assets/images/MHCNet1.png)
+
+BA values are measured as $IC_{50}$ values in nanomolar(aff) and can be rescaled to the interval [0,1] by applying 1 - log(aff)/log(50,000), representing continuous target values. For ELs, the strength of the interaction between peptide and MHC molecules is unknown; therefore, a target value of 1 is assigned to binders, and 0 is assigned to artificial negative peptieds. 
+
+In this network architecture, weights between the input and hidden layer are shared between the two input types, and weights connecting the hidden and output layer are specific for each input type. In this setting, we define one training epoch as the average number of iterations needed to process each data point in the smaller data set once. 
+
+A neutral network ensembel was trained, as described by Nielsen and Andreatta[[5]](https://genomemedicine.biomedcentral.com/articles/10.1186/s13073-016-0288-x), using 5-fold nested cross-validation. Networks with 60 and 70 hidden neurons were trained, leading to an ensemble of 40 networks in total. 
+
+The inputs to the neural networks consisted of the peptide and the MHC molecule in terms of a pseudo-sequence [[6]](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0000796). All peptides were represented as 9-mer binding cores by the use of insertions and deletions, as described by ref. [[7]](https://academic.oup.com/bioinformatics/article/32/4/511/1744469?login=false), and were econded using BLOSUM encoding.[[8]] (https://onlinelibrary.wiley.com/doi/full/10.1110/ps.0239403). Additional feqtures for the encoding of peptides included the length of the deletion/insertion; the length of peptide-flanking regions, which are >0 in the case of a predicted extension of the peptide outside either terminus of the binding groove; and the length(L) of the peptide, encoded with four input neurons corresponding to the four cases L smaller than 8, L = 9, L = 10, and L bigger than 11.  
+
+### Length preference of MHC molecules
+
+For all MHC molecules shared between the BA and EL data sets, we generated predictions for 80,000 random natural peptides of 8-15 aa. From the top 2% of predictions, the frequency of each peptide length was estimated.
+
+### Leave-one-out validation
+
+LOO experiments were performed for all MHC molecules present in the EL dataset. For this, a given MHC molecules was removed from the EL data set and then the BA+EL method was trained in 5-fold cross-validation, as described above, omitting multiple random initializations, resulting in an ensemble of 10 networks. Performance of the LOO models is compared with an ensemble of neural networks of the same size trained on the complete data set. Further predictions are made for 80,000 peptides of lengths 8-15 aa derived from natural proteins to evaluate a model's ability to predict the length preference of an MHC allele that was not part of the EL training data. 
+
+### Validation on external data sets
+
+A data set of ELs was obtained from Pearson et al. [[9]](https://www.jci.org/articles/view/88590). Also, a set of positive CD8 epitopes was downloaded from the IEDB. The epitope set was identified using the following search criteria: "T cell assays: IFN-r," "positive assays only", "MHC restriction type: Class 1". A Frank value was calculated for each positive HLA pair as the ratio of the number of peptides with a prediction score higher than the positive peptide/the number of peptides contained within the source protein.  
+
+## Results
+
+![fig2](https://jasonkim8652.github.io/assets/images/MHCNet2.png)
+
+### peptide-length preference of MHC molecules
+
+We set out to investigate how well the different methods could capture the peptide-length preferences of individual MHC molecules. For this, we predicted binding scores for a set of random natural peptides of lengths 8-15 aa and calculated the frequencies of peptides of different lengths in the top 2% of predictions.
+
+![fig3](https://jasonkim8652.github.io/assets/images/MHCNet3.png)
+
+This analysis clearly confirms the results obtained from the three case examples. The predictions for the two EL likelihood models only show low performance for one molecule: HLA-B41:04. However, this molecule is only characterized by 52ELs, whose length profile forms an unusual bimodal distribution at 9 and 11 aa. 
+
+### Validation on external data sets
+
+![fig4](https://jasonkim8652.github.io/assets/images/MHCNet4.png)
+
+First and foremost, the results clearly demonstrateed the increased predictive power of integrating EL data into the training data of NetMHCpan. In fig.5A, we can observe that the gain in sensitivityat a Frank threshold of 1% for the EL models compared with NetMHCpan-3.0 is 10% and it is 15% at a Frank threshold of 0.5% . However, the results shown in the left panel of Fig.5 also suggest that the two EL models achieve very similar predictive performance when it comes to identification of ELs. This is in strong contrast to the results obtained from the IEDB eptiope data set. In summary, these analyses suggest that the gained predictive performance of the EL method on the EL evaluation data is driven by at least two factors: differences in binding preferences between EL and affinity-defined peptide binders and the improved prediction accuracy of ligand length preference of the EL methods. 
 
 ## Reference
 1. Nielsen, Morten, and Massimo Andreatta. "NNAlign: a platform to construct and evaluate artificial neural network models of receptor–ligand interactions." Nucleic acids research 45.W1 (2017): W344-W349.
 2. Tenzer, S., et al. "Modeling the MHC class I pathway by combining predictions of proteasomal cleavage, TAP transport and MHC class I binding." Cellular and Molecular Life Sciences CMLS 62.9 (2005): 1025-1037.
 3. Harndahl, Mikkel, et al. "Peptide‐MHC class I stability is a better predictor than peptide affinity of CTL immunogenicity." European journal of immunology 42.6 (2012): 1405-1416.
 4. Trolle, Thomas, et al. "The length distribution of class I–restricted T cell epitopes is determined by both peptide supply and MHC allele–specific binding preference." The Journal of Immunology 196.4 (2016): 1480-1487.
+5. Nielsen, Morten, and Massimo Andreatta. "NetMHCpan-3.0; improved prediction of binding to MHC class I molecules integrating information from multiple receptor and peptide length datasets." Genome medicine 8.1 (2016): 1-9.
+6. Nielsen, Morten, et al. "NetMHCpan, a method for quantitative predictions of peptide binding to any HLA-A and-B locus protein of known sequence." PloS one 2.8 (2007): e796.
+7. Andreatta, Massimo, and Morten Nielsen. "Gapped sequence alignment using artificial neural networks: application to the MHC class I system." Bioinformatics 32.4 (2016): 511-517.
+8. Nielsen, Morten, et al. "Reliable prediction of T‐cell epitopes using neural networks with novel sequence representations." Protein Science 12.5 (2003): 1007-1017.
+9. Pearson, Hillary, et al. "MHC class I–associated peptides derive from selective regions of the human genome." The Journal of clinical investigation 126.12 (2016): 4690-4701.
