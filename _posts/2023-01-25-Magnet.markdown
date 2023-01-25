@@ -1,0 +1,34 @@
+---
+title:  "Magnet for the Needle in Haystack: 'Crystal Structures First' Fragment Hits Unlock Active Chemical Matter Using Targeted Exploration of vast Chemical Spaces "
+classes: wide
+date:   2023-01-25 16:31:24 +0900
+categories: 
+  - SmallMolecule
+tags:
+  - Fragment-based drug discovery
+  - Chemical Space Docking
+---
+
+## Introduction
+Generally, only the most promising compounds are subjected to biostructural evaluation. Nevertheless, since three-dimensional(3D) structural information is rare at this stage, elaborate validation of the actual binding evenet at functionally relevant positions on the surface of the target protein, like substrate or allosteric pockets, is essential. This also avoids starting with artifactual hits based on the limited conclusiveness of biochemical assays. 
+
+Although routinely executed, the typical hit rates of HTS are low(~1%). Hit compounds tend to exhibit a certain level of molecular complexity and need to be signigicantly modified to progress the campaigns. Another major limitation is an unsatisfactory and nonexhaustive coverage of chemical space. To remedy these shortcomings, virtual preassessment via molecular docking studies can be a resource-saving method to filter for most promising binding candidates. 
+
+Only those fragments with high-quality interactions are used for enumeration of their respective lead-like structures and for subsequent docking. With this approach, termed as chemical space docking in this work, just a fraction of the computatioanl effort is required to exhaustively screen a given chemical space. Owing to their smaller size and fewer optiions to establish interactions, fragment tend to bind more promiscuosuly, i.e., at several individual binding sites of a structure. The goal of this fragment evolution is to design lead-like molecules, a process that heavily relies on the availability of structural data. Since its inception, FBDD has not only led to approved therapeutics, like most recent drugs sotorasib and asciminib, and numerous drug candiditaes, but it has also empowered the industry to address targets that had previously been deemed "undrugable". Starting points for the design of noncovalent inhibitors for "undruggable" targets can be identified by crystallographic and NMR screening techniques. Other approaches utilize covalent strategies or fragments for the design of bifunctional molecules for targeted protein degradation of the "undruggable" target. 
+
+However, Lots of studies have shown that established screening cascades in FBDD have major limitations, especially considering the low overlap between identified hits from screening assays performed in parallel. THis question such strategies as a reliable criterion to select the most promising fragment hits for further evaluation. A large proportion of them might be missed prior to entering the phase of validation by structural biology. Therefore, we proposed fragment screening directly by X-ray crtstallography and coined it the "crysral structure first" approach. 
+
+We started from co-crystal structures of four fragments complexed with protein kinase A and did not consider or even know their binding affinity as we believe such values are not sufficiently indicative in the case of fragments. Subsequently, we performed a "fuzzy" template-based virtual screening using a two-component reaction Enamine REAL Space for these four selected fragments. We "anchored the Enamine Real Space molecules, guided by the experimental fragment 3D coordinates. 
+
+## Results and Discussion
+
+### Crystallography-Driven Prioritization of Fragments for Fragment Evolution
+
+Crystal Structure of fragment hits on PKA from crystallographic fragment screenings conducted by Oebbeke et al. and Siefker were visually inspected to assess their ligan confidence. Regarding the receptor side, 19 of ehse structures were deemed highly reliable. A super-positioning of the binding site residues revealed a rigid binding site with only Asp 184, Thr 183, Met 120, and Glu 121 side chains adopting slightly different orientations.
+
+To apply the novel chemical space docking workflow presented in this study, out of the 19 fragments bound to PKA, four chemically diverse fragments with different hinge binding motifs were selected. 
+
+![fig1](https://jasonkim8652.github.io/assets/images/Magnet1.png)
+
+Since the experimental affinity of fragments had not been determined at this stage of the workflow, it was also not considered for any sort of prioritization to select fragments. The selection was done solely based on the crystallographically retrieved binding modes. Our goal was to optimize the diversity of the set of hinge binders to enable multiple chemical routes for subsequent fragment evolution. 
+
