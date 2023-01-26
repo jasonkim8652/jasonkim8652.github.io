@@ -10,3 +10,36 @@ tags:
 ---
 
 ## Introduction
+
+As a significant step toward this ultimate goal of reaction evaluation, we address the task of predicting the major products of organic ractions based on the reactant, reagent, and solvent species. The methodology we describe below is directly applicable to the automated identification of not just major products, but all species in a mixture of products. This fulfulls an additional need for impurity identification and quantification during process development, particularly in the context of drug substance manufacturing where it is essential to understand the exact composition of crude product mixtures. 
+
+Major developments in machine learning and data availability have enabled new approaches to this problem. For specific reaction familes with sufficiently detailed reaction condition data, machine learning can be applied to the quantitative prediction of yield. Ideally, however, models could be trained on historical reaction data to predict a broad range of reaction families. One way to do so is by combining the traditional use of reaction templates in cheminformatics with machine learning, either by learning to select relevant reaction rules from a template library or by learning to rank template-generated products. However, while rection rules are suitable for interpolating known chemistry to novel substrates, they leave no opportunity to describe reactions with even minor structural differences at the reaction center. Other approaches have involved learning to propose mechanistic or pseudo-mechanistic reaction steps, but these require human annotations or heuristically-generated mechanisms in addition to published experimental results. Here, we describe a chemically-informed model that incorporates domain expertise through its architecture. 
+
+![fig1](https://jasonkim8652.github.io/assets/images/GCNN1.png)
+
+Our overall model structure is desigend to reflect how expert chemists approach the same task. First, we learn to identify reactive sites that are most likely to undergo a change in connectivity - this parallel the identification of reactive functional groups and consideration fo how they might react, but without codifiying rigid rules about functional group decomposition. Next, we perform a focused enumeration of products that could result from those interactions subject to chemical valence rules. We learn to rank those candidiates - determining what modes of reactivity are most liekly, as would a chemist - to produce the final prediction of major products. 
+
+The key to the success of our approach is learning a representation of molecules that captures properties relevant to reactivity. We use a graph-based representation of reactant species to propose changes in bond order, introduced in a recent conference publication. A quantitative analysis of model performances shows an accuracy of over 85.6%, 5.3% higher than the previous state-of-the-art, and performance on par with human experts for this complex prediction task. 
+
+## Results
+
+### Perceiving likely modes of reactivity
+
+We treat these reactant molecules as a single molecular graph where nodes and edges describe atoms and bonds, respectively. Reactions are thus a set of graph edits where the edges between two or more nodes are changed. One aspect of our approach is the fact that for most organic reactions in this dataset,the reaction center - the set of nodes and edges undergoing a change in connectivity - consists of a relatively small number of atoms and typically only up to 5 bonds. 
+
+> reaction center has relatively small number of atoms and typically only up to 5 bonds. 
+
+![fig2](https://jasonkim8652.github.io/assets/images/GCNN2.png)
+
+As the first tep in predicting reaction outcomes, we predict the most likely changes in connectivity: the sets of (atom, atom, new bond order) changes that describe the difference between the reactant molecules and the major product. We train a Weisfeiler-Lehman Network (WLN), a type of graph convolutional neural network, to analyze the reactant graph and predict the likelihood of each (atom, atom) pair to change to each new bond order, including a 0th 0rder bond. 
+
+![fig3](https://jasonkim8652.github.io/assets/images/GCNN3.png)
+
+Atoms are featurized by their atomic number, formal charge, degree of connectivity, explicit and implicit valence, and aromaticity. Bonds are featurized solely by their bond order and ring status. 
+
+> more featurization does not mean performance improvement.
+
+To account for the effects of distanct atoms, a gloval attention mechanism is use whereby all atoms in the reactant graph atten to ("look at") all other atoms; a global context vector for each atom is based on contributions from the representations of all aotms weighted by the strength of this attention. Pairwise sums of these learned atom-levle representations, both from the local atomic environment and from the influence of all other species, are used to calculate the likelihood scores. The model is trained to score the true graph edits highly using a sigmoid corss entropy loss function. 
+
+While an exhaustive enumeration of all possible bond changes guarantees 100% coverage, the subsequent problem of selecting the most likely outcome would be intractable. 
+
