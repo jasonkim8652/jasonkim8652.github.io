@@ -10,6 +10,7 @@ tags:
 ---
 
 ## Introduction
+
 Generally, only the most promising compounds are subjected to biostructural evaluation. Nevertheless, since three-dimensional(3D) structural information is rare at this stage, elaborate validation of the actual binding evenet at functionally relevant positions on the surface of the target protein, like substrate or allosteric pockets, is essential. This also avoids starting with artifactual hits based on the limited conclusiveness of biochemical assays. 
 
 Although routinely executed, the typical hit rates of HTS are low(~1%). Hit compounds tend to exhibit a certain level of molecular complexity and need to be signigicantly modified to progress the campaigns. Another major limitation is an unsatisfactory and nonexhaustive coverage of chemical space. To remedy these shortcomings, virtual preassessment via molecular docking studies can be a resource-saving method to filter for most promising binding candidates. 
@@ -31,4 +32,35 @@ To apply the novel chemical space docking workflow presented in this study, out 
 ![fig1](https://jasonkim8652.github.io/assets/images/Magnet1.png)
 
 Since the experimental affinity of fragments had not been determined at this stage of the workflow, it was also not considered for any sort of prioritization to select fragments. The selection was done solely based on the crystallographically retrieved binding modes. Our goal was to optimize the diversity of the set of hinge binders to enable multiple chemical routes for subsequent fragment evolution. 
+
+### Chemical Space Docking Workflow
+
+To achieve an efficient fragment evolution strategy using multibillion-sized chemical spaces, we have designed a chemical space docking workflow that consists of three steps:
+
+1. placement of the REAL Space fragments onto crystallographically determined fragment positions,
+2. enumeration of sublibraries using Enamine's reaction knowledge
+3. template-based docking of enumerated sublibraries.
+
+#### placement of the Real Space Fragmnets onto Crystallographic Fragments.
+Docking all of the REAL Space fragments (208,293; ten poses each) ensures that any fully built-up molecule of the REAL Space may later emerge as a solution: It will share one of the initial fragments as a substructure. It prevents an undesired shortening of the hit list and introduces a degree of flexibility in the build-up process by an RMSD of approximately 0.5-1.5 A.
+
+> Using MCS algorithm pick up candidate, then docking them to get the pose. 
+
+#### Enumeration of Sublibraries.
+
+In the seconds step, 50 REAL Space fragments were selected from step (i) for the enumeration of corresponding sublibraries. The enumeration was based on the virtual "reaction vector" contained in each REAL Space fragment, yielding sublibraries that included Enamine's core intellectual property, the reaction knowledge. Enumeration of each sublibrary led to an equal-sized set of compounds for each initial crystallographic fragment with an average of 13,000 virtual product molecules per REAL Space fragment
+
+#### Template-based docking
+
+In the final step of this new workflow, the molecules of the enumerated sublibraries from step (ii) were again docked using the template-based method resulting in around 2,020,658 docking poses for each selected crystallographic fragment. This time the docking pose of the corresponding REAL Space fragment for each sublibrary was used as a template. Subsequently, the generated docking poses were scored to generate lists for final post-processing and cherry picking. These lists consists of around 539,055 docking poses for each selected crystallographic fragment. 
+
+
+
+
+
+
+
+
+
+
 
