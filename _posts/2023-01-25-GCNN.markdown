@@ -43,3 +43,14 @@ To account for the effects of distanct atoms, a gloval attention mechanism is us
 
 While an exhaustive enumeration of all possible bond changes guarantees 100% coverage, the subsequent problem of selecting the most likely outcome would be intractable. 
 
+### Evaluating candidate reaction outcomes
+
+The set of valid product structures resulting from the focused enumeration requires additional evaluation and ranking to produce the final model prediction. We have previously treated the problem of ranking candidate products as an isolated task, yet this fails to utilize a key aspect of the enumeration approach: candidate outcomes produced by combinations of more likely bond changes are themselves more likely to be the true outcome. The quantitative scores for each bond change when perceiving likely modes of reactivity provides an initial ranking of candidate reaction outcomes. The remaining evaluation task serves to refine these preliminary rankings, now taking into account the likelihood of each set of bond changes. 
+
+Reactants and candidate outcomes are embedded as attributed graphs to obtain local atom-level representations. For each candidate, a numerical reaction representation is calculated based on the differences in atom representations between that candidate's atoms and the reactant's atoms. The overall candidate reaction outcome score is produced by processing that reation representation through a final neural network layer and adding it to the preliminary score obtained by summing the bond change likelihoods as perceived by the WLN. The model is trained to score the true candidate outcome most highly using a softmax cross entropy loss function. The bond changes corresponding to the top combinations are imposed on the reactant molecules to yield the predicted product molecules, which are then canonicalized in terms of theri SMILES representation using RDKit. 
+
+Quantitative evaluation is performed on the same atom-mapped dataset of 410k/30k/40k reactions from the USPTO. For consistency, we explicitly exclude reactant species not contributing heavy atoms to the recorded products in the enumeration; that is, the model is made aware of which species are non-reactants. An exact match in product SMILES is required for a prediction to be considered correct. 
+
+### Human benchmarking
+
+To evaluate the difficulty of this prediction task for human experts, we asked eleven human participants to write the likely major products for 80 reaction example from the test set. The 80 total questions have been divided into 8 categories of 10 randomly-selected questions each based on the rarity of the reaction template that could have been used to recover the true outcome. 
