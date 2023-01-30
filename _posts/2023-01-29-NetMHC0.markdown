@@ -1,0 +1,61 @@
+---
+title:  "NetMHCpan(2007)"
+classes: wide
+date:   2023-01-19 16:31:24 +0900
+categories: 
+  - Immunogenecity
+tags:
+  - Bioinformatics
+  - MHC class I
+---
+
+## Introduction
+
+The cytoxic T lymphcyte(CTL) arm of the T cell immune system represents a prime example of peptides being used as immune targets. CTL's are aimed at intracellular pathogens and obtain information on the intracellular environment of our cells through a series of cellular events involving HLA-I-mediated antigen processing and presentation of peptide epitopes derived from the intracellular protein metabolsim, including that of intracellularly located pathogens. A detailed description of how the immune system handles proteins and generates peptide could enable scientists and clinicians to analyze any protein of interest for the presence of potentially immunogenic CTL epitopes. Scanning entire proteomes computationally should futrther enable a rational approach to vaccine development, immunotherapy and diagnostics. Thus, candidate eptiopes might be predicted from the various microbial genome projects, tumor vaccine candidates from mRNA expression profiling of tumors ("Transcriptomes") and auto-antigens from the human genome.
+
+The single most selective event in antigen processing and presentation is that of peptide binding to HLA-I. It has been estimated taht only 1 in 200 peptides will bind to a given MHC class I molecule with sufficient strength to elicit an immune response. This makes it particularly important to establish accurate descriptions and predictions of peptide binding to HLA-I molecules. It is not a simple task since the genes encoding HLA proteins are extremely polymorphic giving rise to many differnet peptids binding specificities begin expressed in the human population. 
+
+The analysis of HLA-I specificities have classically entailed the identification of peptide binding motifs(characterized primarily by the requirement for a few properly spaced and essential primary anchor residues) through pool sequencing of MHC eluted peptides and/or the geneeration of a representative set of peptide binding data. More recently, the growing amount of peptide-binding data has supported the generation of more sophisticated data-driven bioinformatics approaches including artificial neural networks, hidden Markov models, and support vector machines.
+
+In general, HLA-I binding predictions depend on sufficient experimental data beign available for the excat HLA-I molecule in question. However, the number of data is deficient. Furthermore, focus has been towards the most prevalent Caucasians HLA-I molecules, which are not necessarily those prevalent among other populations, which are in more urgent need of new vaccine initiatives. To overcome this kind of problem, several (frequently computer intensive) prediction algorithms have been proposed using the three dimensional structure of the MHC molecule, and empirical or semi-empiricial force fields, to estimate the peptide-HLA-I binding affinity. Obviously, to extend this approach beyond the 17 HLA-I molecules currently solved at the structural level requires some kind of structural modeling. Searching for alternative solutions, we here propose a novel method, NetMHCpan, exploiting both peptide and primary HLA sequence as input information for ANN-driven predictions pooling all available data and at the same time incorporate all HLA specificities.
+
+## Materials and Methods
+
+### Source data
+
+Nonameric peptide - HLA binding data was obtained from two sources: peptide-HLA binding data recently published by Sette and coworkers, and data recently deposited at the IEDB by Buus and coworkers. In total, the dataset consisted of 37,384 unique peptide-HLA interactions covering 24 HLA-A alleles and 18 HLA-B alleles (26503 and 10881 for the A and B alleles, respectively).
+
+### HLA pseudo sequence
+
+The HLA sequence was encoded in terms of a pseudo-sequence consisting of amino acid residues in contact with the peptide. The contact residues are defined as being within 4.0 $\AA$  of the peptide in any of a representative set of HLA-A and -B structures with nonamer peptides. Only polymorphic residues from A,B, and C alleles were included giving rise to a pseudo-sequence consisting of 34 amino acid residues. Notice that due to multiple possible conformations, the central peptide residues could choose to interact with differnet subsets of residues in the binding groove.
+
+### Neural network training
+
+Artificial neural networks were trained to quantitatively predict peptide-HLA binding. As input data, we used both peptide sequences and HLA primary sequence information, and as output data we used experimentally determined affinity data. The primary HLA sequence information was obtained from the [Anthony Nolan database](http://www.anthonynolan.org.uk/HIG/) and reduced to the 34 amino acid pseudo-sequence. Architectures with hidden neurons in the range 22 to 86 were tested, and the network with the highest prediction performance on the test set was selected. The binding affinity was log-transformed into the range between 0 and 1. The input sequences were presented to the neural network in three distinct manners: a) conventional sparse encoding b) Blosum encoding, where each amino acid was encoded by the BLOSUM50 matrix score vector and c) a mixture of the two, where the peptide was sparse encoded and the HLA psudo sequence was Blosum encoded. [[1]](https://www.pnas.org/doi/abs/10.1073/pnas.89.22.10915) Representing each HLA locus molecule, we trained a neural network ensemble using all available data for the relevant locus, excluding all data specific for the HLA allele in question. 
+
+### HLA distance trees
+
+HLA distance trees were derived from correlations betwen predicted binding affinities. For each antigen, the binding affinity was predicted for a set of 10,000 random natural peptieds using the NetMHCpan method. Next, the distance between any two alleles was defined, as $D = 1- P_{corr}$, where P_{corr} is the Pearson correlation between two sets of predicted binding affinities. The HLA allele distance matrixes were calculated for 390 HLA-A alleles, and for 711 HLA-B alleles, and used the neighbor algorithm.
+
+## Results
+
+### Experimental validation
+
+A prospective validation was performed using NetMHCpan to identify peptides, which would bind to HLA molecules tha tspecificity-wise were unknown to us. For each HLA molecules, the binding affinity was predicted for a set of 500,000 random nonameric peptides of pathogenic, or human, origin. Only peptides predicted to bind with an affinity stronger than 50 nM were selected, and from this set of predicted binders, a subset of 10-15 peptides with low mutual sequence similarity was selected. These peptides were then tested for binidng to the relevant HLA molecule in an in vitro binding assay. More than 86% of the predictions were experimentally confirmed as binders with Kd values below 500nM. 
+
+### Leave-one-out validation
+
+Here, we trained networks using all data for the relevent loci, HLA-A or -B, except the data for the molecule in question. This was done for all HLA molecules represented in the dataset. Thus, in this evaluation, no peptide-HLA binding data from the validation set was included in the training of the pan-specifric predictor. For each allele under consideration, we trained three such conventional single allele cross-validated networks based on different sets of peptide binding data: (1) data from the exact HLA molecule in question(Self), (2) data from the most closely related HLA molecules as identified by similarity between the HLA sequences(Neighbor), (3) data from a previously selected representative of the HLA supertype(supertype)
+
+### Identification of HLA supertypes
+
+Having demonstrated the predictive strength of the approach to identify the binding motif of uncahracterized HLA molecules, we now used the pan-specific ANNs to cluster HLA molecules according to predicted peptide binding specificity. 
+
+## Discussion
+
+Predictions of T cell eptiopes have the potential to provide important information for rational research and development of vaccines and immunotherapies. Unfortunately, at this time they only cover a few of the many HLA specificities found in human populations. All such efforts have faced the problems of the limited amounts of data available for most of the different HLA molecules present in the human population. Here, we report a pan-specific approach overcoming the problems of lacking specific binding data during the methods development. The major advantage of the pan-specific approach is that it predicts the binding of any peptide to any present and future HLA molecule, even in absence of data specific for the query HLA molecule, whereas conventional data-driven prediction approaches are restricted to predict the binding of peptides solely to the particular HLA molecules included in the training. 
+
+## Refrence
+
+1. Henikoff, Steven, and Jorja G. Henikoff. "Amino acid substitution matrices from protein blocks." Proceedings of the National Academy of Sciences 89.22 (1992): 10915-10919.
+2.

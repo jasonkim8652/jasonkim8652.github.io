@@ -1,5 +1,5 @@
 ---
-title:  "Magnet for the Needle in Haystack: 'Crystal Structures First' Fragment Hits Unlock Active Chemical Matter Using Targeted Exploration of vast Chemical Spaces "
+title:  "Magnet for the Needle in Haystack: 'Crystal Structures First' Fragment Hits Unlock Active Chemical Matter Using Targeted Exploration of vast Chemical Spaces (2022)"
 classes: wide
 date:   2023-01-25 16:31:24 +0900
 categories: 
