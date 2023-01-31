@@ -53,14 +53,3 @@ In the seconds step, 50 REAL Space fragments were selected from step (i) for the
 #### Template-based docking
 
 In the final step of this new workflow, the molecules of the enumerated sublibraries from step (ii) were again docked using the template-based method resulting in around 2,020,658 docking poses for each selected crystallographic fragment. This time the docking pose of the corresponding REAL Space fragment for each sublibrary was used as a template. Subsequently, the generated docking poses were scored to generate lists for final post-processing and cherry picking. These lists consists of around 539,055 docking poses for each selected crystallographic fragment. 
-
-
-
-
-
-
-
-
-
-
-
