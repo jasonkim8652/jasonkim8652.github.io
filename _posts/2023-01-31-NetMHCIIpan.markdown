@@ -21,6 +21,13 @@ We have previously shown that a minimum number of 100-200 peptides with characte
 
 ### Data
 
+Quantitative HLA-DR restricted peptide-binding data was obtained from the IEDB database and from an in-house collection of unpublished data. For external evaluation of the pan-specific method, we included a set of HLA-DR class II ligands from the SYFPEITHI database. Only ligands not included in the quantitatitve HLA-DR restricted peptide binding data set were used. The SYFPEITHI data set consists of 584 MHC ligands restricted to 28 HLA-DR alleles.
+
+### Method
+
+![fig1](https://jasonkim8652.github.io/assets/images/NetMHC2pan1png.png)
+
+The peptide nonamer core and peptide-flanking residues (PFR) were identified for each of the peptides in the IEDB dataset using the SMM-align method
 
 
 ## Reference
