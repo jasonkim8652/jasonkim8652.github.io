@@ -1,0 +1,41 @@
+---
+title:  "Prediction of MHC class II binding affinity using SMM-align, a novel stabilization matrix alignment method(2007)"
+classes: wide
+date:   2023-02-03 11:31:24 +0900
+categories: 
+  - Immunogenecity
+tags:
+  - HLA-class2
+---
+
+## Background
+
+Predicting the peptides that binds to MHC class II molecules can effectively reduce the number of experiments required for identifying helper T cell epitopes and play an important role in rational vaccine design. In general terms, the different methods can be classified in two groups. One group being quantitative matrices estimated from experimentally derived position specific binding profiles, and the other group comprising data driven bioinformatical motif search methods. However, most of these methods have been trained and evaluated on very limited data sets covering only a single or a few different MHC class II alleles. Further the majority of the methods are trained on MHC ligand data (peptides eluted from MHC complexes present on teh cell surface). This type of qualitative prediction methods are well suited to classify data in to binders and non-binders, but they do not allow a direct prediction of the peptide:MHC binding strength.
+
+Recently, a large set of quantitative MHC class II peptide-binding data has been made publicly available on the IEDB databases. The data set comprises peptide data with IC50 binding affinities for more than 14 HLA and several mouse MHC class II alleless. The SMM_align method seeks to identify a weight matrix that optimally reproduces the measured IC50 values for each peptide in the training set.
+
+The method allows for identification the MHC class II binding motif in terms of a position specific weight matrix. The output of the SMM-align method is IC50 binding affinity values, enabling direct readout of the peptide:MHC binding affinity.
+
+## Methods
+
+### Data
+
+Quantitative peptide: HLA binding data were downloaded from the IEDB database November 2006. Only HLA DR alleles with more than 100 unique peptides and mouse H2-IA data with more than 75 unique peptides were included.
+
+The SMM-align method includes a weight matrix encoding the amino acids preferences identified bt a Gibbs sampler trained on HLA ligand data. HLA ligand data were downloaded from the SYFPEITHI database. Only peptides of nine amino acids length or more and peptides not present in the IEDB data set were included. A total of 360 HLA ligands were included in the SYF dataset.
+
+Designing a benchmark is quite more difficult for Class II binding prediction compared to Class I due to the broad length variation between the different peptides, and the potential data redundancy this imposes. To make an evaluation fo tha prediction method, one has to define the evaluation set so that none of the 9 mer sequences of the evaluation set are present in the training data. We have desinged a simple Hobohm1 inspired algorithm that aims at minimizing the overlap between training and evaluation data. The algorithm is applied to all peptide data for each allele. FOr each allele: Add each new peptide to list of non-redundant peptide sequences, NR, if it has no identical nonamer peptide overlap with any of the peptides already on the NR list. Otherwise the new peptide is added to the cluster defined by the first hit on the NR list. Next all peptides in the NR list are split into five subsets. We are aware that this approach does not ensure zero overlap on the 9 mer level between the different data subsets. However, the overlap is minor and for most alleles in the order 0.5-2%. 
+
+### Method
+
+#### Gibbs sampler weighy matrices
+
+For each allele, a weight matrix describing the binding motif was constructred based on the relevant data in the SYF data set and the set of binding peptides in the IEDB training set, using the Gibbs sampler method as described by Nielsen et al. [[2]](https://www.sciencedirect.com/science/article/pii/S1389172302801608) An IC50 value of 500 nM was used identify peptide binders from the IEDB data set. 
+
+#### The SMM-align method
+
+The binding motif for all MHC class II alleles is defined in terms of a 9 X 20 weight matrix, where 9 is the length of the binding motif, and 20 the number of different amino acids. The SMM-align method seeks to identify a weight matrix that optimally reproduces the measured IC50 values for each peptide. The predicted binding affinity for a peptide sequence is determined as the highest nonamer peptide score within the peptide, where a nonamer peptide score is calculated as $s = \sum _l \sum _{a'} v^a_{la'} \dot w_{la'}$
+
+## References
+
+1. Noguchi, Hideki, et al. "Hidden Markov model-based prediction of antigenic peptides that interact with MHC class II molecules." Journal of bioscience and bioengineering 94.3 (2002): 264-270.
