@@ -34,7 +34,59 @@ For each allele, a weight matrix describing the binding motif was constructred b
 
 #### The SMM-align method
 
-The binding motif for all MHC class II alleles is defined in terms of a 9 X 20 weight matrix, where 9 is the length of the binding motif, and 20 the number of different amino acids. The SMM-align method seeks to identify a weight matrix that optimally reproduces the measured IC50 values for each peptide. The predicted binding affinity for a peptide sequence is determined as the highest nonamer peptide score within the peptide, where a nonamer peptide score is calculated as $ s = \sum_{l} \sum_{a'} v^a_{la'} \dot w_{la'} $
+The binding motif for all MHC class II alleles is defined in terms of a 9 X 20 weight matrix, where 9 is the length of the binding motif, and 20 the number of different amino acids. The SMM-align method seeks to identify a weight matrix that optimally reproduces the measured IC50 values for each peptide. The predicted binding affinity for a peptide sequence is determined as the highest nonamer peptide score within the peptide, where a nonamer peptide score is calculated as $ s = \sum_{l} \sum_{a'} v^a_{la'} w_{la'} $ where $ w_{la'} $ is the binding motif weight at position l for amino acid $ a' $ and $ v^a_{la'} $, is the sequence-encoding value for amino acid a' for amino acid a. The peptides sequences are presented to the SMM-align method using several sequence-encoding schemes. The first is the conventional sparse encoding where each amino acid is encoded as 20-digit binary number. The second is the Blosum50 encoding inwhich the amino acids are encoded as the Blosum50 score for replacing the amino acid with each of the 20 amino acids. Note that since the sequence encoding for each amino acid thus is a constan "vector", the relation for the peptide score can be simplified to the conventional scoring scheme. The final prediction score for a nonomer peptide is calculated as the average of the sparse and Blosum encoded predictions. 
+
+A Metropolis Monte Carlo (MC) procedure is invoked to search for the optimal weight matrix. Initially, random weights are assigned to the matrix keeping the sum at each position equal to zero. In each Monte carlo step, a position is selected at random, and the weight on two amino acids are updated keeping the sum of the weights equal to zero. The energy function guiding the Monte Carlo search is following below.
+
+![fig1](https://jasonkim8652.github.io/assets/images/SMM_align1.png)
+
+where $ s_i $ is the prediction score, $ m_i $ is the measured(log-transformed) binding affinity, N is the number of peptide data, L is the binding motif length, A is the number of different amino acids, $ w_{la} $ are the weighy matrix elements, and a term weighted by a parameter $ \lambda $ is introduced to avoid over-fitting. The final weight matrix is determined as the weighted mean of the SMM-align and Gibbs sampler matrices, with relative weights on the Gibbs sampler matrix determined from the Monte Carlo search.
+
+As demonstrated earlier, the Gibbs sampler performance can be greatly improved by restricting the number of allowed amino acids at the P1 position in the binding motif. We adopt a similar approach, to improve the performance of the SMM-align method for HLA-DR alleles. In the Monte Carlo step modifying the weights at position P1 in the matrix, hydrophobic amino acids (ILVMFYW) are forced to take only non-negative values, and non-hydrophobic amino acids are forced to take only non-positive values. 
+
+The probability of accepting a move in the Monte Carlo search is determined by the relation $ P = min[1,exp(-\dfrac{dE}{T})] $ where dE is the difference in energy between the end and start configurations, and T a scaler. 
+
+#### SMM-align training
+
+Each MC search was initiated with random weights. The scalar T was initialized to 0.01 and lowered to 0.000001 in 20 uniform steps. At each value of T, 2500 Monte Carlo moves were performed. The motif length, L, was fixed at nine amino acids. 
+
+The configuration-space of the peptide sequences contains many local minima with close to identical energy. In order to achieve an effective sampling of these local minima, the MC calculations were repteated 25 times with different initial weight configuration. For each run the final energy and weight matrix were recorded, and the top 10 scoring matrices were kepy in the matrix ensemble. 
+
+## Results
+
+### Cross-validated predictive performance
+
+![fig2](https://jasonkim8652.github.io/assets/images/SMM_align2.png)
+
+![fig3](https://jasonkim8652.github.io/assets/images/SMM_align3.png)
+
+### Incorporating the peptide length in prediction fo peptide:MHC class II binding
+
+Chang et al. recently proposed a strategy for incorporating of peptide length into prediction of peptide-MHC class II binding, and demonstrated that at least for some alleles the approach leads to significant improvements in prediction accuracy. The data are taken from two source: AntiJen and IEDB. For each allele in the two data sets, we trian the SMM-align method in three distinct manners; a) using no peptide length information, b) including a peptide length affinity baseline estimated from the training data as described by Chang et al. and c) including a peptide length affinity baseline estimated from the data in the alternative dataset, i.e., using the DRB1\*0101 AntiJen data set to estimate the baseline correction for the training of the IEDB DRB1\*0101 data and vise versa. The result of the benchmark calcualtion is shown in follow. 
+
+![fig4](https://jasonkim8652.github.io/assets/images/SMM_align4.png)
+
+The table shows that the performance gained proposed the Chang et al. for the AntiJen DRB1\*0101, and DRB1\*1501 allele data sets is recovered in our implementation(see SMM_regr). However, it is striking to observe that the alternative baseline correction consistently for all alleles lead to a dramatic drop in predictive performance (see SMM-regr-alter). This suggests that the baseline subtraction, rather than being alleles specific, is highly data set dependent and that the performance gain observed including an affinity baseline correction does not including an affinity baseline correction does not necessarily reflect a genuine feature of MHC class II binding predictions, but may arise as a result of over-fitting the method to a length distribution and binding profile of a particular data set. 
+
+We observed a large discrepancy between the affinity-length profiles for the peptide data in the AntiJen, IEDB and SYFPEITHI databases. The short peptides(length < 15  amino acids) in the IEDB data set, seems to follow an affinity profile in agreement with the observed length profile for natural MHC-II ligands in teh SYFPEITHI database. This is in contrast to what was observed for the peptides the AntiJen data set. For longer peptides, both the AntiJen and IEDB data sets followed a similar affinity profile that deviated strongly from the length profile of natural MHC-II ligands. The large discrepancy between the affinity-length profiles for the two databases provides a possible explanation as to why the alternative baseline correction gives so poor predictive performance. While the AntiJen data sets tend to have high binding affinities for short peptides, the opposite is the case for the IEDB data sets, and applying an AntiJen derived baseline correction to an IEDB data set thus could give no improvement to the prediction results. 
+
+### Including peptide flanking residues
+ 
+Looking at differences in the length distribution of the amino terminal peptide flanking residues(PFR) as identified by the SMM alignment method, suggest a feature common to both ethe AntiJen and IEDB data that separates binding from non-binding peptides. 
+
+![fig5](https://jasonkim8652.github.io/assets/images/SMM_align5.png)
+
+In the Figure above, the length distribution of the amino terminal PFRs is shown for the combined set of binding and non-binding peptides in the AntiJen, and IEDB data sets, respectively. From the figure, it is apparent that a significantly larger fraction of the non-binding peptides have amino terminal PFRs shorter than 2 amino acids, suggesting that amino terminal PFRs do play an important role in stabilizing the peptideP:MHC complex. A similar picture is not observed at the C terminal. 
+
+The requirement for presence of amino terminal flanking amino acids in combination with the observation that the SSM algorithm tends to over-predict the binding affinity for longer peptides, suggests a simple scheme suitable for modifying the SMM predictions
+
+![fig6](https://jasonkim8652.github.io/assets/images/SMM_align6.png)
+
+where S is the original prediction score from the SMM method, and p is a parameter determining the penalty for short pFRs and longer peptides. In a small cross validation experiment, an optimal value for p was determined to be equal to 0.1. This method is SMM-PFR, making the improvement highly statistical significant. 
+
+An attempt to directly encode the amino acids composition of the PFR's as input to the SMM-align method gave further improvements to the prediction accuracy. Here, the SMM weight matrix was extended to a length of 11 to incorporate the effect of PFR's. PFR's were encoded to the SMM_align method as the average Blosum 62 score over a maximum length of three amino acids. The gain in predictive performance is minor. However, the performance is consistently increased for all three alleles in AntiJen dataset, and is increased for 11 of the alleles in the IEDB data set, making the improvement highly statistical significatn suggesting that amino acid composition of the PFRs does play some role in stabilizing the peptide: MHC complex. 
+
+
 
 ## References
 
