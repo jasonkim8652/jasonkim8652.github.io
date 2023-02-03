@@ -34,7 +34,7 @@ For each allele, a weight matrix describing the binding motif was constructred b
 
 #### The SMM-align method
 
-The binding motif for all MHC class II alleles is defined in terms of a 9 X 20 weight matrix, where 9 is the length of the binding motif, and 20 the number of different amino acids. The SMM-align method seeks to identify a weight matrix that optimally reproduces the measured IC50 values for each peptide. The predicted binding affinity for a peptide sequence is determined as the highest nonamer peptide score within the peptide, where a nonamer peptide score is calculated as $s = \sum _l \sum _{a'} v^a_{la'} \dot w_{la'}$
+The binding motif for all MHC class II alleles is defined in terms of a 9 X 20 weight matrix, where 9 is the length of the binding motif, and 20 the number of different amino acids. The SMM-align method seeks to identify a weight matrix that optimally reproduces the measured IC50 values for each peptide. The predicted binding affinity for a peptide sequence is determined as the highest nonamer peptide score within the peptide, where a nonamer peptide score is calculated as $ s = \sum_{l} \sum_{a'} v^a_{la'} \dot w_{la'} $
 
 ## References
 
