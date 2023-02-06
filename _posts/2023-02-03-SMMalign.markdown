@@ -86,6 +86,10 @@ where S is the original prediction score from the SMM method, and p is a paramet
 
 An attempt to directly encode the amino acids composition of the PFR's as input to the SMM-align method gave further improvements to the prediction accuracy. Here, the SMM weight matrix was extended to a length of 11 to incorporate the effect of PFR's. PFR's were encoded to the SMM_align method as the average Blosum 62 score over a maximum length of three amino acids. The gain in predictive performance is minor. However, the performance is consistently increased for all three alleles in AntiJen dataset, and is increased for 11 of the alleles in the IEDB data set, making the improvement highly statistical significatn suggesting that amino acid composition of the PFRs does play some role in stabilizing the peptide: MHC complex. 
 
+## Discussion
+
+Most importantly, the MHC class II binding motif is more dgenerate than that of MHC class I. For MHC class I, the anchor positions are highly conserved, often allowing accommodation of only a few different amino acids. The situation is quite different for MHC class II. Here, even the most dominant anchor positions allow for a large number of different amino acids. Due to this high degeneracy one might expect a general lower predictive performance. However, there are other issues affecting the predictive performance of the SMM-align method. The SMM-align method takes as a fundamental assumption that the peptide: MHC binding affinity is determined solely from the nine amino acids in binding core motif. This is clearly a large oversimplification since it is known that peptide flanking residues on both sides of the binding core may contribute to the binding affinity and tability.
+
 
 
 ## References

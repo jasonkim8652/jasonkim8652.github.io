@@ -27,8 +27,37 @@ Quantitative HLA-DR restricted peptide-binding data was obtained from the IEDB d
 
 ![fig1](https://jasonkim8652.github.io/assets/images/NetMHC2pan1png.png)
 
-The peptide nonamer core and peptide-flanking residues (PFR) were identified for each of the peptides in the IEDB dataset using the SMM-align method
+The peptide nonamer core and peptide-flanking residues (PFR) were identified for each of the peptides in the IEDB dataset using the SMM-align method. The SMM-align method identifies of the maximal scoring nonamoer peptide core for each peptide sequence. This approach will thus leave out information on the suboptimizal nonamer sequences that are predicted not to bind or to bind with a weaker affinity. To include information on the suboptimal nonamer sequences that are predicted not to bind or to bind with a weaker affinity. To include information on the binding affinity for these suboptimal nonamer peptides, we assign a normalized binding score, $ S_{norm} $, to suboptimal nonamer peptides given as the ratio of the SMM-align score for the peptide to the SMM_align score of the optimal peptide multiplied with the log-transformed experimental IC50 binding value of the peptide. That is $ S_{norm} = (S/S_M)M $, where S is the SMM-align score for the suboptimal peptide, $ S_M $is the SMM_align score of the optimal peptide, and M is the bindign value log-transformed as 1-log(aff), where aff is the experimental IC50 binding value of the full-length peptide. In case the SMM-align method assigns the maximal scoring nonamer peptide a log-transform binding value of 0, the log-transformed experimental IC50 binding value is assigned randomly to one of the suboptimal peptides and all other nonamer peptides are givena a binding value of 0. In doing this expansion using sub-optimal nonamer peptides, the size of the IEDB dataset was enlarged from 14,607 to more than 100,000 data points. This more than 5 fold increase of the data gave consistent improvements to the accuracy of the prediction method in all benchmark calculations. For each peptide core, the PFRs were identified as the amino acids flanking the peptide core up to maximum of three at either end.
 
+### HLA Pseudo-Sequence
+
+The contact residues are defined as being within 4.0$ \AA $ of the peptide in any of a representative set of HLA class II structures. Only residues polymorphic in any known HLA-DR, DQ and DP protein sequence were included giving rise to a pseudo-sequence consisting of 21 amino acid residues.
+
+### Neural Network training
+
+The input sequences were presented to the neural network in three ditinct manners: (a) conventional sparse encoding(i.e., encoded by 19 zeros and a one), (b) Blosum encoding, where each amino acid was encoded by the BLOSUM50 matrix score vector, and (c) a mixture of the two, where the peptide was sparse encoded and the HLA pseudo seqeuce was Blosum encoded. PFRs were calculated as the average BLOSUM62 score over a maximum length of three amino acids. The PFR length was encoded as $L_{PFR}/3$, $1-L_{PFR}/3$, where $L_{PFR}$ is the length of the PFR(between 0 and 3), and the peptide length was encode as $ L_{PEP}$, $1- L_{PEP}$, where $ L_{PEP} = 1/(1+exp((L-15)/2)) $ and L is the peptide length.  For each data point, the input to the neural network thus consists of the peptide sequence, the PFRs, the HLA pseudo sequence, the peptide length, and the length of the C and N terminal PFR's resulting in a total of 646 input values. 
+
+For each HLA-DR molecule, a neural network ensemble was trained using all available data, excluding all data specific for the HLA-DR allele in question. Network architectures with hidden neurons of 22, 44,56, and 66 were used. The network training was performed in a fivefold corss-validated manner using the three encoding schemes described above resulting in an ensemble of 60 neural networks (3 encoding schemes, 4 architrctures, and 5 folds). The predictited affinity for a peptide was then determined as prediction value for the maximal scoring nonamer peptide core (including PFRs), where each nonamer peptide core is cored as the average of the 60 predictions in the neural network ensemble. 
+
+## Results
+
+### Leave-one-out validation
+
+![fig2](https://jasonkim8652.github.io/assets/images/NetMHC2pan2.png)
+
+The predictive performance of the pan-specific method relies on the ability to interpolate information from "neighboring" alleles in HLA specificity space and interpret this information in terms of binding affinities. It is thus expected that the pan-specific method should perfom best in cases where closely related HLA molecules are included in the training of the method. 
+
+### Identifying Endogeneously Presented Peptides
+
+The NetMHCIIpan method was further validated using a large set of data from the SYFPEITHI database, which were not included in the training data of the NetMHCIIpan method. This set consists of 584 HLA ligands restricted to 28 different HLA-DR alleles. For every peptides, the source protein was found in the SwissProt database. If more than one source protein was possible, the longest protein was chose. The source protein was split into overlapping peptide sequences of the length of the HLA ligand. All peptides except the annotated HLA ligand were taken as negative peptides. 
+
+![fig3](https://jasonkim8652.github.io/assets/images/NetMHC2pan3.png)
+
+The netMHCIIpan and TEPITOPE methods have similar predictive performance on the subset of 17 alleles covered by both methods. The TEPITOPE method has the highest performacne for 10 alleles and the NetMHCIIpan the highest performance for 7 alleles. For the 11 alleles not covered by the TEPITOPE method, NetMHCIIpan achieves the highest performance for 9 alleles, and the TEPTIOPE method the highest performance for 2 alleles. 
+
+### Discussion 
+
+In the present work, we develop a HLA-DR pan-specific method, NetMHCIIpan, capable of providing quantitative predictions of peptide binding to all HLA-DR molecules with known protein sequence. 
 
 ## Reference
 
