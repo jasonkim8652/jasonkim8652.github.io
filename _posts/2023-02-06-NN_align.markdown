@@ -1,0 +1,49 @@
+---
+title:  "NN-align. An artificial neural network-based alignment algorithm for MHC class II peptide binding prediction(2009)"
+classes: wide
+date:   2023-02-06 16:31:24 +0900
+categories: 
+  - Immunogenecity
+tags:
+  - HLA-class2
+---
+
+## Introduction
+
+The MHC class I molecule is highly specific and binds a limited set of peptides of a narrow length distribution. In contrast to this, the MHC class II molecule is highly promiscuous both with respect to composition and length of the peptide ligands. During the last decade, large efforts have been invested in developing methods to allow for in silico screening of pathogenic organisms with the purpose of identifying peptides that will bind MHC class II molecules in a given host. However, these methods for MHC class II binding prediction however focus on identifying the peptide-binding core only, ignoring the effects on the binding affinity of PFRs. 
+
+Here, we show how an artificial neural network-based alignment method, NN-align, can significantly outperform both the SMM-align and NetMHCIIpan methods. The NN-align method includes explicit encoding of the peptide flanking residues in terms of amino acid composition and length, as well as a novel scheme for neural network training that deals with the data redundancy inherent in the peptide data due to multiple examples of identical binding cores. The NN-align method is trained on a large data set of more than 14,000 quantitiative peptide MHC binding values covering 14 HLA-DR alleles. The performance is evaluated on five independent data sets and its performance is compared to the best publicly available state-of-the art MHC class II prediction methods. 
+
+## Methods
+
+### Data
+
+The data set comprises 14 HLA-DR alleles each characterized by at least 420 and up to 5166 peptide binding data points.
+
+The method was evaluated further on five independent data sets taken from recent MHC class II benchmark publications. The HLA-DR class II ligand data set from the SYFPEITHI database. Only ligands restricted by one of the 14 HLA-DR alleles in the quantitative binding data set were included. This SYFPEITHI data set consists of 475 MHC ligands.
+
+## Method
+
+NN-align was implemented a sa conventional feed-forward artificial neural network. The method consists of a two-step procedure that simultaneously estimates the optimal peptide binding register(core) and network weight configuration. Initially, all network weights were assigned random values. Given this set of network weights, the core of a given peptide was identified as the highest scoring of all 9mers contained within the peptide. The score of a 9mer peptide was cacualted using the conventional feed-forward algorithm. The network weights were updated using gradient descent back-propagation. Given a peptide core alignment, the weights were updated to lower the sum of squared errors between the predicted binding score and the measured binding affinity target value. The quantitative binding data contains a large degree of redundancy. To limit the effect of such data redundancy, the network back-propagation was modified so that the step-size of back-propagation was divided by the binding core redundancy of the given peptide. The binding core redundancy was calcualted using a Hobohm-1 algorithm to define clusters of identical binding cores.
+
+To impose an amino acid preference at the P1 position of the binding core, a log-odds position specific scoring matrix was constructed using the Gibbs sampler method for class II binding prediction using the peptide binders in the training data for the allele in question. Next, the core P1 amino acid was encoded as the P1-PSSM score for that given amino acid, i.e. for a given peptide binding register, one additional value was added to the network input as the score of the core P1 amino acid at the P1 position in the PSSM. For each peptide core, the input to the neural network thus consisted of the peptide sequence, the PFRs, the peptide length, the length of the C and N terminal PFR's, and the P1-PSSM score resulting in a total of 227 input values.
+
+## Results
+
+### The quantitative IEDB benchmark data set
+
+The predictive binding affinity for the peptides in the evaluation set was calculated as a simple average over the 40 network predictions, and the peptide-binding core was identified by a majority vote. 
+
+![fig1](https://jasonkim8652.github.io/assets/images/NN_align1.png)
+
+The performance is shown for five different versions of the NN-based method, each including different degrees of the NN-based method, each including different degrees of sophistication in the training algorithm. NN is the standard NN-based method, NN-W is the NN-based method including data redundancy step-size rescaling, NN_P1 is the NN-based method including PSSM-P1 amino acid encoding, NN-W-P1 is the NN-based method including both data redundancy step-size rescaling and PSSM-P1 amino acid encoding, and NN-xPFR is the NN-W-P1 method excluding peptide-flanking residue encoding. 
+
+From Table, it is clear that the NN-based methods that include data redundancy step-size rescaling(NN-W and NN-W-P1) significantly outperformed their non-rescaled counterparts(NN and NN-P1). When compared to the SMM-align and TEPITOPE methods, the NN-based methods all showed a significantly improved predictive performance. 
+
+Comparing the performance of the NN-based method with (NN-W-P1) and without peptide-flanking residue encoding (NN-xPFR) demonstrated the importance of the latter for improved prediction accuracy. FOr 13 of the 14 alleles, did the inclusion of PFR improve the prediction accuacy. 
+
+The NN-based method with P1-PSSM amino acid encoding (NN-W-P1) showed a lower performance compared to the method without P1-PSSM amino acid encoding(NN-W). However, when investigating the amino acid distribution at the P1 position of the predicted binding cores of the two methods, it became apparent that the NN-W-P1 method produces a P1 binding core amino acid preference that is in stronger accordance with prior experimental knowledge than the NN-W method. Only hydrophobic amino acids have experimentally been found to be allowed at the P1 position in the binding core of HLA-DR molecules. For the 14 alleles, we found that the NN-W method on average assigned 30 % of the predicted binders to have non-conventional P1 amino acids, whereas the corresponding value for the NN-W-P1 method was 16%.
+
+### The NN-align method
+
+From the large set of benchmark studies, we conclude that the two methods NN-W-P1 and NN-W share comparable predictive performance. The NN-W-P1 method was shown to be more accurate in identifying the peptide core binding register, whereas the NN-W was more accurate when predicting the binding affinity. However, none of these differences were consistently statistically significant. The final method, called NN-align, was therefore implemented with a switch that allows the user to select whether or not to include the P1-PSSM amino acid preference encoding.
