@@ -28,9 +28,11 @@ This paper resolve these problems by splitting the building block selection proc
 ![Tux, the figure 1](https://user-images.githubusercontent.com/59328209/212456986-9b37a2dd-1b89-4dc6-ab61-6f6ecfb53a81.jpg){: .center}
 
 ### Dataset
+
 The library should contain all building blocks of the molecuels in the training set, preferably many molecules, so that the model could learn chemical diversity. There would be various definitions of building blocks such as BRICS, RECAP, Bemis-Murcko, and so on. In this work, the BRICS decomposition was adopted. The algorithm of the BRICS decomposition was breaking the covalent bonds which corresponded to predefined SMILES arbitrary target specification (SMARTS) strings. These SMARTS strings corresponded to synthetically accessible bonds, so BRICS decomposition was similar to retrosynthesis. 
 
 ### Building Block Selection Model
+
 The Selection module took two molecular graphs from core molecule, building blocks and condition. The target properties were the properties of the original molecule in the training process. Then module predicted the probability of binding core graph and block graph. In this work, both of them were the molecular graph of a core molecule given as input of from the previous step and a building block sampled randomly from the building block library, respectively. We used graph convolution network. 
 
 By applying the graph convolution layers, the two respecive graph vectors were obtained. To train the conditional model, molecular properties were incorporated into the condition vectors of Core graph. The probability value for building block selection pblock was evalueated as a function of core embedded vector and block embedded vector concatenation. 
@@ -40,27 +42,32 @@ The training dataset made by the BRICS decomposition intrinsically included only
 > Specific point of this paper is that they prepare negative fragment sample.
 
 ### Atom Selection Model
+
 The atom selection module predicted the bonding probability between core graph node and block graph node. We only need to choose the block graph node. The atom selection module accepted output node embedding vectors from the building block selection module and applied the graph convolution layers to them. After applying the graph convolutional layers, the connection probability of core graph node was calculated using fully connected layers with a softmax layer at the end. The model was trained to predict connection probability as 1 for a positive atom and 0 for negative atoms. The cross-entropy loss for this task was used. 
 
 ### Termination Prediction Model
+
 The termination prediction module predicted the probability of terminating the generation process. The module produced core graph vector by applying the graph convolution layers. Then, the termination prbability can be evaluated by applyting fully connected layers with the sigmoid activation function to the core graph vector. In the training process, the module was trained to predict the termination probability as 1.0 when the original molecules were recovered and other wise as 0.0.
 
 ### Moleculare Generation after Training the Model
+
 The model accepted a starting molecule as input to generate a larger molecule by adding building blocks to it. If the starting molecule was not given, a building block was randomly selected from the building block library as a starting molecule. The conditional molecule generation additionally needed target properties as input. The generation process began to predict the termination probability of the starting molecule. Then, the termination sign was sampled in proportion to the termination probability. 
 
-If not terminating, the model executed the building block selection and the atom selection modules subsequently. ** In the building block selection step, the model randomly samples a set of building blocks proportional to their populations in the training. This stochastic sampling enhanced the efficiency of the generation process. ** 
+If not terminating, the model executed the building block selection and the atom selection modules subsequently. **In the building block selection step, the model randomly samples a set of building blocks proportional to their populations in the training. This stochastic sampling enhanced the efficiency of the generation process.** 
 
 > How about clustering when selecting building blocks?
 
 The number of building blocks in each sampling was a hyper-parameter. 
 
 ## What I've learned
+
 * We could use synthon based method, not using reaction template. This method could solve the harsh subgraph isomorphism problem. 
 * There are various building block generation method. Let's study about BRICS.
 * Building block selection model, Atom selection model, termination prediction model. These are elaborate architecture as I think. We can use this architecture later. 
 * Preparing negative building block was really impressive. This kind of detail is what we should learn.  
 
 ## Reference
+
 1. Podda, Marco, Davide Bacciu, and Alessio Micheli. "A deep generative model for fragment-based molecule generation." International Conference on Artificial Intelligence and Statistics. PMLR, 2020.
 2. Yang, Soojung, et al. "Hit and lead discovery with explorative rl and fragment-based molecule generation." Advances in Neural Information Processing Systems 34 (2021): 7924-7936.
 3. Mikolov, Tomas, et al. "Efficient estimation of word representations in vector space." arXiv preprint arXiv:1301.3781 (2013).
