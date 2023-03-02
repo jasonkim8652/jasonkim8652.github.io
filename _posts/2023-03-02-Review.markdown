@@ -27,4 +27,43 @@ We now explore some of the experimental and computational progress made to date,
 
 ### Experimental methods
 
-The development of recombinant
+The development of recombinant antigen-MHC multimer assays has proved transformative in the analysis of TCR-antigen specificity, enabling researchers to track and study T cell populations under various conditions and disease settings. Nonetheless, critical limitations remain that hamper high-throughput determination of TCR-antigen specificity.
+
+Antigen-MHC multimers may be used to determine TCR specificity using bulk(pooled) T cell populations, or newer single-cell methods. Bulk methods are widely used and relatively inexpensive, but do not provide information on $\alpha \beta$ TCR chain pairing or function. As a result, single chain TCR sequences predominate in public data sets. 
+
+However, both $\alpha$-chains and $\beta$-chains contribute to antigen recognition and specificity. Multimodal single-cell technologies provide insight into chain pairing and transcriptomic and phenotypic profiles at cellular resolution, but remain prohibitively expensive, return fewer TCR sequences per run than bulk experiments and show significant bias towards TCRs with high specificity. The appropriate experimental protocol for the reduction of nonspecific multimer binding, validation of correct folding and computational improvement of signal-to-noise ratios remain active fiedls of debate. 
+
+Although bulk and single-cell methods are limeted to a modest number of antigen-MHC complexes per run, the advent of technologies such as lentiviral transfections assays provides scalability to up to 96 antigen-MHC complexes through library-on-library screens. However, previous knowledge of the antigen-MHC complexes of interest is still required. This precludes epitope discovery in unkonw, rare, sequestered, non-canonical and/or non-protein antigens. 
+
+The advent of synthetic peptide display libraries permits the extension of binding analysis to hundreds of thousands of peptides per TCR. Using transgenic yeast expressing synthetic peptide-MHC constructs from a library of $2 X 10^8$ peptides, Birnbaum et al. dissected the binding preferences of autoreactive mouse and human TCRs, providing clues as to the mechanisms underlying autoimmune targeting in multiple sclerosis. High-throughput library screens such as these provide opportunities for improved screening of the antigen-MHC space, but limit analysis to individual TCRs and rely on TCR-MHC binding instead of function. There remains a need for high-throughput linkage of antigen specificity and T cell function, for example, through mammalia or bead display. 
+
+As a result of these barriers to scalability, only a minuscule fraction of the total possible sample space of TCR-antigen pairs has been validated experimentally. Where the HLA context of a given antigen is known, the training data are dominated by antigens presented by a handful of common alleles. Many antigens have only one known cognate TCR. These limitations have simultaneously provided the motivation for and the greatest barrier to computational methods for the prediction fo TCR-antigen specificity. 
+
+![fig1](https://jasonkim8652.github.io/assets/images/review_1.png)
+
+### Computational methods. 
+
+A comprehensive survey of computational models for TCR specificity inference is beyond the scope intended here but can be found in the following helpful review. Broadly speaking, current models can be divided into two categories, which we dub supervised predicitive models(SPMs) and unsupervised clustering models(UCMs) on accounting of their respective use of supervised learning and unsupervised learning.
+
+#### Supervised predictive models
+
+SPMs are those which attempt to learn a function that will correctly predict the cognate epitope for a given input TCR of unknown specificity, given some training data set of known TCR-peptide pairs. Perfomance by this measure surpasses 80 % ROC-AUC for a handful of 'seen' immunodominant viral epitopes presented by MHC class I. However, representation is not a gurantee of performance: 60% ROC-AUC has been reported for HLA-A2*01-CMV-NLVPMVATV, possibly owing to the recognition of this immunodominant antigen by diverse TCRs. Critically, few models explicitly evaluate the performance of trained predictors on unseen epitopes using comparable data sets. 
+
+Together, these results highlight a critical need for a thorough, independent benchmarking study conducted across models on data sets prepared and analysed in a consistent manner. Until then, newer models may be applied with reasonable confidence by common HLA alleles. However, SPMs should be used with caution when generalizing to prediction of any epitope, as performance is likely to drop the further the epitope is in sequence form those in the training set. 
+
+#### Unsupervised clustering models
+
+Unlike SPMs, UCMs do not depend on the availability of labelled data, learning instead to produce groupings of the TCR, antigen or HLA input that reflect the underlying statistical variations of the data. Applied to TCR repertoires, UCMs take as their input single or paired TCR CDR3 amino acid sequences, with or without gene usage information, and return a mapping of sequences to unique clusters. clustering is achieved by determining the similarity between input sequences, using either 'hand-crafted'features, or by comparing abstract features learnt by DNNs. 
+
+Clustering provides multiple paths to specificity inference for orphan TCRs. Epitope specificity can be predicted by assuming that if an unlabelled TCR is similar to a receptor of known specificity, it will bind the same epitope. One may also co-cluster unlabelled and labelled TCRs and assign the modal or most enriched epitope to all seqeunces that cluster together. Finally, DNNs can be used to generate 'protein fingerprints', simple fixed-length numerical representations of complex variable input seqeucnes that may serve as a direct input for a second supervised model. 
+
+As for SPMs, quantitative assessment of the relative merits of hand-crafted and neural network-based UCMs for TCR specificity inference remains limited to the proponents of each new model. Altough some DNN-UCMs allow for the integration of paired chain sequences and even transcriptomic profiles, they are susceptible to the same training biases as SPMs and are notably less easy to implement than established clustering models such as GLIPH and TCRdist. However, these established clustering models scale relatively poorly to large data sets compared with newer releases. Recent analyses suggest that there is little to differentiate commonly used UCMs from simple sequence distance measures. Here again, independent benchmarking analyses would be valuable, work towards which our group is dedicating significant time and effort. 
+
+## Key challenges
+
+Among the most plausible explanations for these failures are limitations in the data, methodological gaps and incomplete modelling of the underlying immunology. 
+
+### Data
+
+As we have set out earlier, the single most significant limitation to model development is the availability of high-quality TCR and antigen-MHC pairs. The need is most acute for under-represented antigens, for those presented by less frequent HLA alleles, and for linkage of eptiope specificity and T cell function. Meanwhile, single-cell multimodal technologies have given rise to hundreds of millions of unlabellled TCR sequences, linked to transcriptomics, phenotypic and functional information. However, these unlabelled data are not without significant limitations. Notably, biological factors such as age, sex, ethnicity and disease setting vary between studies and are likely to influence immune repertories. Differences in experimental protocol, sequence pre-processing, total variation filtering(denoising) and normalization betwen laboratory groups are also likely to have an impact: ** batch correction may well need to be applied **.
+
