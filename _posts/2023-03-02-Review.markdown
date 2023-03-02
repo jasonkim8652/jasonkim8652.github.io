@@ -10,3 +10,21 @@ tags:
 
 ## Intoduction
   
+TCRs typically engage antigen-MHC complexes via one or more of their six complementarity-determining loops(CDRs), three contributed by each chain of the TCR dimer. However, cost and experimental limitations have restricted the available databases to just a minute fraction of the possible sample space of TCR-antigen binding pairs. As we discuss later, these data sets are also poorly representative of the univers of self and pathogenic epitopes and of the varied MHC contexts in which they may be presented. 
+
+The research community has therefore turned to machine learning models as a means of predicting the antigen specificity of the so-called orphan TCRs having no known experimentally validated cognate antigen. Accurate prediction of TCR_antigen specificity can be described as deriving computational solutions to two related problems below:
+
+1. given a TCR of unknown antigen specificity, which antigen-MHC complexes is it most likely to bind
+2. given an antigen-MHC complex, which are the most likely cognate TCRs?
+
+These should cover both 'seen' pairs included in the data on which the model was trained and novel or 'unseen' TCR-epitope pairs to which the models has not been exposed. Impressive advances have been made for specificity have been identified for Mycobacterium tuberculosis and SARS-CoV-2, providing possible avenues for new vaccine and pharmaceutical development. However, performance for seen epitopes wanes beyond a small number of immunodominant viral epitopes and is generally poor for unseen eptiopes. This matters because many epitopes encountered in nature will not have an experimentally validated cognate TCR, particularly those of human or non-viral origin.
+
+We must also make an important distinction between the related tasks of predicting TCR specificity and antigen immunogenicity. The former is the prediction of binding between sets of TCRs and antigen-MHC complexes. The latter can be described as predicting whether a given antigen will include a functional T cell immune response: a complex chain of events spanning antigen expression, processing and presentation, TCR binding, T cell activation, expansion and effector differentiation. A significant gap also remains for the prediction of T cell activation for a given peptide, and the paramteres that influence pathological peptide or neoantigen immunogenecity remain under intense investigation. We believe that only by integrating knowledge of antigen presentation, TCR recognition, context-dependent activatetion and effector function at the cell and tissue level will we fully realize the benefits to fundamental and translational science. 
+
+## State of the art
+
+We now explore some of the experimental and computational progress made to date, highlighting possible explanations for why generalizable prediction of TCR binding specificity remains a daunting task. 
+
+### Experimental methods
+
+The development of recombinant
