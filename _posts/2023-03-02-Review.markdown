@@ -1,0 +1,12 @@
+---
+title:  "Can we predict T cell specificity with digital biology and machine learning?(2023)"
+classes: wide
+date:   2023-03-02 13:31:24 +0900
+categories: 
+  - Immunogenecity
+tags:
+  - HLA-class2
+---
+
+## Intoduction
+  
