@@ -22,6 +22,8 @@ Language: First language Korean, Fluent in English
 
 ## Education
 
-| Mar. 2017 ~ Feb. 2023(expected) | Seoul National University - Department of **Chemical and Biological Engineering**, Double major in **Computer Science and Engineering**| Seoul, Korea |
+|Mar.2023~ Feb.2025(expected)| Seoklab in Seoul National University - Department of Chemistry, especially in Computational Biology| Seoul,Korea|
+
+| Mar. 2017 ~ Feb. 2023 | Seoul National University - Department of **Chemical and Biological Engineering**, Double major in **Computer Science and Engineering**| Seoul, Korea |
 | Mar. 2014 ~ Feb. 2017 | Daegu Science High School | Daegu, Korea |
 
