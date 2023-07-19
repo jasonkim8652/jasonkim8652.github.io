@@ -11,3 +11,8 @@ tags:
 mathjax: true
 ---
 
+Introduction
+
+=======================================================
+
+Structure-based drug design seeks to identify and optimize specific attractive interactions between ligands and their host molecules, typiclally proteins, given their 3D structures. 
