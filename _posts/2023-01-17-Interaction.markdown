@@ -41,7 +41,7 @@ In reality, the multiplicity of interactions present in a single protein-ligand 
 
 ![image-20230719145554185](https://jasonkim8652.github.io/assets/images/image-20230719145554185-9746155-9746705.png)
 
-![image-20230719145625552](../../../%EB%AC%B8%EC%84%9C%20-%20%EA%B9%80%EC%A0%95%ED%98%84%EC%9D%98%20MacBook%C2%A0Air/jasonkim8652.github.io/assets/images/image-20230719145625552.png)
+![image-20230719145625552](https://jasonkim8652.github.io/assets/images/image-20230719145625552-9746844.png)
 
 ### Weak Hydrogen Bonds
 
