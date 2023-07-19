@@ -37,9 +37,9 @@ In reality, the multiplicity of interactions present in a single protein-ligand 
 
 ### Hydrogen bonds
 
-![image-20230719145440607](../../../%EB%AC%B8%EC%84%9C%20-%20%EA%B9%80%EC%A0%95%ED%98%84%EC%9D%98%20MacBook%C2%A0Air/jasonkim8652.github.io/assets/images/image-20230719145440607-9746093-9746096-9746097.png)
+![image-20230719145440607](https://jasonkim8652.github.io/assets/images/image-20230719145440607-9746093-9746096-9746097.png)
 
-![image-20230719145554185](../../../%EB%AC%B8%EC%84%9C%20-%20%EA%B9%80%EC%A0%95%ED%98%84%EC%9D%98%20MacBook%C2%A0Air/jasonkim8652.github.io/assets/images/image-20230719145554185-9746155.png)
+![image-20230719145554185](https://jasonkim8652.github.io/assets/images/image-20230719145554185-9746155-9746705.png)
 
 ![image-20230719145625552](../../../%EB%AC%B8%EC%84%9C%20-%20%EA%B9%80%EC%A0%95%ED%98%84%EC%9D%98%20MacBook%C2%A0Air/jasonkim8652.github.io/assets/images/image-20230719145625552.png)
 
@@ -61,7 +61,7 @@ In reality, the multiplicity of interactions present in a single protein-ligand 
 
 ### Summary of Typical Distances
 
-![image-20230719150008009](../../../%EB%AC%B8%EC%84%9C%20-%20%EA%B9%80%EC%A0%95%ED%98%84%EC%9D%98%20MacBook%C2%A0Air/jasonkim8652.github.io/assets/images/image-20230719150008009-9746412.png)
+![image-20230719150008009](https://jasonkim8652.github.io/assets/images/image-20230719150008009-9746412-9746727.png)
 
 ## Conclusions
 
