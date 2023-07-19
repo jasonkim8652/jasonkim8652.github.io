@@ -11,8 +11,11 @@ tags:
 mathjax: true
 ---
 
-Introduction
+## Introduction
 
-=======================================================
+Structure-based drug design seeks to identify and optimize specific attractive interactions between ligands and their host molecules, typiclally proteins, given their 3D structures. This optimization process requires knowledge about interactions of attractive interactions that can be gleaned from crystal structure and associated affinity data. 
 
-Structure-based drug design seeks to identify and optimize specific attractive interactions between ligands and their host molecules, typiclally proteins, given their 3D structures. 
+Here we compile and review the literature on molecular interactions as it pretrains to medicinal chemistry through a combination of **careful statistical analysis of the large body of publicly available X-ray structure data** (from CSD and PDB)and experimental and theoretical studies of specific model system. Throughout this article, we wish to raise the readers' awareness that formulating rules for molecular interactions is only possible within certain boundaries. 
+
+
+
