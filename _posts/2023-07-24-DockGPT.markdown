@@ -98,3 +98,4 @@ Afterwards, monomers are removed, and we train exclusively on complexes. For all
 
 Our network is trained end-to-end with gradients coming from frame-aligned point error(FAPE), pairwise distance, per-residue lDDT(plDDT), and a few other auxiliary losses. 
 
+![image-20230724011941664](https://jasonkim8652.github.io/assets/images/image-20230724011941664.png)
