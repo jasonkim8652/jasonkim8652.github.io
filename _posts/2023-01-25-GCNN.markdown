@@ -3,7 +3,7 @@ title:  "A GCNN model for the prediction of chemical reactivity(2018)"
 classes: wide
 date:   2023-01-25 16:31:24 +0900
 categories: 
-  - SmallMolecule
+  - baestimation
 tags:
   - Graph based model
   - Synthesizability

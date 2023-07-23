@@ -4,7 +4,7 @@ classes: wide
 excerpt: "Paper review about Multiplicative interaction, which is new concept for fusing representation"
 date:   2023-01-18 10:31:24 +0900
 categories: 
-  - AI
+  - background
 tags:
   - AI background
 mathjax: true

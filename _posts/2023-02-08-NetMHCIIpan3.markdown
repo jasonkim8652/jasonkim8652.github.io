@@ -3,7 +3,7 @@ title:  "NetMHCIIpan-3.0, a common pan-specific MHC class II prediction method i
 classes: wide
 date:   2023-02-08 11:31:24 +0900
 categories: 
-  - Immunogenecity
+  - immunogenecity
 tags:
   - HLA-class2
 ---

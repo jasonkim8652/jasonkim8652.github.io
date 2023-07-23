@@ -4,7 +4,7 @@ classes: wide
 excerpt: "Paper review about machine learning that tried to catch up activity cliff"
 date:   2023-01-18 10:31:24 +0900
 categories: 
-  - SmallMolecule
+  - baestimation
 tags:
   - lead optimization
   - limitation

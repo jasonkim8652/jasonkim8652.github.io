@@ -3,7 +3,7 @@ title:  "Nine major HLA class I supertypes account for the vast preponderance of
 classes: wide
 date:   2023-01-30 16:31:24 +0900
 categories: 
-  - Immunogenecity
+  - immunogenecity
 tags:
   - Bioinformatics
   - HLA Supertypes

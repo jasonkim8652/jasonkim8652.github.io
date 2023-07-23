@@ -3,7 +3,7 @@ title:  "Can we predict T cell specificity with digital biology and machine lear
 classes: wide
 date:   2023-03-02 13:31:24 +0900
 categories: 
-  - Immunogenecity
+  - immunogenecity
 tags:
   - HLA-class2
 ---

@@ -3,7 +3,7 @@ title:  "Magnet for the Needle in Haystack: 'Crystal Structures First' Fragment 
 classes: wide
 date:   2023-01-25 16:31:24 +0900
 categories: 
-  - SmallMolecule
+  - medchem
 tags:
   - Fragment-based drug discovery
   - Chemical Space Docking
