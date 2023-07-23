@@ -16,21 +16,21 @@
                 <!--category[1].size 로 해당 카테고리를 가진 글의 개수 표시--> 
                 {% for category in site.categories %}
                     {% if category[0] == "Active_learning" %}
-                        <li><a href="/categories/smallmolecule" class="">Active learning ({{category[1].size}})</a></li>
+                        <li><a href="/categories/activelearning" class="">Active learning ({{category[1].size}})</a></li>
                     {% endif %}
                 {% endfor %}
             </ul>
             <ul>
                 {% for category in site.categories %}
                     {% if category[0] == "Generative_model" %}
-                        <li><a href="/categories/AI" class="">Generative model ({{category[1].size}})</a></li>
+                        <li><a href="/categories/generativemodel" class="">Generative model ({{category[1].size}})</a></li>
                     {% endif %}
                 {% endfor %}
             </ul>
             <ul>
                 {% for category in site.categories %}
                     {% if category[0] == "Med_chem" %}
-                        <li><a href="/categories/Immunogenecity" class="">Medicinal Chemistry ({{category[1].size}})</a></li>
+                        <li><a href="/categories/medchem" class="">Medicinal Chemistry ({{category[1].size}})</a></li>
                     {% endif %}
                 {% endfor %}
             </ul>
@@ -38,14 +38,29 @@
             <ul>
                 {% for category in site.categories %}
                     {% if category[0] == "Protein_structure" %}
-                        <li><a href="/categories/algorithm" class="">Protein structure modeling ({{category[1].size}})</a></li>
+                        <li><a href="/categories/proteinstructure" class="">Protein structure modeling ({{category[1].size}})</a></li>
                     {% endif %}
                 {% endfor %}
             </ul>
             <ul>
                 {% for category in site.categories %}
                     {% if category[0] == "Immunogenicity" %}
-                        <li><a href="/categories/programmers" class="">Immunogenicity ({{category[1].size}})</a></li>
+                        <li><a href="/categories/immunogenicty" class="">Immunogenicity ({{category[1].size}})</a></li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        <span class="nav__sub-title">Core AI</span>
+            <ul>
+                {% for category in site.categories %}
+                    {% if category[0] == "rl" %}
+                        <li><a href="/categories/rl" class="">Reinforcement learning ({{category[1].size}})</a></li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+            <ul>
+                {% for category in site.categories %}
+                    {% if category[0] == "languagemodel" %}
+                        <li><a href="/categories/languagemodel" class="">Language model ({{category[1].size}})</a></li>
                     {% endif %}
                 {% endfor %}
             </ul>
