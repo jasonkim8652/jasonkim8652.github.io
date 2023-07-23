@@ -20,3 +20,7 @@ In this work, we introduce DockGPT, an end-to-end deep-learning approach to site
 
 ### Input Features
 
+### Intra-chain Features
+
+**Residue Feature**
+We generate residue features for each chain and join them by concateniating along the sequence deimension. The input feature $$x_i$$ associated with residue i consists of four encoding. The first, 
