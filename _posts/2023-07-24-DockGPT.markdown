@@ -8,3 +8,8 @@ tags:
   - Prtoein-protein docking
 ---
 
+## Intrdocution
+
+Altough it is possible to infer protein complex structure from primary sequence information alone, in many cases, the three-dimensional structures of constituent(unbound) chains have already been experimentally determined. Moreover, extra infromation such as target binding sites or inter-chain contacts, is readily available in many applications, or can be derived through experimental methods such as cross-linking mass spectrometry. In these scenarios, pretoein docking methods can be used to predict a complex structure. Despite having many practical applications, the efficacy of in silico protein docking or design methods is ultimately hindered by unrealistic assumptions about input structures, and failure to effectively utilize PPI information such as binding sites and inter-protein contacts. 
+
+Current 

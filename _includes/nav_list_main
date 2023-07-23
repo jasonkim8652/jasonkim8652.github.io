@@ -45,7 +45,7 @@
             <ul>
                 {% for category in site.categories %}
                     {% if category[0] == "immunogenicity" %}
-                        <li><a href="/categories/immunogenicty" class="">Immunogenicity ({{category[1].size}})</a></li>
+                        <li><a href="/categories/immunogenicity" class="">Immunogenicity ({{category[1].size}})</a></li>
                     {% endif %}
                 {% endfor %}
             </ul>
