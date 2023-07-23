@@ -22,7 +22,7 @@
             </ul>
             <ul>
                 {% for category in site.categories %}
-                    {% if category[0] == "Generative_model" %}
+                    {% if category[0] == "generativemodel" %}
                         <li><a href="/categories/generativemodel" class="">Generative model ({{category[1].size}})</a></li>
                     {% endif %}
                 {% endfor %}
