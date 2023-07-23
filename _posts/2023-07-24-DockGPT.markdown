@@ -28,7 +28,7 @@ The features for each chain are stacked to form a block-diagonal input matrix. A
 #### Inter-chain Features
 **Inter-chain Interface(Residue)** $$f_i \in \{0,1\}$$ is an optional binary flag indiciating whether the $$C\alpha$$ atom of residue i is within $$10\mathring{A}$$ of a $$C\alpha$$ atom belonging to a residue in a different chain. 
 **Inter-chain contact(pair)**  $$f_i \in \{0,1\}$$ indicates whether two residues in separate chains are in contact. This occurs when the distance between two position vector is less than $$10\mathring{A}$$.
-**Relative Chain(Pair)** A one-hot encoding of the relative chain index for residues i and j into three classes. Let $$c_i, c_j \in \{1, ... ,k\} denotes the chain index of resiudues i and j, then $$f_{ij} = \text{OneHot}(sign(c_i - c_j)) $$
+**Relative Chain(Pair)** A one-hot encoding of the relative chain index for residues i and j into three classes. Let $$c_i, c_j \in \{1, ... ,k\}$$ denotes the chain index of resiudues i and j, then $$f_{ij} = \text{OneHot}(sign(c_i - c_j)) $$
 
 The interface and contact flags provide context for residues on the binding interface for each chain; restricting the effective search space during inference. In real world applications, knowledge of the binding interface may be limited or unknown. In light of this, we provide only a limited number of contacts or binding residues, chosen randomly for each training example. Specifically, for each input, we include no contacts or no residue flags, independently, with probability 1/2. If interface features are included, we randomly subsuample a number of interface residues $$N_{int} \text{~} geom(1/5)$$ to include, meaning five resiudes are selected on average. 
 
@@ -37,3 +37,18 @@ The relative chain encoding provides a way to distinguish between intra-chain an
 ### Deep Network Architecture and Training
 ![DockGPT_1](https://jasonkim8652.github.io/assets/images/DockGPT_1.PNG)
 
+We design a two-stage network making use of triangle muiltiplication, pair-biased attention, and invariant point attention(IPA). Our first module, which we refer to as the "structure encoder", produces an invariant representation of the protein complex which is subsequently converted to 3D coordinates by the secodn module, the "structure decoder". Our encoder uses pair-biased attention to update pair features. The decoder updates only residue features using IPA. 
+
+#### Network Architecture
+![DockGPT_2](https://jasonkim8652.github.io/assets/images/DockGPT_2.PNG)
+**Structure Encoder Layer** Our encoder produces a joint representation of the input chans. Since interchain features are mostly missing from the input, we hypothesized that a network that updates pair features would facilitate more successful docking. Consequently, we chose to update pair features using incoming and outgoing traingle-mutliplicative updates. 
+
+![DockGPT_3](https://jasonkim8652.github.io/assets/images/DockGPT_3.PNG)
+Each layer has two update blocks. The first block updates the residues features using multi-head attention with pair bias. The next block transforms the updated residue features into an update for the pair representation using a learned outer product, and then applies triangle multiplication and a shallow feed-forward network to the result. 
+
+**Structure Decoder Layer** The decoder module converts the encoder representation to 3D Geometry. Since we do not make direct use of coordinate information in our input, we sought an invariant architecture specialized for coordinate prediction and ultimately settled on IPA. 
+
+![DockGPT_4](https://jasonkim8652.github.io/assets/images/DockGPT_4.PNG)
+We use a total of six decoder layers, sharing the same weights for all six layers. We perform recycling during training and inference, allowing us to execute our model multiple times on the same example. This is done by embedding the previous iteration's outputs in the next iteration's inputs. Our best-performing model uses the same scheme as described in the AF2 implementation. Since the decoder residue features encode plDDT information, we hypothesized that this information could better inform future iterations. 
+
+**Coordinate Prediction** 
