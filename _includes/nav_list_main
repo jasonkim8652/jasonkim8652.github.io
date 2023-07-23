@@ -15,7 +15,7 @@
                 <!--Cpp 카테고리 글들을 모아둔 페이지인 /categories/cpp 주소의 글로 링크 연결-->
                 <!--category[1].size 로 해당 카테고리를 가진 글의 개수 표시--> 
                 {% for category in site.categories %}
-                    {% if category[0] == "Active_learning" %}
+                    {% if category[0] == "activelearning" %}
                         <li><a href="/categories/activelearning" class="">Active learning ({{category[1].size}})</a></li>
                     {% endif %}
                 {% endfor %}
@@ -29,7 +29,7 @@
             </ul>
             <ul>
                 {% for category in site.categories %}
-                    {% if category[0] == "Med_chem" %}
+                    {% if category[0] == "medchem" %}
                         <li><a href="/categories/medchem" class="">Medicinal Chemistry ({{category[1].size}})</a></li>
                     {% endif %}
                 {% endfor %}
@@ -37,14 +37,14 @@
         <span class="nav__sub-title">Protein Drug</span>
             <ul>
                 {% for category in site.categories %}
-                    {% if category[0] == "Protein_structure" %}
+                    {% if category[0] == "proteinstructure" %}
                         <li><a href="/categories/proteinstructure" class="">Protein structure modeling ({{category[1].size}})</a></li>
                     {% endif %}
                 {% endfor %}
             </ul>
             <ul>
                 {% for category in site.categories %}
-                    {% if category[0] == "Immunogenicity" %}
+                    {% if category[0] == "immunogenicity" %}
                         <li><a href="/categories/immunogenicty" class="">Immunogenicity ({{category[1].size}})</a></li>
                     {% endif %}
                 {% endfor %}
