@@ -34,6 +34,20 @@
                     {% endif %}
                 {% endfor %}
             </ul>
+            <ul>
+                {% for category in site.categories %}
+                    {% if category[0] == "baestimation" %}
+                        <li><a href="/categories/baestimation" class="">Binding Affinity Estimation ({{category[1].size}})</a></li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+            <ul>
+                {% for category in site.categories %}
+                    {% if category[0] == "synthesizability" %}
+                        <li><a href="/categories/synthesizability" class="">Synthesizability ({{category[1].size}})</a></li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
         <span class="nav__sub-title">Protein Drug</span>
             <ul>
                 {% for category in site.categories %}
@@ -61,6 +75,13 @@
                 {% for category in site.categories %}
                     {% if category[0] == "languagemodel" %}
                         <li><a href="/categories/languagemodel" class="">Language model ({{category[1].size}})</a></li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+            <ul>
+                {% for category in site.categories %}
+                    {% if category[0] == "background" %}
+                        <li><a href="/categories/background" class="">Background techniques ({{category[1].size}})</a></li>
                     {% endif %}
                 {% endfor %}
             </ul>
