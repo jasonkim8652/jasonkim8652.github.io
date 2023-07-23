@@ -3,7 +3,7 @@ title:  "Prediction of MHC class II binding affinity using SMM-align, a novel st
 classes: wide
 date:   2023-02-03 11:31:24 +0900
 categories: 
-  - immunogenecity
+  - immunogenicity
 tags:
   - HLA-class2
 ---

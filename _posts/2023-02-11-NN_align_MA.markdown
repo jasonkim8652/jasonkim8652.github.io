@@ -3,7 +3,7 @@ title:  "NNAlign_MA; MHC Peptidome Deconvolution for Accurate MHC Binding Motif 
 classes: wide
 date:   2023-02-11 16:31:24 +0900
 categories: 
-  - immunogenecity
+  - immunogenicity
 tags:
   - HLA-class2
 ---

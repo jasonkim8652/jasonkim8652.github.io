@@ -3,7 +3,7 @@ title:  "NetMHCIIpan-2.0 - Improved pan-specific HLA-DR predictions using a nove
 classes: wide
 date:   2023-02-07 11:31:24 +0900
 categories: 
-  - immunogenecity
+  - immunogenicity
 tags:
   - HLA-class2
 ---

@@ -3,7 +3,7 @@ title:  "NN-align. An artificial neural network-based alignment algorithm for MH
 classes: wide
 date:   2023-02-06 16:31:24 +0900
 categories: 
-  - immunogenecity
+  - immunogenicity
 tags:
   - HLA-class2
 ---
