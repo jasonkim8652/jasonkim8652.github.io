@@ -18,14 +18,20 @@ In this work, we introduce DockGPT, an end-to-end deep-learning approach to site
 
 ## Methods
 ### Input Features
-### Intra-chain Features
+#### Intra-chain Features
 **Residue Features**
 We generate residue features for each chain and join them by concateniating along the sequence deimension. The input feature $$x_i$$ associated with residue i consists of four encoding. The first, $$E_{AA}(s)$$, is a one-hot encoding of the amino acid types s using 20 bins for each naturally occuring amino acid. The next, $$E_{pos}$$, encodes the residue relative sequence position into ten equal-width bins. As a proxy for estimating whether a residue is on the protein's surface, we use a centrality econding, $$E_{cen}$$, which corresponds to the number of $$C\beta$$ atoms in a ball of radius $$10\AA$$ around the query residue. We encode this feature with six radial basis functions equally spaced between 6 and 40, and only consider residues in the same chain as the query atom. Last, $$E_{dih}$$, encodes the aangle into 18 bins of width $$20^{\circ}$$.The inputs are the phi and psi backbone torsion angles of residue i. For residues before and after chain breaks, or at the N and C terminus of a chain, we set the phi and psi angles to 0. 
 
 **Pair Features**
 The features for each chain are stacked to form a block-diagonal input matrix. A seperate learned parameter is used to fill the missing off-diagonal entries. For a pair of residues $$i$$ and $$j$$, in a common chain, the corresponding feature $$e_{ij}$$ consists of three one-hot encodings. $$E_{dist}$$ is an encoding of the distance d into six equal-width bins between $$2\AA$$ and $$16\AA$$, with one extra bin added for distnaces greater than $$16\AA$$. We include distances between $$C_{\alpha}$$ and each atom type $$a \in \{N,C\alpha,C,C\beta\}. $$\E_{ori}$$, encodes the angle $$\theta$$ performed in the same manner as the backbone dihedral encoding for residue features. The last feature, $E_sep(.)$$, is a one-hot encoding of signed relative sequence seperation into 32 classes. 
 
-### Inter-chain Features
+#### Inter-chain Features
 **Inter-chain Interface(Residue)** $$f_i \in \{0,1\}$$ is an optional binary flag indiciating whether the $$C\alpha$$ atom of residue i is within $$10\AA$$ of a $$C\alpha$$ atom belonging to a residue in a different chain. 
 **Inter-chain contact(pair)**  $$f_i \in \{0,1\}$$ indicates whether two residues in separate chains are in contact. This occurs when the distance between two position vector is less than $$10\AA$$.
 **Relative Chain(Pair)** A one-hot encoding of the relative chain index for residues i and j into three classes. Let $$c_i, c_j \in \{1, ... ,k\} denotes the chain index of resiudues i and j, then f_{ij} = \text{OneHot}(sign(c_i - c_j)) 
+
+The interface and contact flags provide context for residues on the binding interface for each chain; restricting the effective search space during inference. In real world applications, knowledge of the binding interface may be limited or unknown. In light of this, we provide only a limited number of contacts or binding residues, chosen randomly for each training example. Specifically, for each input, we include no contacts or no residue flags, independently, with probability 1/2. If interface features are included, we randomly subsuample a number of interface residues $$N_{int} ~ geom(1/5)$$ to include, meaning five resiudes are selected on average. 
+
+The relative chain encoding provides a way to distinguish between intra-chain and inter-chain pair features. By taking a signed difference, pair features $$e_{ij}$$ and $$e_{ji}$$ receive different encodings when i and j are in distinct chains. 
+
+### Deep Network Architecture and Training
