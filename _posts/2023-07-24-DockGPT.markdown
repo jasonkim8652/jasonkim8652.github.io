@@ -20,10 +20,10 @@ In this work, we introduce DockGPT, an end-to-end deep-learning approach to site
 ### Input Features
 #### Intra-chain Features
 **Residue Features**
-We generate residue features for each chain and join them by concateniating along the sequence deimension. The input feature $$x_i$$ associated with residue i consists of four encoding. The first, $$E_{AA}(s)$$, is a one-hot encoding of the amino acid types s using 20 bins for each naturally occuring amino acid. The next, $$E_{pos}$$, encodes the residue relative sequence position into ten equal-width bins. As a proxy for estimating whether a residue is on the protein's surface, we use a centrality econding, $$E_{cen}$$, which corresponds to the number of $$C\beta$$ atoms in a ball of radius $$10\mathring{A}$$ around the query residue. We encode this feature with six radial basis functions equally spaced between 6 and 40, and only consider residues in the same chain as the query atom. Last, $$E_{dih}$$, encodes the aangle into 18 bins of width $$20^{\circ}$$.The inputs are the phi and psi backbone torsion angles of residue i. For residues before and after chain breaks, or at the N and C terminus of a chain, we set the phi and psi angles to 0. 
+We generate residue features for each chain and join them by concateniating along the sequence deimension. The input feature $$x_i$$ associated with residue i consists of four encoding. The first, $$E_{\text{AA}}(s)$$, is a one-hot encoding of the amino acid types s using 20 bins for each naturally occuring amino acid. The next, $$E_{\text{pos}}$$, encodes the residue relative sequence position into ten equal-width bins. As a proxy for estimating whether a residue is on the protein's surface, we use a centrality econding, $$E_{\text{cen}}$$, which corresponds to the number of $$C\beta$$ atoms in a ball of radius $$10\mathring{A}$$ around the query residue. We encode this feature with six radial basis functions equally spaced between 6 and 40, and only consider residues in the same chain as the query atom. Last, $$E_{dih}$$, encodes the aangle into 18 bins of width $$20^{\circ}$$.The inputs are the phi and psi backbone torsion angles of residue i. For residues before and after chain breaks, or at the N and C terminus of a chain, we set the phi and psi angles to 0. 
 
 **Pair Features**
-The features for each chain are stacked to form a block-diagonal input matrix. A seperate learned parameter is used to fill the missing off-diagonal entries. For a pair of residues $$i$$ and $$j$$, in a common chain, the corresponding feature $$e_{ij}$$ consists of three one-hot encodings. $$E_{dist}$$ is an encoding of the distance d into six equal-width bins between $$2 \mathring{A}$$ and $$16 \mathring{A}$$, with one extra bin added for distnaces greater than $$16 \mathring{A}$$. We include distances between $$C_{\alpha}$$ and each atom type $$a \in \{N,C\alpha,C,C\beta\}$$. $$E_{ori}$$, encodes the angle $$\theta$$ performed in the same manner as the backbone dihedral encoding for residue features. The last feature, $E_sep(.)$$, is a one-hot encoding of signed relative sequence seperation into 32 classes. 
+The features for each chain are stacked to form a block-diagonal input matrix. A seperate learned parameter is used to fill the missing off-diagonal entries. For a pair of residues $$i$$ and $$j$$, in a common chain, the corresponding feature $$e_{ij}$$ consists of three one-hot encodings. $$E_{\text{dist}}$$ is an encoding of the distance d into six equal-width bins between $$2 \mathring{A}$$ and $$16 \mathring{A}$$, with one extra bin added for distnaces greater than $$16 \mathring{A}$$. We include distances between $$C_{\alpha}$$ and each atom type $$a \in \{N,C\alpha,C,C\beta\}$$. $$E_{ori}$$, encodes the angle $$\theta$$ performed in the same manner as the backbone dihedral encoding for residue features. The last feature, $E_{\text{sep}}(.)$$, is a one-hot encoding of signed relative sequence seperation into 32 classes. 
 
 #### Inter-chain Features
 **Inter-chain Interface(Residue)** $$f_i \in \{0,1\}$$ is an optional binary flag indiciating whether the $$C\alpha$$ atom of residue i is within $$10\mathring{A}$$ of a $$C\alpha$$ atom belonging to a residue in a different chain. 
@@ -43,9 +43,11 @@ We design a two-stage network making use of triangle muiltiplication, pair-biase
 
 #### Network Architecture
 ![DockGPT_2](https://jasonkim8652.github.io/assets/images/DockGPT_2.PNG)
+
 **Structure Encoder Layer** Our encoder produces a joint representation of the input chans. Since interchain features are mostly missing from the input, we hypothesized that a network that updates pair features would facilitate more successful docking. Consequently, we chose to update pair features using incoming and outgoing traingle-mutliplicative updates. 
 
 ![DockGPT_3](https://jasonkim8652.github.io/assets/images/DockGPT_3.PNG)
+
 Each layer has two update blocks. The first block updates the residues features using multi-head attention with pair bias. The next block transforms the updated residue features into an update for the pair representation using a learned outer product, and then applies triangle multiplication and a shallow feed-forward network to the result. 
 
 
@@ -53,6 +55,46 @@ Each layer has two update blocks. The first block updates the residues features 
 **Structure Decoder Layer** The decoder module converts the encoder representation to 3D Geometry. Since we do not make direct use of coordinate information in our input, we sought an invariant architecture specialized for coordinate prediction and ultimately settled on IPA. 
 
 ![DockGPT_4](https://jasonkim8652.github.io/assets/images/DockGPT_4.PNG)
+
 We use a total of six decoder layers, sharing the same weights for all six layers. We perform recycling during training and inference, allowing us to execute our model multiple times on the same example. This is done by embedding the previous iteration's outputs in the next iteration's inputs. Our best-performing model uses the same scheme as described in the AF2 implementation. Since the decoder residue features encode plDDT information, we hypothesized that this information could better inform future iterations. 
 
 **Coordinate Prediction** 
+
+In predicting residue-wise atom coordinates, we deviate from the strategy of AF2 and simply compute the local-frame coordinates for each atom using a learned linear projection. The coordinates for $$C\alpha$$ are taken as the translation component of the per-residue predicted rigid transformation, and the remaining atom coordinates are predicted as 
+
+![image-20230724000322245](https://jasonkim8652.github.io/assets/images/image-20230724000322245.png)
+
+**Handling Coordinates as Input**
+
+Although we do not explicitly make use of coordinates in our docking model, for certain tasks, it may be important to incorporate this information as part of the input. This is especially salient in antibody loop design, where the framework region tends to remain mostly rigid upon binding. 
+
+Here, we provide further details of maintaining SE(3)-Equivariant updates to rigid frames when some input coordinates are treated as fixed. We note that IPA rigid frames as SE(3)-Equivariant with respect to a single global rigid tranformation applied to per-residue local frames. Moreover, the same proof shows that scalar node features are invariant to any global rigid transformation. Thus, setting rigids $$T^{(0)}$$ in the decoder submodule to those derived froma. complete set of backbone coordinates results in an SE(3)-Equivariant update to the rigid frames, and an invariant update to the scalar features. 
+
+We now argue a more general claim: that IPA can be made SE(3)-Equivariant even when some input coordinates are fixed, flexble or missing. Let $$C = C_{fixed} \cup C_{flexible} \cup C_{missing}$$ be a partition of the input residues i = 1...n denoting those residues with coordinates which should remain fixed, those which are flexible, and those with coordinates that are missing. Without loss of generalizability, assume that the coordinates which are not missing have mean **0**, and all missing coordinates are initialized at the origin. 
+
+To leave the coordinates corresponding to residues in $$C_{fixed}$$ static, we modify the update to 
+
+![image-20230724004541667](https://jasonkim8652.github.io/assets/images/image-20230724004541667.png)
+
+Note that any global rotation applied to the input points will leave the origin fixed, and thus only the fixed or flexible coordinates can change position. The claim of equivariance now follows directly from the equivariance of IPA. To see this, recall that the IPA-layer itself is rotation-equivariant, and that scalar residue features are invariant under the same tranformation. Thus, applying a global rotation to all residue coordinates, while keeping the scalar embeddings fixed, will result in only an equivalent update to the local frames. 
+
+#### Training
+
+In the first stage, we pre-train on a mix of complexes and monomers, randomly selecting a monomer or a complex to train on with equal probability. This repeats for 5 epochs. 
+
+During the mixed monomer/multimer pre-training phase we crop complex chains so that the total number of residues does not exceed 500. We also remark that during the pre-training stage we append a binary flag to each residue and pair feature indicating whether the input corresponds to a single chain - in which case the chain should be treated as rigid. 
+
+We attempted to apply the model to rigid-docking, providing the same intra-chain information, but excluding all inter-chain features. In these experiments, the model struggled to reconstruct the conformations of the respective chains with reasonable accuracy, and showed a tendency to favor auxiliary loss terms such as intra-chain pairwise distance loss. This behavior persisted even after significantly more gradient updates. 
+
+![image-20230724010717646](https://jasonkim8652.github.io/assets/images/image-20230724010717646.png)
+
+**WE NEED TO TRY VARIOUS TASKS AND CHECK OUT EACH LOSS TERM THOROUGHLY**
+
+Afterwards, monomers are removed, and we train exclusively on complexes. For all complexes in our training sets, we relaxed each individual chain using Rosetta's FastRelax protocol with all default settings. 
+
+
+
+#### Loss
+
+Our network is trained end-to-end with gradients coming from frame-aligned point error(FAPE), pairwise distance, per-residue lDDT(plDDT), and a few other auxiliary losses. 
+
