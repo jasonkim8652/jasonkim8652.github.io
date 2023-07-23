@@ -4,7 +4,7 @@ classes: wide
 excerpt: "Paper review about making synthesizable molecule through RL"
 date:   2023-01-17 17:31:24 +0900
 categories: 
-  - SmallMolecule
+  - generativemodel
 tags:
   - Generative model
   - Graph based model

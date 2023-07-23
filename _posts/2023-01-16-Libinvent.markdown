@@ -4,7 +4,7 @@ classes: wide
 excerpt: "Paper review about making synthesizable molecule generative model"
 date:   2023-01-10 18:01:24 +0900
 categories: 
-  - SmallMolecule
+  - generativemodel
 tags:
   - Generative model
   - Language based model
