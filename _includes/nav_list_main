@@ -15,37 +15,37 @@
                 <!--Cpp 카테고리 글들을 모아둔 페이지인 /categories/cpp 주소의 글로 링크 연결-->
                 <!--category[1].size 로 해당 카테고리를 가진 글의 개수 표시--> 
                 {% for category in site.categories %}
-                    {% if category[0] == "SmallMolecule" %}
-                        <li><a href="/categories/smallmolecule" class="">SmallMolecule ({{category[1].size}})</a></li>
+                    {% if category[0] == "Active_learning" %}
+                        <li><a href="/categories/smallmolecule" class="">Active learning ({{category[1].size}})</a></li>
                     {% endif %}
                 {% endfor %}
             </ul>
             <ul>
                 {% for category in site.categories %}
-                    {% if category[0] == "AI" %}
-                        <li><a href="/categories/AI" class="">AI ({{category[1].size}})</a></li>
+                    {% if category[0] == "Generative_model" %}
+                        <li><a href="/categories/AI" class="">Generative model ({{category[1].size}})</a></li>
                     {% endif %}
                 {% endfor %}
             </ul>
             <ul>
                 {% for category in site.categories %}
-                    {% if category[0] == "Immunogenecity" %}
-                        <li><a href="/categories/Immunogenecity" class="">Immunogenecity ({{category[1].size}})</a></li>
+                    {% if category[0] == "Med_chem" %}
+                        <li><a href="/categories/Immunogenecity" class="">Medicinal Chemistry ({{category[1].size}})</a></li>
                     {% endif %}
                 {% endfor %}
             </ul>
-        <span class="nav__sub-title">Music</span>
+        <span class="nav__sub-title">Protein Drug</span>
             <ul>
                 {% for category in site.categories %}
-                    {% if category[0] == "왜들음" %}
-                        <li><a href="/categories/algorithm" class="">왜들음 (with C++) ({{category[1].size}})</a></li>
+                    {% if category[0] == "Protein_structure" %}
+                        <li><a href="/categories/algorithm" class="">Protein structure modeling ({{category[1].size}})</a></li>
                     {% endif %}
                 {% endfor %}
             </ul>
             <ul>
                 {% for category in site.categories %}
-                    {% if category[0] == "Programmers" %}
-                        <li><a href="/categories/programmers" class="">프로그래머스 ({{category[1].size}})</a></li>
+                    {% if category[0] == "Immunogenicity" %}
+                        <li><a href="/categories/programmers" class="">Immunogenicity ({{category[1].size}})</a></li>
                     {% endif %}
                 {% endfor %}
             </ul>
