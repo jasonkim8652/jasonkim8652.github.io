@@ -10,73 +10,7 @@ tags:
 
 ## Introduction
 
-Many therapeutic antibodies are derived from natural B-cell repertories of mice, or mice with an engineered human germline repertorie. However, antibodies developed in animal models are often not tolerated by humans and can elicit an immune response - this property is known as immunogenicity. Immunogenic responses can nengatively impact both safety and pharmacokinetic properties of the therapeutics and can result in the production of neutralizing antibodies the lead to loss of efficacy. 
 
-The aim of humanization is to reduce immunogenicity while preserving the efficacy of the therapeutic. Typically, human frameworks with high homology to the original sequence of interest are chosen as a scaffold. Some murine residues in framework regions, referred to as Verneir zone residues, affect the conformation of CDR loops and may therefore be retained to preserve antibody affinity. The humanization process remains a bottleneck in mAb development, often based on trial-and-error, involving arbitrary back mutations to restore efficacy or reduce immunogenencity. 
-
-An effective humanization protocol must be systematic and be able to identify the humanness of a sequence with little error. Higher humanness scores should also be linked with lower levels of immunogenecity. Multiple computational methods have been developed to assess antibody humanness. Traditional humanness scores are based on pairwise squence identity methods between the sample and a set of reference human sequences, for example, a score corresponding to the sequence identity of the closest germline sequence or the average among a set of sequences.
-
-More recent models take account of both preferences of particular residues and pair correlations between amino acids. A multivariate Gaussian model utilized a statistical inference approach. This method could distinguish human from murine sequences accurately, but the score demonstrated only a weak negative correlation to experimental immunogenecity levles. More recently, a deep learning approach utilizing a bi-directional LSTM model demonstrated best-in-class performance in discriminating between human and murine sequences. However, while making advances, these approaches are subject to limitations including the need for manual input, the requirement for a solved or modelled antibody structure, the lack of a humanization protocol and limitations in the size of the training dataset.
-
-The recent growth of publicly available antibody sequences has created many opportunities for large-scale data mining. The observed Antibody Space database (OAS) is a database of Ig-seq outputs from 80 studies with nearly 2 billion redundant antibody sequences across diverse immune states and organisms. 
-
-Utilizing machine learning and the extensive OAS sequence data, we have developed a method that overcomes the limitations of existing techniques. We have constructed RF classifiers that accurately distinguish between each human V gene and non-human variable domain sequences. The 'humanness' scores produced by our RF classifiers exhibited a negative relationship with observed immunogenecity levles. We used these modesl to build Hu-mAb, a computational tool that can systematically humanize VH and VL sequences of interest by suggesting mutations that increase humanness. Hu-mAb humanizes the sequence in an optimal manner, minimizing the number of mutations made to the sequence to limit the impact on efficacy.
-
-## Materials and methods
-
-### Preparation of OAS antibody sequence datasets
-
-All IgG VH and VL sequences were downloaded from the OAS database. Human sequences were split by their V gene type - for example, V1-V7 for VH sequences. Redundant sequences, sequences with cysteine errors and sequences with missing framework 1 residues were removed. The total dataset included over 65 million non-redundant sequences. The non-redundant non-human(negative) sequences comprised over 13 million sequences from three species (mouse, rat and rhesus).
-
-### Training and testing the RF models
-
-All models were trained using the scikit-learn Python module with default parameters unless stated otherwise. RF binary classifiers for each V gene type were trained with their respective set of V gene sequences and the entir set of negative sequences. For example, the VH V1 model was trained on all human VH V1 sequences. We trained separate classifieres for each human V gene type to acheive a realistic, V gene type-specific sequence representation, rather than a non-physiological representation of mixed V gene types. The validation set was utilized to set the classificiation threshold according to the value that maximizes the Youden's J statistic(calculated as YJS = sensitivity + specificity -1).  It was found that the threshold that maximizes the YJS was very similar to the threshold that maximizes the Matthews correlation coefficient. This classification threshold was then used for calculating YJS was very similar to the threshold that maximizes the Matthews correlation coefficient. This classification threshold was then used for calculating YJS values of the test set and for classification of therapeutic datasets. In addition, ROC curves were generated and area under curve(AUC) scores for each model were calculated in order to assess performance. 
-
-### VL Kappa and lambda classifier
-
-An RF model to classify whether a ligth chain sequence is of type kappa or lambda was trained on 25% of the total human VL dataset. Testing of the model demonstrated perfect accuracy-it correctly classified every sequence as kappa or lambda within the entire VL dataset (both human and negative).
-
-### Therapeutic antibody dataset
-
-All approved and phases 1-3 antibody therapeutics wer obtained from Thera-SAbDab and were aligned and IMGT numbered by ANARCI. Only mAbs with both a VH and VL sequence were included; this gave a set of 481 therapeutics. Each therapeutic has an International Nonproprietary Name (INN) assigned by the WHO. The INN infix precedings the suffix '-mab' is determined by the origin of the therapeutic. THus, the origin of each therapeutic was obtained from its source infix. For 25 therapeutics, we also obtained the precursor sequences prior to their humanization, in addition to their humanized sequences. 
-
-For each of these 481 therapeutics, we calculated the humanness scores of the VH and VL sequences. The VL kappa/lambda clssifier was used to classify VL sequences as kappa or lambda prior to humanness scoring. A sequence was considered 'human' if it achieved a humanness score above the YJS threshold for any V gene. The combined VH/VL sequences were classified as human if both separate VH and VL scores exceeded the respective YJS thresholds. 
-
-### Anti-drug antibody response levels of therapeutics
-
-Anti-drug antibody(ADA) responses of patients were obtained for 217 therapeutics from clinical papers using an identical approach to that described in Clavero-Alvarez et al. when multiple ADA levels are reported for the same therapeutic, the mean between the minimal and maximal reproted value is used. We then obtained the sequences of 10 additional therapeutics, for which we had ADA response data but which were not included in Thera-SabDab. 
-
-### Hu-mAb protocol
-
-The input sequence, specific chain type (VH, VL kappa or VL lambda), V gene type and target humanness score were used as inputs. To compare Hu-mAb to experimental mutations, for the therapeutic cases we set the Hu-mAb target score as the humanness score of the experimentally humanized sequence. Every possible single-site mutation within the framework region of the input sequence was made. This generated a set of mutated sequences which were then scored by the relevant RF model. The humanness scores of the mutated seqeunces were ranked and the top scoring sequence was selected. This process was repeated with the newly selected sequence until the target humanness score was achieved. We carried out this humanization approach for each of the 25 therapeutics for which we had the precursor and experimentally humaniezed sequences. 
-
-To investigate the importance of having separate V gene type-specific classifiers, we conducted a negative control analysis in which we humanized each of these 25 therapeutics sequences using an RF classifier corresponding to a different V gene type than the experimentally humanized sequence. For each therapeutic, we scored the sequence humanness and selected the RF classifier with the lowest humanness score for humanization. In the case where multiple classifieres had the same, lowest humanness score, the classifier for humanization was selected at random from those with the lowest score. 
-
-## Results
-
-### Classification performance of our RF models on OAS sequences
-
-All the VH models perfectly discriminated between human and negative sequences in both validation and test sets. Performance on the light chain was also extermely high, albeit not perfect-this may be due to the greater amount of negative training data available for the VH models compared to that of kappa and lambda models. 
-
-### Relationship of RF model scores with immunogenicity
-
-The aim of hummanization is to create a therapeutic that is safe and does not elicit an immune response. A strong predictive score for classification is not sufficient to produce a humanizer as it does not explicity account for immunogenecity. The relationship of the model scores with observed immunogenic responses, as measured by the appearnace of ADAs, was therefore investigated. The fraction of patients with observed immunogenic responses was obtained from FDA labels of approved antibody therapeutics and clinical studies of therapeutics still in clinical trials. There are limitations to this data: for example, there are differences in patient demographic, dosage levels and length of dosage of the therapeutic and if the treatment is in combination with other drugs. In addition, the murine therapeutics within the dataset are likely to be inherently biased toward lower levels of immunogenecity as they are approved therapeutics. 
-
-![fig1](https://jasonkim8652.github.io/assets/images/Humab_1.png)
-
-### Hu-mAb protocol and RF model analysis
-
-Since experimental humanization procedures often involve grafting of non-human CDRs onto a human framework, it is expected that the framework regions are more important than the hypervariable CDR regions for the classification of human and non-human sequences. Analysis of our RF models' feature importance found that this is true; the key residues for discrimination are mostly found in the framework region. However, some CDR positions are utilized by the models for discrimination.
-
-Analysis of our Hu-mab protocol showed that identical mutations do not result in an identical increase in humanness score; the effect depends on the rest of the seqeunce. Moreover, we found that Hu-mAb occasionally made more than one mutation to the same position in the sequence over the course of the humanization procedure. These observations suggest that our RF models do not consider positions in the sequence independently, but rather they incorporate interactions between residues to more realistically evaluate humanness. 
-
-The geometry of the antibody binding site is dependent on the orientation of the VH and VL, which is in turn affected by the residues present at the interface between the two domains. The proportion of mutations suggested by Hu-mAb to key VH-VL interface residues is slightly lower than the proportion made by experimental procedures, and the OR calculated for these residues is also higher than the average. Since Hu-mAb also suggests fewer mutations on average, the average number of interface mutations per sequence is around half that of experimental procedures. A similar pattern was also observed for the Verneir zone-Hu-mAb proposed fewer mutations to these residues, which are thought to affect CDR conformations. 
-
-## Discussion
-
-Our model is worse at classifying non-human seqeunces of species that it has not been trained on. The non-human sequences within OAS are almost entirely of murine origin, and therefore Hu-mAb is mainly intended for use on murine precursor sequences. 
-
-THere are, however, still remaining challenges in antibody humanization, most notably the humanization of alternative antibody formats. The ability to score and increase the humanness of these sequences will improve with further data and investigation of the relationship between immunogenecity, sequence and antibody format.
 
 ## References
 
