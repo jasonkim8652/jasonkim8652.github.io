@@ -34,7 +34,11 @@ Ablang can be used to generate three different sets of antibody seqeunce represe
 
 As above figure shows, AbLang and ESM-1b both seperate the sequences based on their V-gene familites; however, AbLang separates the V-genes into smaller clusters. These smaller clusters can partly be attributed to AbLang's finer seperation of V-genes. Within the AbLang clusters, a clearer separation can be seen between naive B-cells and memory B-cells than with ESM-1b's clusters. Further, the memory B-cells, in AbLang's clusters, appear to be ordered based on a gradual increase in mutations. This potentially indicates that AbLang representations contain information about the order of antibody mutations. 
 
+## Discussion
 
+A language model specific for antibodies, should learn a deeper understanding of the semantics of antibodies than current general protein language models. In this work, we present AbLang, a language model trained on a large dataset of antibody sequences from OAS. 
+
+Overall, the works shows the possibility of using protein language models for restoring residues in protein sequences, a crucual problem not only for antibody sequences but also for protien sequences in general. Though ESM-1b struggles with restoring longer end regions, it outperforms the IMGT germline baseline when restoring randomly placed residues in antibody sequences. ESM-1b might therefore be a useful tool for restoring a few missing residues in proteins, but less useful at restroing the ends of sequences and longer regions. The fact that ESM-1b struggles to restore residues at the N-terminus compared to single randomly distributed residues, could be because longer regions give rise to higher combinations of possible residues, and as ESM-1b does not have antibody specific context, it is unable to make accurate predictions. 
 
 
 ## References
