@@ -28,7 +28,7 @@ During training, between 1% and 25% residues from each sequence were selected, a
 ### Data preparation
 All antibody sequences seen three or more times in the OAS database as of October 2021 were downloaded. The heavy and light chain sequences were then clustered separately based on identical CDR3s and thereafter clustered further by 70% identity over the whole sequence using Linclust[[2]](https://www.nature.com/articles/s41467-018-04964-5), with the longest sequence selected from each cluster. The selected sequences were then randomly divided into training sets of 14,126,724 heavy and 187,068 light sequences, and two evaluation sets of 100,000 heavy and 50,000 light sequences. 
 
-###Ablang's antibody seqeunce representations
+### Ablang's antibody seqeunce representations
 
 ## References
 
