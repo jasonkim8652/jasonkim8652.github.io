@@ -88,7 +88,7 @@ We attempted to apply the model to rigid-docking, providing the same intra-chain
 
 ![image-20230724010717646](https://jasonkim8652.github.io/assets/images/image-20230724010717646.png)
 
-**WE NEED TO TRY VARIOUS TASKS AND CHECK OUT EACH LOSS TERM THOROUGHLY**
+> **WE NEED TO TRY VARIOUS TASKS AND CHECK OUT EACH LOSS TERM THOROUGHLY**
 
 Afterwards, monomers are removed, and we train exclusively on complexes. For all complexes in our training sets, we relaxed each individual chain using Rosetta's FastRelax protocol with all default settings. 
 
