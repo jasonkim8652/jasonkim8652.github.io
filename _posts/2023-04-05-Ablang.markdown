@@ -29,6 +29,13 @@ During training, between 1% and 25% residues from each sequence were selected, a
 All antibody sequences seen three or more times in the OAS database as of October 2021 were downloaded. The heavy and light chain sequences were then clustered separately based on identical CDR3s and thereafter clustered further by 70% identity over the whole sequence using Linclust[[2]](https://www.nature.com/articles/s41467-018-04964-5), with the longest sequence selected from each cluster. The selected sequences were then randomly divided into training sets of 14,126,724 heavy and 187,068 light sequences, and two evaluation sets of 100,000 heavy and 50,000 light sequences. 
 
 ### Ablang's antibody seqeunce representations
+Ablang can be used to generate three different sets of antibody seqeunce representations. The first representation, the res-codings, consists of 768 values for each residue, useful for residue speicific predictions. The second representatin, the seq-codings, represents the whole sequence and is derived from the mean of all res-codings in a sequence. The seq-coding have the benefit of having the same length for each sequence, removing the need to align antibody sequences. Lastly, AbLang can be used to generate the likelihoods of each amino acid at each position in a given antibody sequence, useful for antibody engineering. 
+![fig2](https://jasonkim8652.github.io/assets/images/Ablang_2.PNG)
+
+As above figure shows, AbLang and ESM-1b both seperate the sequences based on their V-gene familites; however, AbLang separates the V-genes into smaller clusters. These smaller clusters can partly be attributed to AbLang's finer seperation of V-genes. Within the AbLang clusters, a clearer separation can be seen between naive B-cells and memory B-cells than with ESM-1b's clusters. Further, the memory B-cells, in AbLang's clusters, appear to be ordered based on a gradual increase in mutations. This potentially indicates that AbLang representations contain information about the order of antibody mutations. 
+
+
+
 
 ## References
 
