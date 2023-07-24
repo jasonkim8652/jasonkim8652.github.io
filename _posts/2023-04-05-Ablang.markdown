@@ -16,6 +16,10 @@ Here, we present AbLang, an antibody specific languge model trained on either th
 
 ## Materials and methods
 
+Two AbLang models were trained, one for heavy and one for light chains. Each AbLang model consists of two parts: AbRep, which creates representations from antibody sequences, and AbHead, which uses the representations to predict the likelihood of each amino acid at each position. 
+
+![fig1](https://jasonkim8652.github.io/assets/images/Ablang_1.PNG)
+
 
 
 ## References
