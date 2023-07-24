@@ -10,6 +10,12 @@ tags:
 
 ## Introduction
 
+Over the last decase, billions of antibodies have been sequenced. However, in some cases, the sequenced antibodies are missing residues due either to sequencing errors, such as ambiguous bases, or the limitations of the seuqnecing techniques used. **We find in OAS that ~80% of the seqeunces are missing more than one residue at the N-terminus and ~43% are missing the first 15 positions, and ~1% contain at least one ambiguous residue somewhere in the sequence. 
+
+Here, we present AbLang, an antibody specific languge model trained on either the heavy or light chain antibody sequences from OAS. While AbLang can be used to create representations for residue or sequence sepcific predictions and residue engineering, in this paper, we focus on showing how AbLang can be used to restore missing resdiues in antibody sequences, more accurately than using IMGT germlines or a general protein model like ESM-1b
+
+## Materials and methods
+
 
 
 ## References
