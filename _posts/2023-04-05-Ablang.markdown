@@ -20,8 +20,17 @@ Two AbLang models were trained, one for heavy and one for light chains. Each AbL
 
 ![fig1](https://jasonkim8652.github.io/assets/images/Ablang_1.PNG)
 
+AbRep follows the architecture of RoBERTa [[1]](https://arxiv.org/abs/1907.11692), except it uses a learned positional embedding layer with a max length of 160. Each of its 12 transformer blocks has 12 attenuated heads, an inner hidden size of 3072 and a hidden size of 768. From AbRep, the rescodings(768 values for each residue) are obtained. AbHead follows the design of RoBERTa's head model, with a hidden size of 768. 
 
+During training, between 1% and 25% residues from each sequence were selected, and of these, 80% were masked, 10% randomly changed to another residue and 10% left unchanged.
+
+## Results
+### Data preparation
+All antibody sequences seen three or more times in the OAS database as of October 2021 were downloaded. The heavy and light chain sequences were then clustered separately based on identical CDR3s and thereafter clustered further by 70% identity over the whole sequence using Linclust[[2]](https://www.nature.com/articles/s41467-018-04964-5), with the longest sequence selected from each cluster. The selected sequences were then randomly divided into training sets of 14,126,724 heavy and 187,068 light sequences, and two evaluation sets of 100,000 heavy and 50,000 light sequences. 
+
+###Ablang's antibody seqeunce representations
 
 ## References
 
-1. Clavero-Álvarez, Alejandro, et al. "Humanization of antibodies using a statistical inference approach." Scientific reports 8.1 (2018): 1-11.
+1. Liu, Yinhan, et al. "Roberta: A robustly optimized bert pretraining approach." arXiv preprint arXiv:1907.11692 (2019).
+2. Steinegger, Martin, and Johannes Söding. "Clustering huge protein sequence sets in linear time." Nature communications 9.1 (2018): 2542.
