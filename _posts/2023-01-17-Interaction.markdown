@@ -25,6 +25,14 @@ In reality, the multiplicity of interactions present in a single protein-ligand 
 
 ### Entropic and Enthalpic Components of Binding
 
+Like any other spontaneuos process, a noncovalent binding event takes place only when it is associated with a negative binding free energy. Where crystal structure information exists as well, it is tempting to speculate about the link between thermodynamics and geometery of protein-ligand complexes. A rough correlation between the burial of apolar surface area and free energy could be derived, but beyond that, practically useful relationships between the burial of apolar surface area and free energy relationships between structure and the componenets of free energy have remained elusive. This is not surprising, as both entropy and enthalpy terms obtained from calrimetric experiments contain solute and solvent contributions and thus cannot be interpreted on the basis of structural data alone. 
+
+Furthermore, from an experimental point of view, such studies are very demanding: Error margins are significantly larger than the fitting errors usually reported and depend on subtle details of exeprtimental setup. Entropy and enthalpy values are sensitive to conditions such as salt concentrations and choice of buffer. 
+
+Freire suggested that best-in-class drugs bind to their targets in an enthalpy-driven fashion.[[1]](https://link.springer.com/chapter/10.1007/0-387-24532-4_13) His group established a comprehensive ITC data set on HIV pretease inhibitors, concluding that second- and thrid-generation inhibitors, concluding that second- and third-generation inhibitors bind through a strong enthalpy component. One may argue that this could be caused by a higher number of specific backbone interactions, partially replacing the larger lipophilic surface area of the first generation inhibitors, and that the larger reliance on backbone interactions, partially replacing the larger lipophilic surface area of the first generation inhibitors, and that the larger reliance on backbone interactions could be the cause for the broader coverage of HIV protease mutants. Still, even in this data set small structural changes cause large difference in relative $$\Delta H$$ and $$T \Delta S$$ contributions that are hard to explain structurally. Amprenavir and darunavir differ only in one cyclic either moiety, but there is a drastic difference of about 10 Kcal/mol in binding enthalpy between these two ligands. 
+
+Since entropic and enthalpic components of binding are highly dependent on many system-specific properties, the practitioner has to conclude that optimizing for free energy is still the only viable approach to structure-based design. Perhaps the greatest advantage in the attempt to interpret components of 
+
 ### Flexibility and Cooperativity
 
 ### Desolvation and the Hydrophobic Effect
@@ -32,4 +40,8 @@ In reality, the multiplicity of interactions present in a single protein-ligand 
 ### Structural Water
 
 ### Repulsive Interactions
+
+## References
+
+1. Freire, Ernesto. "A thermodynamic guide to affinity optimization of drug candidates." *Proteomics and protein-protein interactions: Biology, chemistry, bioinformatics, and drug design*. Boston, MA: Springer US, 2005. 291-307.
 
