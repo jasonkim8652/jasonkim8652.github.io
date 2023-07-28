@@ -57,6 +57,10 @@ Above figure shows that an optimized factor Xa inhibitor is rendered virtually i
 
 ### Structural Water
 
+Any ligand binding event displaces water molecules from the binding site. In structure-based design, most of these are never explicitly considered because they are highly disordered and therefore rarely crystallographically observed. Enzyme  binding sites are in fact characterized by easily displaceable water, as shown by Ringe in her seminal work on transferring protein crystals to organic solvents. &**Those water molecules that are observed need to be carfully analyzed; they might be replaceable or they might be considered as part of the protein structure.**Analyses of high-resolution crystal structures by Poornima and Dean showed that protein-ligand contacts are often binding site and forming multiple hydrogen bonds with both binding partners. Relibase+, a database and query system for analyzing protein-ligand complexes, contains a module that allows a rigorous assessment of water structure in binding sites. 
+
+The release of a water molecule from a rigid environment should be entropically favorable. In a classic contribution, Dunitz has estimated the upper limit of the entropy gain for transferring a water molecule from a protein to water to be 2 kcal/mol at room temperature. To reach the 2 kcal/mol limit, a water molecule will have to be very tightly bound in a rigid protein structure. The entropy gain in releasing the water molecule will then be offset by a loss in enthalpy, and conversely, less tightly bound water molecules might approach or even exceed the entropy in bulk water. It has been observed that even rather tightly bound water molecules can retain a very high amount of residual mobility. Furthermore, protein flexibility may be significnatly affected by water binding. Cases are known where proteins become more rigid or more flexible upon water binding. So how should one assess which water molecules are replaceable? 
+
 ### Repulsive Interactions
 
 ## References
