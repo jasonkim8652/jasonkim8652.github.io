@@ -45,6 +45,16 @@ What can we learn from this study? First, small changes in $$ \Delta G $$ often 
 
 ### Desolvation and the Hydrophobic Effect
 
+The classic concept of the hydrophobic efffect is as follows: A hydrophobic solute disrupts the structure of bulk water and decreases entropy because of stronger bonding and ordering of water molecules around the solute. Such disruptions can be minimized if nonpolar solute molecules aggregate. Water then forms one larger "cage" structure around the combined solutes, whose surface area will be smaller than the combined surfaces areas of isolated solutes. This maximizes the amount of free water and thus the entropy. 
+
+If the mechanism were the sole driving force for a protein-ligand interaction, all binding events involving hydrophobic partners would be entropy-driven. But spectroscopic evidence indicates that hydrogen bonds at hydrophobic surfaces are weaker and water molecules more flexible than originally assumed. In addition, already simple water models show that size and surface curvature of solutes have a dramatic impact on their solvation thermodynamics. Complexation thermodynamics driven by enthalpic forces have been regularly observed in host-guest chemistry and have been dubbed the "nonclassical hydrophobic effect". Homans has carefully studied the ligand-binding thermodynamics of the mouse major urinary protein(MUP). THe key to the extermely favorable enthalpy of binding of ligands to MUP seems to be the subomptimal hydration of the binding pocket in the unbound state. The key to the extremely favorable enthalpy of binding of ligands to MUP seems to be the suboptimal hydration of the binding pocket in the unbound state. The negative change in heat capacity upon binding, a hallmark of the hydrophobic effect, is also observed with MUP ligands. It is largely determined by ligand desolvation, with minor contribution form desolvation of the protein. It is quite likely that the synthetic hosts displaying an enthalpy-driven complexation behavior are also incompletely hydrated in the unbound state becuase they typically feature narrow lipophilic clefts not unlike that of MUP. Desolvation costs are also the likely cause why some ligands that seem to fit into a binding site cannot experimentally be confirmed to be inhibitors. 
+
+From these studies it becomes clear that carefully probing the hydration state of a protein binding pocket in the unbound state should be a standard element of structure-based design, as it will likely point out regions where most binding energy can be gained. Failure to match key hydrophobic areas with appropriate ligand moieties can have a severe impact on binding affinity. 
+
+![fig1](https://jasonkim8652.github.io/assets/images/Interactions_1.PNG)
+
+Above figure shows that an optimized factor Xa inhibitor is rendered virtually inactive when the key interacting group in the S4 pocket is replaced by hydrogen. Not only does the isopropyl group optimally interact with the S4 pocket but its removal leads to a very unfavorably solvated state of the pocket that is likely the main reason for the dramatic loss of affinity. 
+
 ### Structural Water
 
 ### Repulsive Interactions
