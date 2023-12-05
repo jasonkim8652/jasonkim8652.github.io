@@ -19,9 +19,17 @@ Gram-schmidt process is a method to orthonormalize the set of vectors to make a 
 
 ### Quaternion
 
-Quaternion is similar to rotation matrix, but it is much more 
+Quaternion has same function as rotation matrix, but it is much more efficient in computing environment. We can save memory when we use Quaternion compared to rotation matrix(4 float vs 16 float) and operation times when we apply it(16 FLOPS vs 256 FLOPS). This is similar to complex plane: The only difference is that there are more axis. We can easily exchange the Quaternion to rotation matrix. Further information is available in [Wikipedia](https://en.wikipedia.org/wiki/Quaternions_and_spatial_rotation).
+
+![AF2_structure2](https://jasonkim8652.github.io/assets/images/AF2_structure_2.png)
 
 ### Equivariant vs Invariant
+
+For the transformation $T$ and function $f$, if the result of the function does not change after I apply transformation, it is Invariant. On the other hands, if the result of the function change as much as I apply transformation, it is equivariant. It could be expressed as mathematical equation following below. 
+
+Equivariant : $ f(T(x)) = T(f(x)) $
+
+Invariant: $f(T(x)) = f(x) $
 
 # Overview
 
