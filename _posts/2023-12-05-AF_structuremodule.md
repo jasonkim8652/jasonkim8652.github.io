@@ -71,19 +71,27 @@ We firstly need to compute the local frame. We would use gram-schmidt process. F
 
 ## Backbone update
 
+Since we've update the single representation using the other resiude's 3D coordinate information, we can get the 3D backbone information by using single linear layer. We can predict a quaternion for the rotation and a vector for the translation. 
+
 ![AF2_structure11](https://jasonkim8652.github.io/assets/images/AF2_structure_11.png)
 
 
 
 ## Compute all atom coordinates
 
+We could compute the atom coordinates by applying the torsion angles to the corresponding amino acid structure with idealized bond angles and bond lengths. 
+
 ![AF2_structure12](https://jasonkim8652.github.io/assets/images/AF2_structure_12.png)
 
 ## Rename symmetric ground truth atoms
 
+Since there are 180 degree-rotation-symmetry for some of the rigid groups, we need to resolve the name ambiguous to calcualte loss correctly. 
+
 ![AF2_structure13](https://jasonkim8652.github.io/assets/images/AF2_structure_13.png)
 
 ## Amber relaxation
+
+We relax our predicted models by an iterative restrained energy minimization procedure. At each round, we perform minimization of the AMBER99SB force field with additional harmonic restraints that keep the system near its input structure. We then remove restraints form all atoms within these residues and perform restrained minimzation once again, starting from the minimized structure of the previous iteration. This process is repeated until all violates are resolved. 
 
 ## References
 
