@@ -55,13 +55,33 @@ Following below is total pseudo code of structure module.
 
 ## Construction of frames from ground truth atom positions
 
+We firstly need to compute the local frame. We would use gram-schmidt process. For each residue, we use N as $\vec{x_1}$, C$\alpha$ as $\vec{x_2}$ and C as $\vec{x_3}$, so the frame has C$\alpha$ at the centre. 
+
+![AF2_structure6](https://jasonkim8652.github.io/assets/images/AF2_structure_6.png)
+
 ## Invariant point attention(IPA)
+
+![AF2_structure7](https://jasonkim8652.github.io/assets/images/AF2_structure_7.png)
+
+![AF2_structure8](https://jasonkim8652.github.io/assets/images/AF2_structure_8.png)
+
+![AF2_structure9](https://jasonkim8652.github.io/assets/images/AF2_structure_9.png)
+
+![AF2_structure10](https://jasonkim8652.github.io/assets/images/AF2_structure_10.png)
 
 ## Backbone update
 
+![AF2_structure11](https://jasonkim8652.github.io/assets/images/AF2_structure_11.png)
+
+
+
 ## Compute all atom coordinates
 
+![AF2_structure12](https://jasonkim8652.github.io/assets/images/AF2_structure_12.png)
+
 ## Rename symmetric ground truth atoms
+
+![AF2_structure13](https://jasonkim8652.github.io/assets/images/AF2_structure_13.png)
 
 ## Amber relaxation
 
