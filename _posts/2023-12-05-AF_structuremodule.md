@@ -37,7 +37,21 @@ The structure module match the representation created by the Evoformer stack to 
 
 Before we start on, we need to clarify the relationship between the Transformation matrix , global coordinates, and local coordinates. At the begginning, the backbone frames(= Transformation matrix) is initialized to an identity transform. This is why we call this system as **black hole initialization**. We represent each residue gas frame via a tuple $T_i :=(R_i, \vec{t_i}) $. This tuple is an euclidean transforms from the local frame to a glovbal reference frame. We can express the relationship between local coordinates and global coordinates as following below. 
 
-$\vec{x}_{\text{global}} = T_i \circ \vec{x}_{\text{local}} =   R_i \vec{x}_{\text{local}} + \vec{t}_i $
+![AF2_structure3](https://jasonkim8652.github.io/assets/images/AF2_structure_3.png)
+
+Therefore, we need to find out proper $ T_i $ for residue gas firstly, which would be done in Invariant Point Attention module(IPA). After on, we need to find out the side chain orientation using the information of $T_i $. For the second job, we only need to find out the torsion angle becuase we assume that each residue is rigid body. Therefore, we do not need to check the bond length. Following table shows rigid groups for constructing all atoms from given torsion angles. Boxes highlight groups that are symmetric under 180 degree rotation. 
+
+![AF2_structure4](https://jasonkim8652.github.io/assets/images/AF2_structure_4.png)
+
+The predicted torsion angles should be matched to points on the unit circle via normalization whenever they are used as angles. Therefore, to avoid degenerate value, there are auxiliary loss to make this vector norm as 1. 
+
+During training, the last step of each layer computes auxiliary loss for the current 3D structure. This intermediate FAPE loss operates only on the backbone frames and C$\alpha$ atom position. While calculating loss, since there are 180 degree rotation symmetry of some rigid groups, we need to take care of alternative answer. Furthermore, there are steps that zero the gradient into the orientation component of the rigid bodies between iterations, so any iteration is optimized to find an optimal orientation for the structure in the current iterations, but is not concerned by having an orientation more suitable for the next iteration. This strategy makes training stable. 
+
+Finally, the model predictes its confidence in form of a predicted lDDT score per residue. This score is trained with the true per-residue lDDT-C$\alpha$ score computed from the predicted structure and the ground truth. 
+
+Following below is total pseudo code of structure module. 
+
+![AF2_structure5](https://jasonkim8652.github.io/assets/images/AF2_structure_5.png)
 
 ## Construction of frames from ground truth atom positions
 
