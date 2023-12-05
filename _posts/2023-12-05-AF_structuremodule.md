@@ -31,6 +31,14 @@ $T$-Invariant: $f(T(x)) = f(x) $
 
 ## Overview
 
+The structure module match the representation created by the Evoformer stack to concrete 3D atom coordinates. The key point of Structure Module is
+
+> While updating single representation from MSA(1D), we use inductive bias from pair representation(2D) and global coordinates of residue gas(3D)
+
+Before we start on, we need to clarify the relationship between the Transformation matrix , global coordinates, and local coordinates. At the begginning, the backbone frames(= Transformation matrix) is initialized to an identity transform. This is why we call this system as **black hole initialization**. We represent each residue gas frame via a tuple $T_i :=(R_i, \vec{t_i}) $. This tuple is an euclidean transforms from the local frame to a glovbal reference frame. We can express the relationship between local coordinates and global coordinates as following below. 
+
+$\vec{x}_{\text{global}} = T_i \circ \vec{x}_{\text{local}} =   R_i \vec{x}_{\text{local}} + \vec{t}_i
+
 ## Construction of frames from ground truth atom positions
 
 ## Invariant point attention(IPA)
