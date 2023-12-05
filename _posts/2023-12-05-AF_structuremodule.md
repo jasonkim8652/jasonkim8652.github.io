@@ -8,9 +8,7 @@ tags:
   - AF2
 ---
 
-
-
-# Prior Knowledge
+## Prior Knowledge
 
 ### Gram-Schmidt Process
 
@@ -27,23 +25,23 @@ Quaternion has same function as rotation matrix, but it is much more efficient i
 
 For the transformation $T$ and function $f$, if the result of the function does not change after I apply transformation, it is Invariant. On the other hands, if the result of the function change as much as I apply transformation, it is equivariant. It could be expressed as mathematical equation following below. 
 
-Equivariant : $ f(T(x)) = T(f(x)) $
+$T$-Equivariant : $ f(T(x)) = T(f(x)) $
 
-Invariant: $f(T(x)) = f(x) $
+$T$-Invariant: $f(T(x)) = f(x) $
 
-# Overview
+## Overview
 
-# Construction of frames from ground truth atom positions
+## Construction of frames from ground truth atom positions
 
-# Invariant point attention(IPA)
+## Invariant point attention(IPA)
 
-# Backbone update
+## Backbone update
 
-# Compute all atom coordinates
+## Compute all atom coordinates
 
-# Rename symmetric ground truth atoms
+## Rename symmetric ground truth atoms
 
-# Amber relaxation
+## Amber relaxation
 
 ## References
 
