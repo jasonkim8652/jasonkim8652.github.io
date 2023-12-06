@@ -61,17 +61,33 @@ We firstly need to compute the local frame. We would use gram-schmidt process. F
 
 ## Invariant point attention(IPA)
 
+Following figure represents how IPA block works. 
+
 ![AF2_structure7](https://jasonkim8652.github.io/assets/images/AF2_structure_7.png)
+
+Let's take a look at how this works by looking at pseudocode. 
 
 ![AF2_structure8](https://jasonkim8652.github.io/assets/images/AF2_structure_8.png)
 
+Before we start on, we need to know what we want to do in this IPA block. We want to mix up all the information from MSA single representation, pair representation from Evoformer block and 3D coordinate information, while keeping global transformation invariant. We need to attention on the line 7 of the pesudocode, which calculate the attention coefficient. The first term on the right hand is just same as calculating self-attention coefficient of MSA single representation. The second term represents the inductive bias to this self-attention coefficient, which has information about  pair representation. (comes from line 4) These two terms are quite straightforward becuase we want to mix up the information.
+
+The problem is last term. Before we look at the last term, we need to take a look at the meaning of the line 2,3. These lines project the single representation into 3D coordinate. Since it came out from the single representation, these are local coordinate. If we want to get the global coordinate, we need to apply transformation $T_i$. Therefore, the term inside the L2 norm is actually the distance between two residue frame in global coordinate. This inductive bias term implies that we would give higher attention coefficient if these two residues are close to each other in 3D coordinate, which is quite straight forward even comparing with the attention mechanism. 
+
+After calculating the attention coefficient, at line 8 and 9, we would get the output from the weighted sum of pair representation and single representation using attention coefficient. Moreover, since we use the global coordinate as inductive bias when we calcualte the attention coefficient, we use the global coordinate at line 10. The output of weighted sum would also represent global coordinate but we want updated single represenation keep information about local coordiante. Therefore, we did inverse transformation to get the output vector. At the end, we concat all these information into single vector. 
+
+Let's take a look at why we only update single representation. Since it is residual gas, we do not want to constrain each residue frame because of other residues. By only updating and concentrating information into single representation, not the pair representation or transformation matrx, we can keep this residual gas assumption. 
+
+Let's prove that this output vector is invariant to global transformation. We first need to check attention coefficient is invariant. Since L2-norm of a vector is invariant, proof is quite  trivial. 
+
 ![AF2_structure9](https://jasonkim8652.github.io/assets/images/AF2_structure_9.png)
+
+We also need to check the output vector is invariant. Since the terms with Sigma is just weighted sum of each vector, we can take $T_{global}$ outside of the Sigma. This is the key point of the proof. The others are straightforward. 
 
 ![AF2_structure10](https://jasonkim8652.github.io/assets/images/AF2_structure_10.png)
 
 ## Backbone update
 
-Since we've update the single representation using the other resiude's 3D coordinate information, we can get the 3D backbone information by using single linear layer. We can predict a quaternion for the rotation and a vector for the translation. 
+Since we've update the single representation using the other resiude's 3D coordinate information, we can get the 3D backbone information by using single linear layer. We can predict a quaternion for the rotation and a vector for the translation of each backbone frame. 
 
 ![AF2_structure11](https://jasonkim8652.github.io/assets/images/AF2_structure_11.png)
 
