@@ -3,11 +3,16 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "engines": { "node": ">=20" },
+  "engines": {
+    "node": ">=20"
+  },
   "scripts": {
     "build": "node scripts/build.mjs",
     "check": "node scripts/check.mjs",
     "preview": "node scripts/serve.mjs"
   },
-  "dependencies": { "marked": "17.0.5" }
+  "dependencies": {
+    "marked": "17.0.5",
+    "turndown": "7.2.4"
+  }
 }

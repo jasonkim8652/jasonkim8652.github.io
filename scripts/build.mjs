@@ -3,6 +3,7 @@ import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {marked} from 'marked';
 import {createTemplates,esc} from './templates.mjs';
+import {writeDiscovery} from './discovery.mjs';
 
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const output=process.env.OUTPUT_DIR?path.resolve(process.env.OUTPUT_DIR):path.join(root,'dist');
@@ -33,7 +34,8 @@ posts.sort((a,b)=>pubs.findIndex(p=>p.id===a.paper)-pubs.findIndex(p=>p.id===b.p
 for(const post of posts)if(post.related&&!posts.some(p=>p.slug===post.related))throw new Error(`Unknown related note: ${post.related}`);
 const templates=createTemplates(site,pubs,posts,options);
 await rm(output,{recursive:true,force:true});await mkdir(output,{recursive:true});
-const write=async (name,text)=>{const p=path.join(output,name);await mkdir(path.dirname(p),{recursive:true});await writeFile(p,text);};
+const pages=[];
+const write=async (name,text)=>{if(name.endsWith('.html'))pages.push({route:name==='index.html'?'/':name==='404.html'?'/404.html':'/'+name.replace(/index\.html$/,''),html:text});const p=path.join(output,name);await mkdir(path.dirname(p),{recursive:true});await writeFile(p,text);};
 for(const [name,fn] of [['index.html','home'],['research/index.html','research'],['research/design-agents/index.html','design'],['research/experimental-agents/index.html','experiment'],['research/learning-agents/index.html','learn'],['publications/index.html','publications'],['writing/index.html','writing'],['about/index.html','about'],['404.html','notFound']])await write(name,templates[fn]());
 for(const p of posts)await write(`writing/${p.slug}/index.html`,templates.article(p));
 const archive=JSON.parse(await readFile(path.join(root,'content/archive.json'),'utf8'));
@@ -57,4 +59,5 @@ await write('feed.xml',`<?xml version="1.0" encoding="utf-8"?><feed xmlns="http:
 await write('robots.txt',options.publicRelease?`User-agent: *\nAllow: /\n${options.origin?'Sitemap: '+options.origin+options.base+'/sitemap.xml\n':''}`:'User-agent: *\nDisallow: /\n');
 const routes=['/','/research/','/research/design-agents/','/research/experimental-agents/','/research/learning-agents/','/publications/','/writing/','/about/',...posts.filter(p=>!p.draft).map(p=>`/writing/${p.slug}/`),'/archive/',...archive.map(p=>p.route)];
 await write('sitemap.xml',`<?xml version="1.0" encoding="utf-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${routes.map(p=>`<url><loc>${origin}${options.base}${p}</loc><lastmod>${site.updated}</lastmod></url>`).join('')}</urlset>`);
-console.log(JSON.stringify({output,pages:10+posts.length+archive.length,archivedNotes:archive.length,papers:pubs.length,posts:posts.length,publicRelease:options.publicRelease,base:options.base}));
+const discovery=await writeDiscovery({site,pubs,posts,pages,options,write});
+console.log(JSON.stringify({output,...discovery,pages:10+posts.length+archive.length,archivedNotes:archive.length,papers:pubs.length,posts:posts.length,publicRelease:options.publicRelease,base:options.base}));

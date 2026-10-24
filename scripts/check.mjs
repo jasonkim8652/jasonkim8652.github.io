@@ -2,6 +2,7 @@ import {readFile,readdir,stat,rm} from 'node:fs/promises';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {spawnSync} from 'node:child_process';
+import {checkDiscovery} from './check-discovery.mjs';
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const walk=async p=>(await Promise.all((await readdir(p)).map(async n=>{const f=path.join(p,n);return(await stat(f)).isDirectory()?walk(f):[f];}))).flat();
 const forbidden=['drive.google.com','Application_Drafts','Curricular Practical Training'];
@@ -41,5 +42,7 @@ if(!pubs.length||pubs.some(p=>!/^https:\/\/github.com\/[^/]+\/[^/]+$/.test(p.cod
 for(const p of pubs)if(!publicText.includes('/writing/'+p.note+'/'))throw new Error('Missing paper note: '+p.id);
 for(const slug of ['why-benchmarks-should-improve-agents','experimental-feedback-and-agent-learning'])if(!publicText.includes('/writing/'+slug+'/'))throw new Error('Missing restored Idea note');
 if(/Conceptual research direction|Author-created schematic|The foundation I bring/.test(publicText))throw new Error('Removed boilerplate returned');
+await checkDiscovery(path.join(root,'dist'));
+await checkDiscovery(checkDir,'/example-repo','https://example.test');
 await rm(path.join(root,'.build-check'),{recursive:true,force:true});
 console.log('All checks passed.');

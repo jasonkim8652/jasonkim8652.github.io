@@ -61,3 +61,16 @@ The previous Jekyll blog's 27 reading notes remain in `_posts/`, with their orig
 ## Content and attribution
 
 Research text and personal photographs belong to their respective authors. Paper figures are credited through their accompanying paper links. Existing Minimal Mistakes theme files retain their original MIT license and notices. No new license is granted for research figures or personal content by the legacy theme license.
+
+## For research and search agents
+
+The same public content is available in several formats:
+
+- [`llms.txt`](https://jasonkim8652.github.io/llms.txt): concise research navigation and links to clean text.
+- [`llms-full.txt`](https://jasonkim8652.github.io/llms-full.txt): current research pages and notes in one file.
+- [`research.json`](https://jasonkim8652.github.io/research.json): profile, three aims, publication status, code repositories, and notes.
+- Each HTML page links to a Markdown alternative at `index.md` (for example, `/research/design-agents/index.md`).
+
+These files are generated automatically from the rendered pages and content data. Editing a note updates its HTML, Markdown, and index entries together. JSON-LD identifies the researcher and connects notes to the underlying papers. Manuscripts and preprints retain their actual status; future research remains labelled as future work. Current notes remain undated.
+
+These resources help compatible readers retrieve content; they do not guarantee search indexing, ranking, or inclusion in an AI answer.
