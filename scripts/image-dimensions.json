@@ -1,0 +1,218 @@
+{
+  "evidence-verification.png": [
+    1983,
+    793
+  ],
+  "strategy-exploration.png": [
+    1983,
+    793
+  ],
+  "pearl-reasoning.png": [
+    2113,
+    528
+  ],
+  "biodesignbench-figure1.png": [
+    2137,
+    1413
+  ],
+  "resolve-main.png": [
+    4252,
+    3875
+  ],
+  "biodesignbench-figure2.png": [
+    2126,
+    1413
+  ],
+  "learning-transfer.png": [
+    1983,
+    793
+  ],
+  "biodesignbench-figure3.png": [
+    2126,
+    1418
+  ],
+  "biodesignbench-paired.png": [
+    1490,
+    1123
+  ],
+  "biodesignbench-figure4.png": [
+    2126,
+    1418
+  ],
+  "design-toolkit.png": [
+    1672,
+    941
+  ],
+  "alphafast-main.png": [
+    1070,
+    712
+  ],
+  "protein-gfp.png": [
+    2000,
+    2000
+  ],
+  "liquid-handler.png": [
+    1374,
+    1145
+  ],
+  "pearl-figure4.png": [
+    2125,
+    2331
+  ],
+  "prism-affinity.png": [
+    2120,
+    1435
+  ],
+  "pearl-figure3.png": [
+    2113,
+    3085
+  ],
+  "pearl-figure2.png": [
+    2094,
+    2057
+  ],
+  "tscape-main.png": [
+    2126,
+    2474
+  ],
+  "pearl-overview.png": [
+    2103,
+    1926
+  ],
+  "prism-main.png": [
+    1979,
+    596
+  ],
+  "codirect-main.png": [
+    3300,
+    3825
+  ],
+  "agent-learning-core.svg": [
+    520,
+    260
+  ],
+  "agent-learning-loop.svg": [
+    1000,
+    465
+  ],
+  "agent-learning-loop-mobile.svg": [
+    380,
+    715
+  ],
+  "agent-learning-evidence-v2.png": [
+    1774,
+    887
+  ],
+  "agent-learning-core-v2.png": [
+    1774,
+    887
+  ],
+  "agent-learning-evidence-mobile-v2.png": [
+    1086,
+    1448
+  ],
+  "design-overview-v3.png": [
+    1774,
+    887
+  ],
+  "design-tools-v3.png": [
+    1774,
+    887
+  ],
+  "design-future-v3.png": [
+    1774,
+    887
+  ],
+  "experiment-system-v3.png": [
+    1774,
+    887
+  ],
+  "experiment-reasoning-v3.png": [
+    1774,
+    887
+  ],
+  "experiment-future-v3.png": [
+    1774,
+    887
+  ],
+  "learning-future-v3.png": [
+    1774,
+    887
+  ],
+  "learning-change-v4.png": [
+    1774,
+    887
+  ],
+  "home-design-v4.png": [
+    1774,
+    887
+  ],
+  "home-experiment-v4.png": [
+    1448,
+    1086
+  ],
+  "llm-design-agent-v5.png": [
+    1774,
+    887
+  ],
+  "llm-experiment-agent-v6.png": [
+    1774,
+    887
+  ],
+  "llm-learning-agent-v6.png": [
+    1774,
+    887
+  ],
+  "llm-learning-feedback-v7.png": [
+    1774,
+    887
+  ],
+  "learning-overview-v8.png": [
+    1774,
+    887
+  ],
+  "tool-cogeneration-v8.png": [
+    1448,
+    1086
+  ],
+  "tool-cofolding-v8.png": [
+    1448,
+    1086
+  ],
+  "tool-sequence-function-v8.png": [
+    1448,
+    1086
+  ],
+  "design-strategies-v8.png": [
+    1448,
+    1086
+  ],
+  "experiment-followup-v8.png": [
+    1774,
+    887
+  ],
+  "experiment-hypotheses-v8.png": [
+    1448,
+    1086
+  ],
+  "feedback-verifier-v8.png": [
+    1448,
+    1086
+  ],
+  "feedback-experimental-v8.png": [
+    1448,
+    1086
+  ],
+  "learning-mechanisms-v9.png": [
+    1774,
+    887
+  ],
+  "pearl-assumption-testing-v10.png": [
+    1774,
+    887
+  ],
+  "llm-hypothesis-agent-v11.png": [
+    1774,
+    887
+  ]
+}

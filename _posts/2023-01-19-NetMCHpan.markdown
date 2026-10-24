@@ -31,7 +31,7 @@ The IEDB contains a comprehensive set of MHC-binding and eluted ligand(EL) data 
 
 ### Data sets
 
-Data on all class I MHC ligand elution assays available in the [IEDB]((http://www.iedb.org) database were collected, including the ligand sequence, details of the source protein, position of the ligand in the source protein, and the restricting allele of the ligand. There were 160,527 distinct assays in total, and the length of the ligands ranged from 4 to 37 aa. All lengths that were associated with >0.5% of total ligandas were selected for further analysis; this included lengths 8-15 aa and included 99% of the assay entries. 
+Data on all class I MHC ligand elution assays available in the [IEDB](https://www.iedb.org) database were collected, including the ligand sequence, details of the source protein, position of the ligand in the source protein, and the restricting allele of the ligand. There were 160,527 distinct assays in total, and the length of the ligands ranged from 4 to 37 aa. All lengths that were associated with >0.5% of total ligandas were selected for further analysis; this included lengths 8-15 aa and included 99% of the assay entries.
 
 The restricting MHC molecules of the ligands was analyzed, and entries with alleles listed unambiguosuly were selected. Thus, there were 127 class I molecules from human and mouse in teh selected data set. Redundant entries with teh same ligand sequence and MHC molecule were removed, and MHC molecules with >50 ligand entries were selected. This included 55 class I molecules, and the number of available ligands per molecule varied widely from 50 to 9500. 
 

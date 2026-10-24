@@ -1,0 +1,137 @@
+[
+  {
+    "file": "2023-01-13-BBAR.markdown",
+    "title": "Molecular Generative Model via Retrosyntheyically prepared Chemical Building Block Assembly(2023)",
+    "route": "/generativemodel/BBAR/"
+  },
+  {
+    "file": "2023-01-16-BRICS.markdown",
+    "title": "On the Art of Compliling and Using 'Drug-Like' Chemical Fragment Spaces(2008)",
+    "route": "/synthesizability/BRICS/"
+  },
+  {
+    "file": "2023-01-16-ExplorativeRL.markdown",
+    "title": "Hit and Lead Discovery with Explorative RL and Fragment-based Molecule Generation(2021)",
+    "route": "/generativemodel/ExplorativeRL/"
+  },
+  {
+    "file": "2023-01-16-Libinvent.markdown",
+    "title": "LibINVENT: Reaction-based Generative Scaffold Decoration for in Silico Library Desgin(2021)",
+    "route": "/generativemodel/Libinvent/"
+  },
+  {
+    "file": "2023-01-17-Interaction.markdown",
+    "title": "A Medicinal Chemist's Guide to Molecular Interactions(2010) : Part 1",
+    "route": "/medchem/Interaction/"
+  },
+  {
+    "file": "2023-01-17-Interaction_part2.markdown",
+    "title": "A Medicinal Chemist's Guide to Molecular Interactions(2010) : Part 2",
+    "route": "/medchem/Interaction_part2/"
+  },
+  {
+    "file": "2023-01-18-ACE.markdown",
+    "title": "Exposing the Limitation of Molecular Machine Learning with Activity Cliffs(2022)",
+    "route": "/baestimation/ACE/"
+  },
+  {
+    "file": "2023-01-19-MI.markdown",
+    "title": "Multiplicative Interactions and Where to Find Them(2020)",
+    "route": "/background/MI/"
+  },
+  {
+    "file": "2023-01-19-NetMCHpan.markdown",
+    "title": "NetMHCpan-4.0(2017)",
+    "route": "/immunogenicity/NetMCHpan/"
+  },
+  {
+    "file": "2023-01-25-GCNN.markdown",
+    "title": "A GCNN model for the prediction of chemical reactivity(2018)",
+    "route": "/baestimation/GCNN/"
+  },
+  {
+    "file": "2023-01-25-Magnet.markdown",
+    "title": "Magnet for the Needle in Haystack: 'Crystal Structures First' Fragment Hits Unlock Active Chemical Matter Using Targeted Exploration of vast Chemical Spaces (2022)",
+    "route": "/medchem/Magnet/"
+  },
+  {
+    "file": "2023-01-29-NetMHC0.markdown",
+    "title": "NetMHCpan(2007)",
+    "route": "/immunogenicity/NetMHC0/"
+  },
+  {
+    "file": "2023-01-30-Supertype.markdown",
+    "title": "Nine major HLA class I supertypes account for the vast preponderance of HLA-A and -B polymorphism",
+    "route": "/immunogenicity/Supertype/"
+  },
+  {
+    "file": "2023-01-31-NetMHCIIpan.markdown",
+    "title": "Quantitative Predictions of Peptide Binding to Any HLA-DR molecule of known sequence: NetMHCIIPan(2008)",
+    "route": "/immunogenicity/NetMHCIIpan/"
+  },
+  {
+    "file": "2023-02-03-SMMalign.markdown",
+    "title": "Prediction of MHC class II binding affinity using SMM-align, a novel stabilization matrix alignment method(2007)",
+    "route": "/immunogenicity/SMMalign/"
+  },
+  {
+    "file": "2023-02-06-NN_align.markdown",
+    "title": "NN-align. An artificial neural network-based alignment algorithm for MHC class II peptide binding prediction(2009)",
+    "route": "/immunogenicity/NN_align/"
+  },
+  {
+    "file": "2023-02-07-NetMHCIIpan2.markdown",
+    "title": "NetMHCIIpan-2.0 - Improved pan-specific HLA-DR predictions using a novel concurrent alignment and weight optimization training procedure(2010)",
+    "route": "/immunogenicity/NetMHCIIpan2/"
+  },
+  {
+    "file": "2023-02-08-NetMHCIIpan3.markdown",
+    "title": "NetMHCIIpan-3.0, a common pan-specific MHC class II prediction method including all three human MHC class II isotypes, HLA-DR, HLA-DP and HLA-DQ",
+    "route": "/immunogenicity/NetMHCIIpan3/"
+  },
+  {
+    "file": "2023-02-11-NN_align_MA.markdown",
+    "title": "NNAlign_MA; MHC Peptidome Deconvolution for Accurate MHC Binding Motif Chartacterization and Improved T-cell Epitope Predictions(2019)",
+    "route": "/immunogenicity/NN_align_MA/"
+  },
+  {
+    "file": "2023-02-13-Humab.markdown",
+    "title": "Humanization of antibodies using a machine learning approach on large-scale repertoire data(2021)",
+    "route": "/immunogenicity/Humab/"
+  },
+  {
+    "file": "2023-03-02-Review.markdown",
+    "title": "Can we predict T cell specificity with digital biology and machine learning?(2023)",
+    "route": "/immunogenicity/Review/"
+  },
+  {
+    "file": "2023-04-05-Ablang.markdown",
+    "title": "AbLang: an antibodyh language model for completing antibody sequences",
+    "route": "/immunogenicity/Ablang/"
+  },
+  {
+    "file": "2023-05-12-ESMFold.md",
+    "title": "Evolutionary-scale prediction of atomic-level protein structure with a language model(2023)",
+    "route": "/proteinstructure/ESMFold/"
+  },
+  {
+    "file": "2023-07-24-DockGPT.markdown",
+    "title": "Deep Learning for Flexible and Site-Specific Protein Docking and Design(2023)",
+    "route": "/proteinstructure/DockGPT/"
+  },
+  {
+    "file": "2023-08-05-unifoldmusse.md",
+    "title": "Uni-Fold MUSSE : De novo protein complex prediction with protein language models",
+    "route": "/proteinstructure/unifoldmusse/"
+  },
+  {
+    "file": "2023-12-05-AF_structuremodule.md",
+    "title": "Highly accurate protein sturcutre prediction with AlphaFold: Structure Module",
+    "route": "/proteinstructure/AF_structuremodule/"
+  },
+  {
+    "file": "2023-12-15-AF_lossfn.md",
+    "title": "Highly accurate protein structure prediction with AlphaFold: Loss Function",
+    "route": "/proteinstructure/AF_lossfn/"
+  }
+]
