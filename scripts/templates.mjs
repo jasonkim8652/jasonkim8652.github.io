@@ -23,7 +23,7 @@ export function createTemplates(site, pubs, posts, options) {
   }
 
   const aims = [
-    {id:'design-agent',slug:'design-agents',number:'01',title:'Design',label:'Protein models & design agents',question:'How can models and agents improve protein design?',summary:'Develop biologically informed predictive and generative models, and agents that use evidence to guide design.',icon:'llm-design-agent-v5.png'},
+    {id:'design-agent',slug:'design-agents',number:'01',title:'Design',label:'Protein models & design agents',question:'How can models and agents improve protein design?',summary:'Develop biologically informed predictive and generative models, and agents that use evidence to guide design.',icon:'models-and-design-agents-v12.png'},
     {id:'experimental-agent',slug:'experimental-agents',number:'02',title:'Experiment',label:'Experimental reasoning agents',question:'Who investigates a failed assay assumption?',summary:'PEARL questions the protocol, tests a possible cause with the robot, and revises it from camera evidence.',icon:'llm-hypothesis-agent-v11.png'},
     {id:'learning-agent',slug:'learning-agents',number:'03',title:'Learn',label:'Learning from feedback',question:'How can feedback improve models and research decisions?',summary:'Learn from computational and experimental evidence to improve biological models, agent decisions, and workflows.',icon:'learning-mechanisms-v9.png'}
   ];
