@@ -9,6 +9,7 @@ export function createAimPages({url,pubs,detailPage,external,paperLinks,dimensio
  const {figure:conceptFigure,story,tile:conceptTile}=createResearchIllustrations({url,dimensions});
  const result=(title,body)=>{const anchor=body.match(/<div id="([^"]+)"><\/div>/);return `<section class="result-study" ${anchor?`id="${anchor[1]}"`:''}><h3>${title}</h3>${anchor?body.replace(anchor[0],''):body}</section>`;};
  const design=()=>detailPage('design-agents','Protein models and design agents.','I develop biologically informed models for protein prediction and generation, and agents that use computational evidence to plan design strategies.',`
+ ${conceptFigure('models-and-design-agents-v12.png','Model development and agent reasoning contribute equally to protein design: biological observations inform predictive and generative models, while an LLM agent uses candidates and evidence to plan and compare design strategies.')}
  ${researchMotivation('design')}
  <section class="contribution-prose" id="model-research"><h2>Model research</h2><p>What should a model learn about biology to predict function or generate useful proteins from limited data? My work develops representations and learning methods for this problem, from antibody language modeling and immunogenicity prediction to joint sequence–structure generation.</p></section>
  <section class="toolkit-section"><h2>Biological prediction and generation</h2><div class="toolkit-grid">

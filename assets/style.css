@@ -113,3 +113,7 @@ h1,h2,h3,.about-vision{text-wrap:balance}.page-lead,.research-home-intro>p:not(.
 .article-research-context h2{font-size:18px;line-height:1.4;margin:0 0 13px;color:var(--ink)}
 .article-research-context>div{display:flex;flex-wrap:wrap;gap:10px 24px}
 .article-research-context a{font-size:14px;line-height:1.7;color:var(--green)}
+
+/* Two complementary research directions in one Aim 1 illustration. */
+.concept-two-part .concept-desktop-stages{grid-template-columns:repeat(2,minmax(0,1fr))}
+@media(max-width:680px){.concept-two-part .concept-desktop-stages{grid-template-columns:1fr}}

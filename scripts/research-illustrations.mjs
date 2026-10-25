@@ -1,6 +1,13 @@
 // Website concept art. Original paper figures stay in Results and methods.
 const escape = value => String(value).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const content = {
+ 'models-and-design-agents-v12.png': {
+  meaning:'Biologically informed models learn to predict and generate proteins. Scientific agents use candidate designs and evidence to plan, compare, and refine research strategies.',
+  stages:[
+   ['Model development','Learn representations of biological variation and develop predictive and generative protein models.'],
+   ['Agent reasoning','Interpret a design goal, compare candidates and evidence, and choose an informative next step.']
+  ]
+ },
  'llm-hypothesis-agent-v11.png': {
   meaning:'The agent investigates a failed assumption: it compares expectations with camera evidence, tests a possible cause with the robot, and revises the protocol from the results.',
   stages:[
@@ -144,8 +151,8 @@ export function createResearchIllustrations({url,dimensions}) {
  function figure(file,alt) {
   const d=content[file];
   if(!d)throw new Error('Missing scientific illustration meaning: '+file);
-  const stageCopy=(stage,i)=>`<span class="concept-stage-number">${String(i+1).padStart(2,'0')}</span><h3>${stage[0]}</h3><p>${stage[1]}</p>`;
-  return `<figure class="concept-figure concept-whole-mobile"><a class="concept-desktop-art" href="${source(file)}" target="_blank" rel="noopener noreferrer" aria-label="Open the illustration at full resolution">${art(file,alt)}</a><figcaption><p class="concept-meaning">${d.meaning}</p><div class="concept-desktop-stages">${d.stages.map((s,i)=>`<div>${stageCopy(s,i)}</div>`).join('')}</div></figcaption></figure>`;
+  const stageCopy=(stage,i)=>`${d.stages.length===2?'':`<span class="concept-stage-number">${String(i+1).padStart(2,'0')}</span>`}<h3>${stage[0]}</h3><p>${stage[1]}</p>`;
+  return `<figure class="concept-figure concept-whole-mobile${d.stages.length===2?' concept-two-part':''}"><a class="concept-desktop-art" href="${source(file)}" target="_blank" rel="noopener noreferrer" aria-label="Open the illustration at full resolution">${art(file,alt)}</a><figcaption><p class="concept-meaning">${d.meaning}</p><div class="concept-desktop-stages">${d.stages.map((s,i)=>`<div>${stageCopy(s,i)}</div>`).join('')}</div></figcaption></figure>`;
  }
  function story(title,file,alt,body,cls='') {
   const caption=file==='design-strategies-v8.png'?'Compare alternative computational routes.':'Choose a follow-up that tests the explanation.';

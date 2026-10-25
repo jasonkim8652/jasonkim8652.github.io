@@ -78,3 +78,5 @@ These resources help compatible readers retrieve content; they do not guarantee 
 ## Research framing · October 25, 2026
 
 The three aims remain Design, Experiment, and Learn. Design gives independent visibility to biological prediction/generation and to agent reasoning. Learn considers model adaptation alongside agent learning and research decisions. Home, About, research pages, and discovery metadata connect these contributions to the longer-term AI-scientist vision. Existing paper figures, routes, and publication status are preserved.
+
+Aim 1 uses `assets/research/models-and-design-agents-v12.png` as a unified illustration of biological model development and agent reasoning, in both research overviews and the Design page. It is a conceptual illustration; the original study figures remain unchanged.
