@@ -1,30 +1,30 @@
 ---
 {
-  "title": "PRISM: make functional mutations visible to the agent",
+  "title": "PRISM: represent functional antibody variation",
   "slug": "prism-functional-mutations",
   "category": "Paper notes",
-  "summary": "A biased antibody score can misdirect generation, verification, and optimization.",
+  "summary": "Separating residue origin from amino-acid identity addresses germline bias in antibody language models.",
   "paper": "prism",
   "draft": false
 }
 ---
 
-A design agent often relies on a protein language model to judge whether a mutation is promising. That judgment depends on what the model has learned to reward.
+Antibody language models learn strong germline sequence patterns. Those patterns are useful, but they can bias a model against rare non-germline mutations that matter for binding. PRISM asks how a representation should distinguish residue origin from amino-acid identity.
 
 ## Separate conservation from functional variation
 
-Antibody sequences contain germline-derived residues and non-germline changes introduced during maturation. Treating them as one statistical distribution can bias a model against rare mutations that matter for binding.
+Antibody sequences contain germline-derived residues and non-germline changes introduced during maturation. Treating them as one statistical distribution can obscure the difference between a conserved germline residue and a useful functional mutation.
 
-In PRISM, we explicitly separate residue origin and amino-acid identity. An origin-conditioned language-model head makes germline and non-germline representations available for scoring and controlled generation. My work focused on developing and testing the solution to this modeling problem.
+I developed and tested a solution based on factorized residue-origin and amino-acid representations with an origin-conditioned prediction head. The model makes these distinctions available for antibody scoring and controlled generation.
 
 ![PRISM model architecture](../../assets/research/prism-main.png)
 
-## Give the agent a more informative tool
+## Biological knowledge changes the learning problem
 
-For an agent, the distinction changes how a score can be interpreted. A candidate can be unusual relative to germline sequence statistics while containing useful functional mutations. An agent that treats one likelihood as a complete measure of quality may overlook that distinction.
+The modeling question is how explicit knowledge of antibody variation should change a language model’s representation and predictions. A candidate can be unusual relative to germline sequence statistics while containing useful mutations; a single undifferentiated likelihood may miss that distinction.
 
-PRISM can support candidate scoring and generation, and its outputs can become components of an optimization objective. I see these as ways to improve the evidence beneath an agent's decisions. The downstream objective still needs validation for the specific function and setting.
+Functional measurements provide a direct way to evaluate whether the representation improves antibody scoring. Better scores and controlled generation can also help a design agent compare and propose candidates.
 
-## Develop evidence-guided agent decisions
+## What I want to connect next
 
-I want agents to understand why they are using a scorer and what it can resolve. Binding, stability, solubility, and immunogenicity involve different evidence. I develop the agent’s evaluation capability through better scoring models and workflows that combine their outputs with complementary evidence.
+I want to study how biological priors can improve antibody prediction and generation when experimental data are limited, including their role in joint sequence–structure design. In an AI scientist, these advances would complement agents that combine model predictions with experimental evidence and choose informative next steps. The downstream objective still needs validation for the function and setting being investigated.

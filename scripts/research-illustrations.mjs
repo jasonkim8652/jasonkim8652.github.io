@@ -18,7 +18,7 @@ const content = {
   ]
  },
  'learning-mechanisms-v9.png': {
-  meaning:'Learn and adapt from verifier and experimental feedback, then evaluate future agent decisions on new protein tasks.',
+  meaning:'Experimental evidence can improve protein models as well as agent reasoning, memory, and workflows. Evaluate model quality and research decisions on new protein tasks.',
   stages:[
    ['Parameter learning','Train selected components: an LLM, a controller, or a predictor. Updating a predictor need not change the LLM.'],
    ['Context and memory','Use observations, retrieved experience, and reflection to adapt decisions without requiring a weight update.'],

@@ -1,32 +1,32 @@
 ---
 {
-  "title": "Co-DIRECT: better agents need better generation tools",
+  "title": "Co-DIRECT: coordinate protein sequence and structure",
   "slug": "codirect-better-generation-tools",
   "category": "Paper notes",
-  "summary": "Coordinating sequence and structure improves the tool an agent uses to propose proteins.",
+  "summary": "Anticipation and residue-wise routing address harmful interactions in joint protein generation.",
   "paper": "codirect",
   "draft": false
 }
 ---
 
-A protein design agent can choose a sensible workflow and still be limited by the generator it calls. Improving the agent therefore includes improving the models that determine which candidates it can explore.
+A protein generator needs to produce a sequence and a structure that are compatible with one another. Updating both representations together offers a way to coordinate them, but their interaction can also introduce harmful local corrections. Co-DIRECT studies this modeling problem directly.
 
 ## More interaction is not automatically more useful
 
-Joint protein generators update sequence and structure together. That coupling is attractive because a useful protein needs both representations to agree. But a response to another prediction can also increase local error.
+Joint protein generators allow a sequence prediction to influence a structural update and vice versa. A useful response should improve compatibility; a harmful response can propagate error from one representation to the other.
 
-In Co-DIRECT, I examined that distinction and developed anticipation with residue-wise directional routing. The method probes a tentative response and controls which representation leads and which receives the resulting correction.
+I developed anticipation with learned residue-wise directional routing to distinguish these cases. The method probes a tentative response and controls which representation leads and which receives the resulting correction.
 
 ![Co-DIRECT anticipation and directional routing](../../assets/research/codirect-main.png)
 
-The study evaluates binder design, enzyme scaffolding, and antibody CDR redesign. It compares generated and refolded designs under common candidate and evaluation budgets.
+The study evaluates binder design, enzyme scaffolding, and antibody CDR redesign. It compares generated and refolded designs under common candidate and evaluation budgets. The method does not require an external structure predictor during sampling.
 
-## Develop the agent’s generation capability
+## A model question with broader consequences
 
-Co-DIRECT develops an agent’s candidate-generation capability at the level of coupled sequence–structure updates. Those updates determine which candidates the agent can explore and how well its design constraints can be expressed.
+The central contribution concerns how coupled protein representations should interact during generation. Candidate quality and structural compatibility provide direct ways to evaluate those interactions.
 
-I approach this as agent development across levels: improve the generated candidates, decide when and how to invoke generation, and establish what evidence the agent needs before accepting an output.
+Better joint generation also expands the candidates available to a design agent. Model development determines what can be proposed; agent research asks when to invoke generation, which evidence to request, and how to choose a next step.
 
 ## What I want to connect next
 
-I want to examine generation and verification together. An agent should compare candidates using function-relevant evidence, recognize a recurring failure mode, and change its strategy accordingly. Better internal coordination in the generator and better external orchestration by the agent can address different bottlenecks in the same design pipeline.
+I want to study how biological constraints and experimental evidence can improve joint generation, especially when task-specific data are limited. In parallel, I want agents that compare candidates using complementary evidence and recognize when the generator or evaluation strategy needs to change. These are connected research questions within my longer-term AI-scientist vision.

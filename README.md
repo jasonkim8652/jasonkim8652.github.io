@@ -2,7 +2,7 @@
 
 Personal research website: **https://jasonkim8652.github.io/**
 
-Protein design agents, experimental reasoning, and learning from biological feedback.
+Biologically informed protein models, scientific agents, and learning from experiments.
 
 ## Edit a note in your browser
 
@@ -74,3 +74,7 @@ The same public content is available in several formats:
 These files are generated automatically from the rendered pages and content data. Editing a note updates its HTML, Markdown, and index entries together. JSON-LD identifies the researcher and connects notes to the underlying papers. Manuscripts and preprints retain their actual status; future research remains labelled as future work. Current notes remain undated.
 
 These resources help compatible readers retrieve content; they do not guarantee search indexing, ranking, or inclusion in an AI answer.
+
+## Research framing · October 25, 2026
+
+The three aims remain Design, Experiment, and Learn. Design gives independent visibility to biological prediction/generation and to agent reasoning. Learn considers model adaptation alongside agent learning and research decisions. Home, About, research pages, and discovery metadata connect these contributions to the longer-term AI-scientist vision. Existing paper figures, routes, and publication status are preserved.

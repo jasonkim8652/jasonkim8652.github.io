@@ -1,32 +1,30 @@
 ---
 {
-  "title": "T-SCAPE: add biological evidence to a design verifier",
+  "title": "T-SCAPE: learn immunogenicity from limited labels",
   "slug": "tscape-immunogenicity-verifier",
   "category": "Paper notes",
-  "summary": "Immunogenicity prediction expands the criteria a protein design agent can consider.",
+  "summary": "Multitask pretraining and domain adaptation connect related immune datasets to immunogenicity prediction.",
   "paper": "tscape",
   "draft": false
 }
 ---
 
-A protein can satisfy a structural objective and still be unsuitable for its intended use. For therapeutic proteins, immune responses introduce another biological question that an agent's workflow needs to address.
+Predicting immunogenicity is difficult when direct experimental labels are scarce. Related immune datasets contain useful information, but differences between tasks and domains can prevent a model from transferring that information effectively. T-SCAPE addresses this learning problem.
 
 ## Learn from related immunological evidence
 
-Direct immunogenicity labels are limited. In T-SCAPE, I developed a framework using multitask pretraining and adversarial domain adaptation to draw on related immunological data before immunogenicity-specific fine-tuning.
+I developed shared and task-specific encoders with multitask pretraining and adversarial domain adaptation, followed by immunogenicity-specific fine-tuning. The aim is to learn transferable features while retaining information specific to each task.
 
-The study evaluates peptide–MHC immunogenicity and antibody-level antidrug-antibody risk. The modeling contribution is to make better use of heterogeneous evidence when the target labels are scarce.
+The study evaluates peptide–MHC immunogenicity and antibody-level antidrug-antibody risk. Its modeling contribution is to make better use of heterogeneous evidence when the target labels are limited.
 
 ![T-SCAPE framework and training strategy](../../assets/research/tscape-main.png)
 
-## A callable tool, a verifier, and a scoring component
+## Biological prediction as a research objective
 
-For a design agent, this kind of model can answer a specific question about a candidate. Its predicted score can inform filtering or contribute to a multi-objective optimization objective alongside function and structural criteria.
+The central question is how a model can learn a biological property from incomplete and unevenly distributed data, and whether the resulting representations transfer to the target task.
 
-I use “verifier” here to describe its role in a workflow: supplying model-based evidence about a specified design criterion. A predicted immunogenicity score does not establish clinical safety. The workflow needs to preserve the biological context and the uncertainty behind the estimate.
+In a protein design system, such a predictor can also supply a criterion alongside function and structural evidence. Its role as a scoring component is one application of the model. A predicted immunogenicity score does not establish clinical safety, and its biological context remains important.
 
-## Build the evidence into the decision
+## What I want to connect next
 
-I want agents to choose verifiers because of the question they need to resolve. That means recording why a model was called, what part of the candidate it assessed, and how the result changed the next action.
-
-T-SCAPE develops a biological evaluation capability for protein design agents. I want that capability to improve which candidates the agent accepts, what it optimizes, and when it requests more evidence.
+I want to investigate how biological knowledge and new measurements can improve prediction under limited data. For scientific agents, a complementary question is when to rely on such predictions and when to seek additional evidence. Connecting advances in modeling to better experimental decisions is part of my AI-scientist vision.
