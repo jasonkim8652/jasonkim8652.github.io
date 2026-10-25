@@ -117,3 +117,15 @@ h1,h2,h3,.about-vision{text-wrap:balance}.page-lead,.research-home-intro>p:not(.
 /* Two complementary research directions in one Aim 1 illustration. */
 .concept-two-part .concept-desktop-stages{grid-template-columns:repeat(2,minmax(0,1fr))}
 @media(max-width:680px){.concept-two-part .concept-desktop-stages{grid-template-columns:1fr}}
+
+/* Give the biological model's inputs and two outputs room to be read. */
+.motivation-comparison:has(.motivation-node-biological) .motivation-node{grid-template-rows:208px auto}
+.motivation-comparison:has(.motivation-node-biological) .motivation-node>svg{align-self:center}
+.motivation-node-biological>svg{width:364px;height:208px;max-width:100%}
+.motivation-node-biological .motivation-node-copy{max-width:330px}
+@media(max-width:680px){
+ .motivation-comparison:has(.motivation-node-biological) .motivation-node{grid-template-rows:auto}
+ .motivation-node-biological{grid-template-columns:minmax(0,1fr);gap:16px;justify-items:stretch}
+ .motivation-node-biological>svg{width:100%;height:auto;max-width:420px;justify-self:center}
+ .motivation-node-biological .motivation-node-copy{max-width:none}
+}

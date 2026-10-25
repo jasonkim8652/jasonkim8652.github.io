@@ -1,4 +1,5 @@
-// One optical grid, one ink colour. These illustrate situations, not measured data.
+// Consistent schematic icons. Plots and molecular shapes are conceptual illustrations.
+import {biologicalModelIcon} from './biological-model-icon.mjs';
 const paper='var(--motivation-paper,#fff)';
 const wash='var(--motivation-wash,#edf2f6)';
 const line=(d,extra='')=>`<path d="${d}" ${extra}/>`;
@@ -23,13 +24,7 @@ function person(x,y){
 }
 
 export const motivationIcons={
- biological:svg(
-  `${rect(8,37,43,27,4,wash)}<text x="29.5" y="55" text-anchor="middle" fill="currentColor" stroke="none" font-family="ui-monospace,monospace" font-size="11">EVQL…</text>
-   ${arrow(51,50,16)}${software(69,27,57,47,'Model')}${arrow(126,50,13)}
-   ${line('M145 34q4-15 8 0t8 0q5-16 10-3m-25 12 22-4','stroke-width="2.5"')}
-   ${line('M145 92V67m0 25h25m-21-7 6-8 6 2 8-10')}
-   ${line('M98 78v20H29V68m-4 4 4-4 4 4','stroke-opacity=".45"')}`,
-  'A protein sequence enters a biological model that predicts properties or generates a structure; evidence can guide further learning'),
+ biological:biologicalModelIcon,
  rigid:svg(
   `${line('M26 65V42h50m28 0h50v23')}
    ${line('M82 30v-6a8 8 0 0 1 16 0v6')}${rect(76,30,28,22,4,wash)}${dot(90,40,2)}${line('M90 42v4')}
